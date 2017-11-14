@@ -57,7 +57,7 @@ public class Resolver {
 			if (base.isValid()) {
 				List<JsonNode> nodes =
 						StreamSupport.stream(treeWalk(base.getJson()).spliterator(), false)
-						.filter(n -> n.isObject() && n.has("$ref"))
+						.filter(n -> (n.isObject() && n.has("$ref")))
 						.collect(Collectors.<JsonNode>toList());
 				for (JsonNode refNode : nodes) {
 					JsonNode refString = refNode.get("$ref");

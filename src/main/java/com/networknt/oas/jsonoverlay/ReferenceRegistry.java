@@ -12,6 +12,7 @@ package com.networknt.oas.jsonoverlay;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class ReferenceRegistry {
 
 	private Map<String, Reference> references = new HashMap<>();
-	private Map<JsonNode, JsonOverlay<?>> overlays = new HashMap<>();
+	private Map<JsonNode, JsonOverlay<?>> overlays = new IdentityHashMap<>();
 
 	public Collection<Reference> getAllReferences() {
 		return references.values();

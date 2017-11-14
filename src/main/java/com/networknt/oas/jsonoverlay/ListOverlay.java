@@ -12,6 +12,7 @@ package com.networknt.oas.jsonoverlay;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonPointer;
@@ -22,7 +23,7 @@ import com.networknt.oas.jsonoverlay.SerializationOptions.Option;
 public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
 
 	private OverlayFactory<V, OV> itemFactory;
-	private List<IJsonOverlay<V>> overlays = new ArrayList<>();
+	private List<IJsonOverlay<V>> overlays = new LinkedList<>();
 
 	public ListOverlay(Collection<V> value, JsonOverlay<?> parent, OverlayFactory<V, OV> itemFactory,
 			ReferenceRegistry refReg) {
