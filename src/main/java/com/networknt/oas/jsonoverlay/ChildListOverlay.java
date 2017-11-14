@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ChildListOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Collection<V>, ListOverlay<V, OV>> {
-	static final Logger logger = LoggerFactory.getLogger(ChildListOverlay.class);
 	private ListOverlay<V, OV> listOverlay;
 
 	public ChildListOverlay(String path, JsonNode json, JsonOverlay<?> parent,
@@ -34,7 +33,6 @@ public class ChildListOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay
 	}
 
 	private void setListOverlay() {
-		logger.debug("overlay = " + overlay);
 		@SuppressWarnings("unchecked")
 		ListOverlay<V, OV> castOverlay = (ListOverlay<V, OV>) overlay;
 		this.listOverlay = castOverlay;

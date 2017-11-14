@@ -58,7 +58,6 @@ public class BigParseTest extends Assert {
 		Object parsedYaml = new Yaml().load(modelUrl.openStream());
 		JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
 		final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl, false);
-		logger.debug("model = " + model);
 		Predicate<JsonNode> valueNodePredicate = n -> n.isValueNode();
 
 		JsonTreeWalker.WalkMethod valueChecker = new JsonTreeWalker.WalkMethod() {
@@ -67,7 +66,6 @@ public class BigParseTest extends Assert {
 				IJsonOverlay<?> overlay = ((OpenApi3Impl) model).find(path);
 				assertNotNull("No overlay object found for path: " + path, overlay);
 				Object fromJson = getValue(node);
-				logger.debug("fromJson =" + fromJson);
 				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,
 						overlay.get());
 				assertEquals(msg, fromJson, overlay.get());

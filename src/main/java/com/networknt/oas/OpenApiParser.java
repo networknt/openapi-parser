@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class OpenApiParser {
-	static final Logger logger = LoggerFactory.getLogger(OpenApiParser.class);
 
 	public OpenApiParser() {
 	}
@@ -90,7 +89,6 @@ public class OpenApiParser {
 				if (validate) {
 					model.validate();
 				}
-				logger.debug("model = " + model);
 				return model;
 			} else {
 				throw new SwaggerParserException(
