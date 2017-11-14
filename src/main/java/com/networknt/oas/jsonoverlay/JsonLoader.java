@@ -17,6 +17,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.networknt.utility.NioUtils;
 import org.yaml.snakeyaml.Yaml;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,7 +29,6 @@ public class JsonLoader {
 
 	private static ObjectMapper jsonMapper = new ObjectMapper();
 	private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-	private static final int BUFFER_SIZE = 1024 * 4;
 
 	private Yaml yaml = new Yaml();
 
@@ -41,7 +42,7 @@ public class JsonLoader {
 		if (cache.containsKey(urlString)) {
 			return cache.get(urlString);
 		}
-		String json = toString(url.openStream());
+		String json = NioUtils.toString(url.openStream());
 		return loadString(url, json);
 	}
 
@@ -58,27 +59,4 @@ public class JsonLoader {
 		}
 		return tree;
 	}
-
-	/**
-	 * Reads and returns the rest of the given input stream as a byte array.
-	 * Caller is responsible for closing the given input stream.
-	 */
-	public static byte[] toByteArray(InputStream is) throws IOException {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		try {
-			byte[] b = new byte[BUFFER_SIZE];
-			int n = 0;
-			while ((n = is.read(b)) != -1) {
-				output.write(b, 0, n);
-			}
-			return output.toByteArray();
-		} finally {
-			output.close();
-		}
-	}
-
-	public static String toString(InputStream is) throws IOException {
-		return new String(toByteArray(is), StandardCharsets.UTF_8);
-	}
-
 }
