@@ -10,21 +10,18 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-
 import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.OpenApi;
 import com.networknt.oas.jsonoverlay.JsonLoader;
 import com.networknt.oas.jsonoverlay.ReferenceRegistry;
 import com.networknt.oas.jsonoverlay.ResolutionBaseRegistry;
 import com.networknt.oas.jsonoverlay.Resolver;
 import com.networknt.oas.model.impl.OpenApi3Impl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 
 public class OpenApiParser {
 

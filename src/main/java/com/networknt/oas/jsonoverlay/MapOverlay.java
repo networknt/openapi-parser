@@ -10,16 +10,16 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
+import com.fasterxml.jackson.core.JsonPointer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.networknt.oas.jsonoverlay.SerializationOptions.Option;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
-
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.networknt.oas.jsonoverlay.SerializationOptions.Option;
 
 public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<String, V>> {
 	private Map<String, IJsonOverlay<V>> overlays = new LinkedHashMap<>();

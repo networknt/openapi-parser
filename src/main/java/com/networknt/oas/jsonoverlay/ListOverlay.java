@@ -10,15 +10,15 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.networknt.oas.jsonoverlay.SerializationOptions.Option;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
 

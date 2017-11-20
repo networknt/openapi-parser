@@ -10,17 +10,17 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import static com.networknt.oas.validator.Messages.m;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.networknt.oas.model.*;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
 import com.networknt.oas.validator.Validator;
 import com.networknt.service.SingletonServiceFactory;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.networknt.oas.validator.Messages.m;
 
 public class LinkValidator extends ObjectValidatorBase<Link> {
 

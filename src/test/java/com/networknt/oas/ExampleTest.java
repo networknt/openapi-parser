@@ -10,18 +10,16 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import com.networknt.oas.model.Example;
+import com.networknt.oas.model.OpenApi3;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.networknt.oas.OpenApiParser;
-import com.networknt.oas.model.Example;
-import com.networknt.oas.model.OpenApi3;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ExampleTest {
 

@@ -10,19 +10,14 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Iterator;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.MissingNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.fasterxml.jackson.databind.node.ValueNode;
+import com.fasterxml.jackson.databind.node.*;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Iterator;
 
 public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 

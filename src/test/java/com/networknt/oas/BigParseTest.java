@@ -10,12 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.function.Predicate;
-
+import com.fasterxml.jackson.core.JsonPointer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.networknt.oas.jsonoverlay.IJsonOverlay;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.impl.OpenApi3Impl;
@@ -29,10 +27,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Predicate;
 
 /**
  * Tests basic parser operation by loading a swagger spec and then verifying

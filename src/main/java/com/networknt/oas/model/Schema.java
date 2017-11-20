@@ -4,7 +4,6 @@ import com.networknt.oas.jsonoverlay.Reference;
 
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
 
 public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 

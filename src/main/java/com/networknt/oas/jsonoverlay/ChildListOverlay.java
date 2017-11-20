@@ -10,12 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.util.Collection;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.Collection;
 
 public class ChildListOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Collection<V>, ListOverlay<V, OV>> {
 	private ListOverlay<V, OV> listOverlay;

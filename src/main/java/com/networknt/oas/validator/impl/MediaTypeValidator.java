@@ -10,10 +10,6 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import static com.networknt.oas.validator.Messages.m;
-
-import java.util.Set;
-
 import com.networknt.oas.model.EncodingProperty;
 import com.networknt.oas.model.Example;
 import com.networknt.oas.model.MediaType;
@@ -22,6 +18,10 @@ import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
 import com.networknt.oas.validator.Validator;
 import com.networknt.service.SingletonServiceFactory;
+
+import java.util.Set;
+
+import static com.networknt.oas.validator.Messages.m;
 
 public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 

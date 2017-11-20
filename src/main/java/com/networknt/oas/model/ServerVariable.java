@@ -2,7 +2,6 @@ package com.networknt.oas.model;
 
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
 
 public interface ServerVariable extends OpenApiObject<OpenApi3, ServerVariable> {
 

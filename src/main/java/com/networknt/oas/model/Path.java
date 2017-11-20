@@ -1,9 +1,9 @@
 package com.networknt.oas.model;
 
 import com.networknt.oas.jsonoverlay.Reference;
+
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
 
 public interface Path extends OpenApiObject<OpenApi3, Path> {
 

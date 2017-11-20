@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import javax.lang.model.type.NullType;
-
 import com.networknt.oas.model.ServerVariable;
 import com.networknt.oas.validator.Messages;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
+
+import javax.lang.model.type.NullType;
 
 public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 

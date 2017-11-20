@@ -10,17 +10,17 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import static com.networknt.oas.validator.Messages.m;
-
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.SecurityParameter;
 import com.networknt.oas.model.SecurityRequirement;
 import com.networknt.oas.validator.Messages;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
+
+import java.util.Map.Entry;
+import java.util.Set;
+
+import static com.networknt.oas.validator.Messages.m;
 
 public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRequirement> {
 

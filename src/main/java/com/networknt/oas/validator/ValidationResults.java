@@ -10,19 +10,15 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import static com.networknt.oas.validator.ValidationResults.Severity.ERROR;
-import static com.networknt.oas.validator.ValidationResults.Severity.INFO;
-import static com.networknt.oas.validator.ValidationResults.Severity.MAX_SEVERITY;
-import static com.networknt.oas.validator.ValidationResults.Severity.NONE;
-import static com.networknt.oas.validator.ValidationResults.Severity.WARNING;
+import com.networknt.oas.jsonoverlay.JsonOverlay;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import com.networknt.oas.jsonoverlay.JsonOverlay;
+import static com.networknt.oas.validator.ValidationResults.Severity.*;
 
 public class ValidationResults {
 

@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.util.Map.Entry;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.util.Map.Entry;
 
 public class JsonPath {
 

@@ -1,7 +1,6 @@
 package com.networknt.oas.model;
 
 import java.util.Map;
-import javax.annotation.Generated;
 
 public interface License extends OpenApiObject<OpenApi3, License> {
 

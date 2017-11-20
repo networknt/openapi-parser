@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.networknt.oas.jsonoverlay.MapOverlay.MapOverlayFactory;
+
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Map<String, V>, MapOverlay<V, OV>> {
 

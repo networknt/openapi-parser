@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.networknt.oas.model.OpenApi3;
+
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.model.OpenApi3;
 
 public class OpenApi3Parser extends OpenApiParser {
 

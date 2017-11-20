@@ -10,14 +10,14 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.function.Predicate;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 public class JsonTreeWalker {
 

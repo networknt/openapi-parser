@@ -10,12 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
 import com.networknt.oas.model.OpenApi3;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class PathsTest {
 

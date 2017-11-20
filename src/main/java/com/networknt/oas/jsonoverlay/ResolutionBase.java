@@ -10,11 +10,11 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class ResolutionBase {
 

@@ -10,11 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.networknt.oas.jsonoverlay.SerializationOptions;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.Schema;
@@ -31,10 +30,10 @@ import org.junit.runners.Parameterized.Parameters;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
 
 @RunWith(Enclosed.class)
 public class SimpleSerializationTest extends Assert {

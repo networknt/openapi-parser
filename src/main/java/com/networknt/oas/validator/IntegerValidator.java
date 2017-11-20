@@ -10,14 +10,14 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
 import com.networknt.oas.jsonoverlay.IntegerOverlay;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class IntegerValidator extends OverlayValidator<IntegerOverlay> {
 

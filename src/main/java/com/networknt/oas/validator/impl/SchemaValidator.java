@@ -10,8 +10,6 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import static com.networknt.oas.validator.Messages.m;
-
 import com.networknt.oas.model.Example;
 import com.networknt.oas.model.ExternalDocs;
 import com.networknt.oas.model.Schema;
@@ -20,6 +18,8 @@ import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
 import com.networknt.oas.validator.Validator;
 import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.validator.Messages.m;
 
 public class SchemaValidator extends ObjectValidatorBase<Schema> {
 

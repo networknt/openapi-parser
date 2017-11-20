@@ -10,11 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.networknt.oas.model.OpenApi3;
+import com.networknt.oas.validator.ValidationResults.ValidationItem;
 import com.networknt.utility.NioUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,11 +22,10 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.networknt.oas.OpenApiParser;
-import com.networknt.oas.model.OpenApi3;
-import com.networknt.oas.validator.ValidationResults.ValidationItem;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
 
 @RunWith(Parameterized.class)
 public class ExamplesTest extends Assert {

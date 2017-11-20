@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +21,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class ResolutionBaseRegistry {
 

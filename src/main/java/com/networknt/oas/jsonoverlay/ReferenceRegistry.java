@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class ReferenceRegistry {
 

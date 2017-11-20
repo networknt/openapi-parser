@@ -1,29 +1,11 @@
 package com.networknt.oas.model.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.jsonoverlay.ChildListOverlay;
-import com.networknt.oas.jsonoverlay.ChildMapOverlay;
-import com.networknt.oas.jsonoverlay.ChildOverlay;
-import com.networknt.oas.jsonoverlay.JsonOverlay;
-import com.networknt.oas.jsonoverlay.ListOverlay;
-import com.networknt.oas.jsonoverlay.MapOverlay;
-import com.networknt.oas.jsonoverlay.ObjectOverlay;
-import com.networknt.oas.jsonoverlay.OverlayFactory;
-import com.networknt.oas.jsonoverlay.Reference;
-import com.networknt.oas.jsonoverlay.ReferenceRegistry;
-import com.networknt.oas.jsonoverlay.StringOverlay;
-import com.networknt.oas.model.OpenApi3;
-import com.networknt.oas.model.Operation;
-import com.networknt.oas.model.Parameter;
-import com.networknt.oas.model.Path;
-import com.networknt.oas.model.Server;
-import com.networknt.oas.model.impl.OpenApiObjectImpl;
-import com.networknt.oas.model.impl.OperationImpl;
-import com.networknt.oas.model.impl.ParameterImpl;
-import com.networknt.oas.model.impl.ServerImpl;
+import com.networknt.oas.jsonoverlay.*;
+import com.networknt.oas.model.*;
+
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
 
 public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path {
 
@@ -150,13 +132,13 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
 
     public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
 
     public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(path, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
 
@@ -179,278 +161,237 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
 
     // Summary
     @Override
-
     public String getSummary() {
         return summary.get();
     }
 
     @Override
-
     public String getSummary(boolean elaborate) {
         return summary.get(elaborate);
     }
 
     @Override
-
     public void setSummary(String summary) {
         this.summary.set(summary);
     }
 
     // Description
     @Override
-
     public String getDescription() {
         return description.get();
     }
 
     @Override
-
     public String getDescription(boolean elaborate) {
         return description.get(elaborate);
     }
 
     @Override
-
     public void setDescription(String description) {
         this.description.set(description);
     }
 
     // Operation
     @Override
-
     public Map<String, Operation> getOperations() {
         return operations.get();
     }
 
     @Override
-
     public Map<String, Operation> getOperations(boolean elaborate) {
         return operations.get(elaborate);
     }
 
     @Override
-
     public boolean hasOperation(String name) {
         return operations.containsKey(name);
     }
 
     @Override
-
     public Operation getOperation(String name) {
         return operations.get(name);
     }
 
     @Override
-
     public void setOperations(Map<String, Operation> operations) {
         this.operations.set(operations);
     }
 
     @Override
-
     public void setOperation(String name, Operation operation) {
         operations.set(name, operation);
     }
 
     @Override
-
     public void removeOperation(String name) {
         operations.remove(name);
     }
 
     // Server
     @Override
-
     public Collection<Server> getServers() {
         return servers.get();
     }
 
     @Override
-
     public Collection<Server> getServers(boolean elaborate) {
         return servers.get(elaborate);
     }
 
     @Override
-
     public boolean hasServers() {
         return servers.isPresent();
     }
 
     @Override
-
     public Server getServer(int index) {
         return servers.get(index);
     }
 
     @Override
-
     public void setServers(Collection<Server> servers) {
         this.servers.set((Collection<Server>) servers);
     }
 
     @Override
-
     public void setServer(int index, Server server) {
         servers.set(index, server);
     }
 
     @Override
-
     public void addServer(Server server) {
         servers.add(server);
     }
 
     @Override
-
     public void insertServer(int index, Server server) {
         servers.insert(index, server);
     }
 
     @Override
-
     public void removeServer(int index) {
         servers.remove(index);
     }
 
     // Parameter
     @Override
-
     public Collection<Parameter> getParameters() {
         return parameters.get();
     }
 
     @Override
-
     public Collection<Parameter> getParameters(boolean elaborate) {
         return parameters.get(elaborate);
     }
 
     @Override
-
     public boolean hasParameters() {
         return parameters.isPresent();
     }
 
     @Override
-
     public Parameter getParameter(int index) {
         return parameters.get(index);
     }
 
     @Override
-
     public void setParameters(Collection<Parameter> parameters) {
         this.parameters.set((Collection<Parameter>) parameters);
     }
 
     @Override
-
     public void setParameter(int index, Parameter parameter) {
         parameters.set(index, parameter);
     }
 
     @Override
-
     public void addParameter(Parameter parameter) {
         parameters.add(parameter);
     }
 
     @Override
-
     public void insertParameter(int index, Parameter parameter) {
         parameters.insert(index, parameter);
     }
 
     @Override
-
     public void removeParameter(int index) {
         parameters.remove(index);
     }
 
     @Override
-
     public boolean isParameterReference(int index) {
         return parameters.getChild(index).isReference();
     }
 
     @Override
-
     public Reference getParameterReference(int index) {
         return parameters.getChild(index).getReference();
     }
 
     // Extension
     @Override
-
     public Map<String, Object> getExtensions() {
         return extensions.get();
     }
 
     @Override
-
     public Map<String, Object> getExtensions(boolean elaborate) {
         return extensions.get(elaborate);
     }
 
     @Override
-
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
 
     @Override
-
     public Object getExtension(String name) {
         return extensions.get(name);
     }
 
     @Override
-
     public void setExtensions(Map<String, Object> extensions) {
         this.extensions.set(extensions);
     }
 
     @Override
-
     public void setExtension(String name, Object extension) {
         extensions.set(name, extension);
     }
 
     @Override
-
     public void removeExtension(String name) {
         extensions.remove(name);
     }
 
     @Override
-
     protected void elaborateChildren() {
         summary = createChild("summary", this, StringOverlay.factory);
-            description = createChild("description", this, StringOverlay.factory);
-            operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
-            servers = createChildList("servers", this, ServerImpl.factory);
-            parameters = createChildList("parameters", this, ParameterImpl.factory);
-            refables.put("parameters", parameters);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        description = createChild("description", this, StringOverlay.factory);
+        operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+        servers = createChildList("servers", this, ServerImpl.factory);
+        parameters = createChildList("parameters", this, ParameterImpl.factory);
+        refables.put("parameters", parameters);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
 
     public static OverlayFactory<Path, PathImpl> factory = new OverlayFactory<Path, PathImpl>() {
-    @Override
-    protected Class<? super PathImpl> getOverlayClass() {
-         return PathImpl.class;
-    }
+        @Override
+        protected Class<? super PathImpl> getOverlayClass() {
+            return PathImpl.class;
+        }
 
-    @Override
-    public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new PathImpl(path, parent, refReg);
-    }
+        @Override
+        public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new PathImpl(path, parent, refReg);
+        }
 
-    @Override
-    public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new PathImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new PathImpl(json, parent, refReg);
+        }
+    };
 
 }

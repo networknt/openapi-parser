@@ -1,8 +1,8 @@
 package com.networknt.oas.model;
 
 import com.networknt.oas.jsonoverlay.Reference;
+
 import java.util.Map;
-import javax.annotation.Generated;
 
 public interface MediaType extends OpenApiObject<OpenApi3, MediaType> {
 

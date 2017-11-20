@@ -10,11 +10,11 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import javax.print.attribute.standard.Severity;
-
 import com.networknt.oas.model.Xml;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
+
+import javax.print.attribute.standard.Severity;
 
 public class XmlValidator extends ObjectValidatorBase<Xml> {
 

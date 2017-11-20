@@ -10,14 +10,14 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import static com.networknt.oas.validator.impl.Regexes.NAME_REGEX;
-
 import com.networknt.oas.model.Server;
 import com.networknt.oas.model.ServerVariable;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
 import com.networknt.oas.validator.Validator;
 import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.validator.impl.Regexes.NAME_REGEX;
 
 public class ServerValidator extends ObjectValidatorBase<Server> {
 

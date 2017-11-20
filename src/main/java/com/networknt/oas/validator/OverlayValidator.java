@@ -10,17 +10,13 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import static com.networknt.oas.validator.Messages.m;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.networknt.oas.jsonoverlay.*;
 
 import java.util.Collections;
 import java.util.Set;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.jsonoverlay.JsonOverlay;
-import com.networknt.oas.jsonoverlay.ListOverlay;
-import com.networknt.oas.jsonoverlay.MapOverlay;
-import com.networknt.oas.jsonoverlay.PropertiesOverlay;
-import com.networknt.oas.jsonoverlay.Reference;
+import static com.networknt.oas.validator.Messages.m;
 
 public class OverlayValidator<T> extends ValidatorBase<T> {
 

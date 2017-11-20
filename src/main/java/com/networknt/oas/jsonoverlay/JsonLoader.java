@@ -10,20 +10,17 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.networknt.utility.NioUtils;
-import org.yaml.snakeyaml.Yaml;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.networknt.utility.NioUtils;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JsonLoader {
 

@@ -10,11 +10,12 @@
  *******************************************************************************/
 package com.networknt.oas.jsonoverlay;
 
+import com.fasterxml.jackson.core.JsonPointer;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.tuple.Pair;
-import com.fasterxml.jackson.core.JsonPointer;
 
 public class JsonPointerTrie<T> {
 

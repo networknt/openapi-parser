@@ -10,11 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import static com.networknt.oas.validator.Messages.m;
-import static com.networknt.oas.validator.NumericUtils.le;
-import static com.networknt.oas.validator.NumericUtils.lt;
-import static com.networknt.oas.validator.NumericUtils.zero;
+import com.networknt.oas.jsonoverlay.JsonOverlay;
+import com.networknt.oas.validator.oasparser.fake.scheme.Handler;
 
+import javax.print.attribute.standard.Severity;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -25,10 +24,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import javax.print.attribute.standard.Severity;
 
-import com.networknt.oas.jsonoverlay.JsonOverlay;
-import com.networknt.oas.validator.oasparser.fake.scheme.Handler;
+import static com.networknt.oas.validator.Messages.m;
+import static com.networknt.oas.validator.NumericUtils.*;
 
 public abstract class ValidatorBase<T> implements Validator<T> {
 

@@ -10,13 +10,11 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
+import com.networknt.oas.model.OpenApi3;
 import org.junit.Test;
 
-import com.networknt.oas.OpenApiParser;
-import com.networknt.oas.model.OpenApi3;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LinksTest {
 
