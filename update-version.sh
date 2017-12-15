@@ -37,6 +37,10 @@ fi
 
 # For light-4j, the only thing that needs to be done is to change the version
 # number. The docs folder will be moved to light-doc in the future.
-
+git checkout develop
+git merge master
 mvn versions:set -DnewVersion=$new -DgenerateBackupPoms=false
 rpx -c config.yaml --var 'old'=$old --var 'new'=$new
+git add .
+git commit -m "update to new version after release"
+git push origin develop
