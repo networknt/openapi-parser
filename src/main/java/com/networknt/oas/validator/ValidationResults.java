@@ -11,7 +11,6 @@
 package com.networknt.oas.validator;
 
 import com.networknt.oas.jsonoverlay.JsonOverlay;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -154,7 +153,7 @@ public class ValidationResults {
 
         @Override
         public String toString() {
-            String label = crumbs != null & !crumbs.isEmpty() ? StringUtils.join(crumbs, '.') + ": " : "";
+            String label = crumbs != null & !crumbs.isEmpty() ? String.join(".", crumbs) + ": " : "";
             return label + msg;
         }
     }
