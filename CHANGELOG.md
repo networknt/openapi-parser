@@ -1,5 +1,16 @@
 # Change Log
 
+## [1.5.12](https://github.com/networknt/openapi-parser/tree/1.5.12) (2018-04-08)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.11...1.5.12)
+
+**Closed issues:**
+
+- remove dependency of commons-lang3 [\#4](https://github.com/networknt/openapi-parser/issues/4)
+- upgrade jackson to 2.9.5 and make dependencies explict [\#3](https://github.com/networknt/openapi-parser/issues/3)
+
+## [1.5.11](https://github.com/networknt/openapi-parser/tree/1.5.11) (2018-03-31)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.10...1.5.11)
+
 ## [1.5.10](https://github.com/networknt/openapi-parser/tree/1.5.10) (2018-03-02)
 [Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.9...1.5.10)
 
