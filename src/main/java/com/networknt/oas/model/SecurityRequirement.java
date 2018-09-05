@@ -2,28 +2,36 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface SecurityRequirement extends OpenApiObject<OpenApi3, SecurityRequirement> {
+import javax.annotation.Generated;
 
-    // Requirement
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    Map<String, SecurityParameter> getRequirements();
+public interface SecurityRequirement
+		extends IJsonOverlay<SecurityRequirement>, IModelPart<OpenApi3, SecurityRequirement> {
 
+	// Requirement
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, SecurityParameter> getRequirements();
 
-    Map<String, SecurityParameter> getRequirements(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, SecurityParameter> getRequirements(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequirements();
 
-    boolean hasRequirement(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequirement(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	SecurityParameter getRequirement(String name);
 
-    SecurityParameter getRequirement(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequirements(Map<String, SecurityParameter> requirements);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequirement(String name, SecurityParameter requirement);
 
-    void setRequirements(Map<String, SecurityParameter> requirements);
-
-
-    void setRequirement(String name, SecurityParameter requirement);
-
-
-    void removeRequirement(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeRequirement(String name);
 }

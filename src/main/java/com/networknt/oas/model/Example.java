@@ -2,68 +2,65 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface Example extends OpenApiObject<OpenApi3, Example> {
+import javax.annotation.Generated;
 
-    // Summary
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getSummary();
+public interface Example extends IJsonOverlay<Example>, IModelPart<OpenApi3, Example> {
 
+	String getName();
 
-    String getSummary(boolean elaborate);
+	// Summary
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getSummary();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSummary(String summary);
 
-    void setSummary(String summary);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
-    // Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    String getDescription();
+	// Value
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getValue();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setValue(Object value);
 
-    String getDescription(boolean elaborate);
+	// ExternalValue
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getExternalValue();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExternalValue(String externalValue);
 
-    void setDescription(String description);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    // Value
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    Object getValue();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    Object getValue(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    void setValue(Object value);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    // ExternalValue
-
-    String getExternalValue();
-
-
-    String getExternalValue(boolean elaborate);
-
-
-    void setExternalValue(String externalValue);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

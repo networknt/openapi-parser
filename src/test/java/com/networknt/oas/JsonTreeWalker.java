@@ -14,16 +14,17 @@ import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.base.Predicates;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.function.Predicate;
+import com.google.common.base.Predicate;
 
 public class JsonTreeWalker {
 
 	public static void walkTree(JsonNode tree, Predicate<JsonNode> nodeFilter, WalkMethod walkMethod) {
 		if (nodeFilter == null) {
-			nodeFilter = (x -> true);
+			nodeFilter = Predicates.alwaysTrue();
 		}
 		new JsonTreeWalker(nodeFilter, walkMethod).walk(tree, JsonPointer.compile(""));
 	}
@@ -37,7 +38,7 @@ public class JsonTreeWalker {
 	}
 
 	private void walk(JsonNode node, JsonPointer path) {
-		if (nodeFilter.test(node)) {
+		if (nodeFilter.apply(node)) {
 			visit(node, path);
 		}
 		walkChildren(node, path);

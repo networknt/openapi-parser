@@ -1,147 +1,204 @@
 package com.networknt.oas.model.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.jsonoverlay.*;
+import com.networknt.jsonoverlay.*;
 import com.networknt.oas.model.ExternalDocs;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.Tag;
 
+import javax.annotation.Generated;
 import java.util.Map;
 
-public class TagImpl extends OpenApiObjectImpl<OpenApi3, Tag> implements Tag {
 
+public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 
-    public TagImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public TagImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public TagImpl(Tag tag, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(tag, parent, factory, refMgr);
+	}
 
-    public TagImpl(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        super(tag, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
-    }
+	// Name
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public String getName() {
+		return _get("name", String.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setName(String name) {
+		_setScalar("name", name, String.class);
+	}
 
-    private ChildOverlay<String, StringOverlay> name = null;
+	// Description
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public String getDescription() {
+		return _get("description", String.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setDescription(String description) {
+		_setScalar("description", description, String.class);
+	}
 
-    private ChildOverlay<String, StringOverlay> description = null;
+	// ExternalDocs
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public ExternalDocs getExternalDocs() {
+		return _get("externalDocs", ExternalDocs.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public ExternalDocs getExternalDocs(boolean elaborate) {
+		return _get("externalDocs", elaborate, ExternalDocs.class);
+	}
 
-    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setExternalDocs(ExternalDocs externalDocs) {
+		_setScalar("externalDocs", externalDocs, ExternalDocs.class);
+	}
 
+	// Extension
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions() {
+		return _getMap("extensions", Object.class);
+	}
 
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
 
-    // Name
-    @Override
-    public String getName() {
-        return name.get();
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
+	}
 
-    @Override
-    public String getName(boolean elaborate) {
-        return name.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtension(String name) {
+		return _getMap("extensions", Object.class).containsKey(name);
+	}
 
-    @Override
-    public void setName(String name) {
-        this.name.set(name);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Object getExtension(String name) {
+		return _get("extensions", name, Object.class);
+	}
 
-    // Description
-    @Override
-    public String getDescription() {
-        return description.get();
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setExtensions(Map<String, Object> extensions) {
+		_setMap("extensions", extensions, Object.class);
+	}
 
-    @Override
-    public String getDescription(boolean elaborate) {
-        return description.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setExtension(String name, Object extension) {
+		_set("extensions", name, extension, Object.class);
+	}
 
-    @Override
-    public void setDescription(String description) {
-        this.description.set(description);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void removeExtension(String name) {
+		_remove("extensions", name, Object.class);
+	}
 
-    // ExternalDocs
-    @Override
-    public ExternalDocs getExternalDocs() {
-        return externalDocs.get();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_name = "name";
 
-    @Override
-    public ExternalDocs getExternalDocs(boolean elaborate) {
-        return externalDocs.get(elaborate);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
 
-    @Override
-    public void setExternalDocs(ExternalDocs externalDocs) {
-        this.externalDocs.set(externalDocs);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
 
-    // Extension
-    @Override
-    public Map<String, Object> getExtensions() {
-        return extensions.get();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
 
-    @Override
-    public Map<String, Object> getExtensions(boolean elaborate) {
-        return extensions.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected void _elaborateJson() {
+		super._elaborateJson();
+		_createScalar("name", "name", StringOverlay.factory);
+		_createScalar("description", "description", StringOverlay.factory);
+		_createScalar("externalDocs", "externalDocs", ExternalDocsImpl.factory);
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
+	}
 
-    @Override
-    public boolean hasExtension(String name) {
-        return extensions.containsKey(name);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static OverlayFactory<Tag> factory = new OverlayFactory<Tag>() {
 
-    @Override
-    public Object getExtension(String name) {
-        return extensions.get(name);
-    }
+		@Override
+		protected Class<? extends JsonOverlay<? super Tag>> getOverlayClass() {
+			return TagImpl.class;
+		}
 
-    @Override
-    public void setExtensions(Map<String, Object> extensions) {
-        this.extensions.set(extensions);
-    }
+		@Override
+		public JsonOverlay<Tag> _create(Tag tag, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new TagImpl(tag, parent, refMgr);
+			@SuppressWarnings("unchecked")
+			JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
+			return castOverlay;
+		}
 
-    @Override
-    public void setExtension(String name, Object extension) {
-        extensions.set(name, extension);
-    }
+		@Override
+		public JsonOverlay<Tag> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new TagImpl(json, parent, refMgr);
+			@SuppressWarnings("unchecked")
+			JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
+			return castOverlay;
+		}
 
-    @Override
-    public void removeExtension(String name) {
-        extensions.remove(name);
-    }
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
+	};
 
-    @Override
-    protected void elaborateChildren() {
-        name = createChild("name", this, StringOverlay.factory);
-        description = createChild("description", this, StringOverlay.factory);
-        externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
-        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	private static Class<? extends Tag> getSubtypeOf(Tag tag) {
+		return Tag.class;
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	private static Class<? extends Tag> getSubtypeOf(JsonNode json) {
+		return Tag.class;
+	}
 
-    public static OverlayFactory<Tag, TagImpl> factory = new OverlayFactory<Tag, TagImpl>() {
-        @Override
-        protected Class<? super TagImpl> getOverlayClass() {
-            return TagImpl.class;
-        }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
+	}
 
-        @Override
-        public TagImpl _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new TagImpl(tag, parent, refReg);
-        }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
+	}
 
-        @Override
-        public TagImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new TagImpl(json, parent, refReg);
-        }
-    };
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static <OV extends IJsonOverlay<?>> Builder<Tag> builder(OV modelMember) {
+		return new Builder<Tag>(factory, modelMember);
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static <OV extends IJsonOverlay<?>> Tag create(OV modelMember) {
+		return (Tag) builder(modelMember).build();
+	}
 }

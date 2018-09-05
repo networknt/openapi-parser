@@ -10,23 +10,15 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import com.networknt.oas.jsonoverlay.IPropertiesOverlay;
-
-public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
-	private ImplValidator<T> implValidator;
-
-	public abstract void validateObject(T object, ValidationResults results);
+public abstract class ObjectValidatorBase<V> extends ValidatorBase<V> {
 
 	@Override
-	public void validate(T value, ValidationResults results) {
-		@SuppressWarnings("unchecked")
-		IPropertiesOverlay<T> propValue = (IPropertiesOverlay<T>) value;
-		if (propValue.isElaborated()) {
-			validateObject(value, results);
-			if (implValidator != null) {
-				implValidator.validateImpl(value, results);
-			}
+	public void runValidations() {
+		if (value.isElaborated() && ValidationContext.visitIfUnvisited(value)) {
+			runObjectValidations();
 		}
 	}
+
+	public abstract void runObjectValidations();
 
 }

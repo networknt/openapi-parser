@@ -1,119 +1,120 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.jsonoverlay.Reference;
-
 import java.util.Map;
 
-public interface Response extends OpenApiObject<OpenApi3, Response> {
+import javax.annotation.Generated;
 
-    // Description
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getDescription();
+public interface Response extends IJsonOverlay<Response>, IModelPart<OpenApi3, Response> {
 
+	String getName();
 
-    String getDescription(boolean elaborate);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    void setDescription(String description);
+	// Header
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders();
 
-    // Header
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders(boolean elaborate);
 
-    Map<String, Header> getHeaders();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeaders();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeader(String name);
 
-    Map<String, Header> getHeaders(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Header getHeader(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setHeaders(Map<String, Header> headers);
 
-    boolean hasHeader(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setHeader(String name, Header header);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeHeader(String name);
 
-    Header getHeader(String name);
+	// ContentMediaType
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, MediaType> getContentMediaTypes();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, MediaType> getContentMediaTypes(boolean elaborate);
 
-    void setHeaders(Map<String, Header> headers);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasContentMediaTypes();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasContentMediaType(String name);
 
-    void setHeader(String name, Header header);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	MediaType getContentMediaType(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
 
-    void removeHeader(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setContentMediaType(String name, MediaType contentMediaType);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeContentMediaType(String name);
 
-    boolean isHeaderReference(String key);
+	// Link
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks(boolean elaborate);
 
-    Reference getHeaderReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLinks();
 
-    // ContentMediaType
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLink(String name);
 
-    Map<String, MediaType> getContentMediaTypes();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Link getLink(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setLinks(Map<String, Link> links);
 
-    Map<String, MediaType> getContentMediaTypes(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setLink(String name, Link link);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeLink(String name);
 
-    boolean hasContentMediaType(String name);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    MediaType getContentMediaType(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    void setContentMediaType(String name, MediaType contentMediaType);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    void removeContentMediaType(String name);
-
-    // Link
-
-    Map<String, Link> getLinks();
-
-
-    Map<String, Link> getLinks(boolean elaborate);
-
-
-    boolean hasLink(String name);
-
-
-    Link getLink(String name);
-
-
-    void setLinks(Map<String, Link> links);
-
-
-    void setLink(String name, Link link);
-
-
-    void removeLink(String name);
-
-
-    boolean isLinkReference(String key);
-
-
-    Reference getLinkReference(String key);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

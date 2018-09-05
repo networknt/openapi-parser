@@ -2,102 +2,106 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface OAuthFlow extends OpenApiObject<OpenApi3, OAuthFlow> {
+import javax.annotation.Generated;
 
-    // AuthorizationUrl
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getAuthorizationUrl();
+public interface OAuthFlow extends IJsonOverlay<OAuthFlow>, IModelPart<OpenApi3, OAuthFlow> {
 
+	// AuthorizationUrl
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getAuthorizationUrl();
 
-    String getAuthorizationUrl(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAuthorizationUrl(String authorizationUrl);
 
+	// TokenUrl
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getTokenUrl();
 
-    void setAuthorizationUrl(String authorizationUrl);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTokenUrl(String tokenUrl);
 
-    // TokenUrl
+	// RefreshUrl
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getRefreshUrl();
 
-    String getTokenUrl();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRefreshUrl(String refreshUrl);
 
+	// Scope
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, String> getScopes();
 
-    String getTokenUrl(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, String> getScopes(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScopes();
 
-    void setTokenUrl(String tokenUrl);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScope(String name);
 
-    // RefreshUrl
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getScope(String name);
 
-    String getRefreshUrl();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setScopes(Map<String, String> scopes);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setScope(String name, String scope);
 
-    String getRefreshUrl(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeScope(String name);
 
+	// ScopesExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getScopesExtensions();
 
-    void setRefreshUrl(String refreshUrl);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getScopesExtensions(boolean elaborate);
 
-    // Scope
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScopesExtensions();
 
-    Map<String, String> getScopes();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScopesExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getScopesExtension(String name);
 
-    Map<String, String> getScopes(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setScopesExtensions(Map<String, Object> scopesExtensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setScopesExtension(String name, Object scopesExtension);
 
-    boolean hasScope(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeScopesExtension(String name);
 
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    String getScope(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    void setScopes(Map<String, String> scopes);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    void setScope(String name, String scope);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    void removeScope(String name);
-
-    // ScopesExtension
-
-    Map<String, Object> getScopesExtensions();
-
-
-    Map<String, Object> getScopesExtensions(boolean elaborate);
-
-
-    boolean hasScopesExtension(String name);
-
-
-    Object getScopesExtension(String name);
-
-
-    void setScopesExtensions(Map<String, Object> scopesExtensions);
-
-
-    void setScopesExtension(String name, Object scopesExtension);
-
-
-    void removeScopesExtension(String name);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

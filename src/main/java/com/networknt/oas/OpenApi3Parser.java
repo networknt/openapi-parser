@@ -19,43 +19,60 @@ import java.net.URL;
 
 public class OpenApi3Parser extends OpenApiParser {
 
-	private OpenApiParser parser = new OpenApiParser() {
-
-		@Override
-		protected boolean isVersion3(JsonNode tree) {
-			return true;
-		}
-	};
-
+	@Override
 	public OpenApi3 parse(String spec, URL resolutionBase) {
-		return (OpenApi3) parser.parse(spec, resolutionBase);
+		return (OpenApi3) super.parse(spec, resolutionBase);
 	}
 
+	@Override
 	public OpenApi3 parse(String spec, URL resolutionBase, boolean validate) {
-		return (OpenApi3) parser.parse(spec, resolutionBase, validate);
+		return (OpenApi3) super.parse(spec, resolutionBase, validate);
 	}
 
-	public OpenApi3 parse(File specFile) {
-		return (OpenApi3) parser.parse(specFile);
+	@Override
+	public OpenApi3 parse(File specFile) throws Exception {
+		return (OpenApi3) super.parse(specFile);
 	}
 
-	public OpenApi3 parse(File specFile, boolean validate) {
-		return (OpenApi3) parser.parse(specFile, validate);
+	@Override
+	public OpenApi3 parse(File specFile, boolean validate) throws Exception {
+		return (OpenApi3) super.parse(specFile, validate);
 	}
 
-	public OpenApi3 parse(URI uri) {
-		return (OpenApi3) parser.parse(uri);
+	@Override
+	public OpenApi3 parse(URI uri) throws Exception {
+		return (OpenApi3) super.parse(uri);
 	}
 
-	public OpenApi3 parse(URI uri, boolean validate) {
-		return (OpenApi3) parser.parse(uri, validate);
+	@Override
+	public OpenApi3 parse(URI uri, boolean validate) throws Exception {
+		return (OpenApi3) super.parse(uri, validate);
 	}
 
-	public OpenApi3 parse(URL resolutionBase) {
-		return (OpenApi3) parser.parse(resolutionBase);
+	@Override
+	public OpenApi3 parse(URL resolutionBase) throws Exception {
+		return (OpenApi3) super.parse(resolutionBase);
 	}
 
-	public OpenApi3 parse(URL resolutionBase, boolean validate) {
-		return (OpenApi3) parser.parse(resolutionBase, validate);
+	@Override
+	public OpenApi3 parse(URL resolutionBase, boolean validate) throws Exception {
+		return (OpenApi3) super.parse(resolutionBase, validate);
+	}
+
+	@Override
+	public OpenApi3 parse(JsonNode tree, URL resolutionBase) {
+		return (OpenApi3) super.parse(tree, resolutionBase);
+	}
+
+	@Override
+	public OpenApi3 parse(JsonNode tree, URL resolutionBase, boolean validate) {
+		return (OpenApi3) super.parse(tree, resolutionBase, validate);
+	}
+
+	@Override
+	protected boolean isVersion3(JsonNode tree) {
+		return true; // if 'openapi' property is missing or incorrect, that will
+		// show up as a
+		// validation error
 	}
 }

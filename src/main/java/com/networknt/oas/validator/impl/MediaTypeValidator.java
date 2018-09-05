@@ -10,51 +10,60 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
+import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.EncodingProperty;
 import com.networknt.oas.model.Example;
 import com.networknt.oas.model.MediaType;
 import com.networknt.oas.model.Schema;
 import com.networknt.oas.validator.ObjectValidatorBase;
 import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
 
+import java.util.Map;
 import java.util.Set;
 
-import static com.networknt.oas.validator.Messages.m;
+import static com.networknt.oas.model.impl.MediaTypeImpl.*;
+import static com.networknt.oas.validator.impl.OpenApi3Messages.EncPropNotSchemaProp;
+import static com.networknt.oas.validator.msg.Messages.msg;
+
 
 public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 
-	private static Validator<Schema> schemaValidator = SingletonServiceFactory.getBean(Validator.class, Schema.class);
-	private static Validator<EncodingProperty> encodingPropertyValidator = SingletonServiceFactory.getBean(Validator.class, EncodingProperty.class);
-	private static Validator<Example> exampleValidator = SingletonServiceFactory.getBean(Validator.class, Example.class);
-
 	@Override
-	public void validateObject(MediaType mediaType, ValidationResults results) {
-		// no validation for: example, examples
+	public void runObjectValidations() {
+		MediaType mediaType = (MediaType) value.getOverlay();
 		// TODO Q: Should schema be required in media type?
-		validateField(mediaType.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(mediaType.getEncodingProperties(false), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
-				encodingPropertyValidator);
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_encodingProperties, false, false, EncodingProperty.class, new EncodingPropertyValidator());
 		checkEncodingPropsAreProps(mediaType, results);
-		validateExtensions(mediaType.getExtensions(false), results);
-		validateMap(mediaType.getExamples(false), results, false, "examples", Regexes.NOEXT_NAME_REGEX,
-				exampleValidator);
+		validateExtensions(mediaType.getExtensions());
+		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+				new ExampleValidator());
+		Overlay<Object> example = validateField(F_example, false, Object.class, null);
+		checkExampleExclusion(examples, example);
 	}
 
 	void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
 		// TODO Q: do allOf, anyOf, oneOf schemas participate? what about
 		// additionalProperties?
 		Schema schema = mediaType.getSchema(false);
-		if (schema.isElaborated()) {
-			Set<String> propNames = schema.getProperties(false).keySet();
-			for (String encodingPropertyName : mediaType.getEncodingProperties(false).keySet()) {
+		if (Overlay.of(schema).isElaborated()) {
+			Set<String> propNames = schema.getProperties().keySet();
+			Map<String, EncodingProperty> encProps = mediaType.getEncodingProperties();
+			for (String encodingPropertyName : encProps.keySet()) {
 				if (!propNames.contains(encodingPropertyName)) {
-					results.addError(m.msg(
-							"EncPropNotSchemaProp|Encoding property does not name a schema property for the media type",
-							encodingPropertyName), encodingPropertyName);
+					results.addError(msg(EncPropNotSchemaProp, encodingPropertyName),
+							Overlay.of(encProps, encodingPropertyName));
 				}
 			}
+		}
+	}
+
+	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+		boolean examplesPresent = examples != null && examples.isPresent()
+				&& Overlay.getMapOverlay(examples).size() > 0;
+		boolean examplePresent = example != null && example.isPresent();
+		if (examplesPresent && examplePresent) {
+			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
 		}
 	}
 }

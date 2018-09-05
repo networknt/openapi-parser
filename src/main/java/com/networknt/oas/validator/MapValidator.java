@@ -10,22 +10,26 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.networknt.oas.jsonoverlay.MapOverlay;
+import com.networknt.jsonoverlay.MapOverlay;
+import com.networknt.jsonoverlay.Overlay;
 
-public class MapValidator<T extends MapOverlay<T, ?>> extends OverlayValidator<MapOverlay<T, ?>> {
+import java.util.Map;
 
-	private Validator<T> elementValidator;
+public class MapValidator<T> extends ValidatorBase<Map<String, T>> {
 
-	public MapValidator(Validator<T> elementValidator) {
-		this.elementValidator = elementValidator;
+	private Validator<T> valueValidator;
+
+	public MapValidator(Validator<T> valueValidator) {
+		this.valueValidator = valueValidator;
 	}
 
 	@Override
-	public void validate(MapOverlay<T, ?> overlay, ValidationResults results) {
-		super.validate(overlay, results, ObjectNode.class);
-		for (T value : overlay.get().values()) {
-			elementValidator.validate(value, results, value.getPathInParent());
+	public void runValidations() {
+		MapOverlay<T> mapOverlay = Overlay.getMapOverlay(value);
+		if (valueValidator != null) {
+			for (String key : mapOverlay.keySet()) {
+				valueValidator.validate(Overlay.of(mapOverlay, key));
+			}
 		}
 	}
 }

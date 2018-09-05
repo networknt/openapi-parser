@@ -13,39 +13,42 @@ package com.networknt.oas.validator.impl;
 import com.networknt.oas.model.OAuthFlow;
 import com.networknt.oas.model.SecurityScheme;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.model.impl.SecuritySchemeImpl.*;
 
 public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme> {
 
-    private static Validator<OAuthFlow> oauthFlowValidator = SingletonServiceFactory.getBean(Validator.class, OAuthFlow.class);
-
-    @Override
-    public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
-        // no validation for: description, bearerFormat
-        validateString(securityScheme.getType(false), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-        switch (securityScheme.getType(false)) {
-            case "http":
-            	validateString(securityScheme.getScheme(false), results, true, "scheme");
-                // If bearer validate bearerFormat
-                break;
-            case "apiKey":
-                validateString(securityScheme.getName(false), results, true, "name");
-                validateString(securityScheme.getIn(false), results, true, "query|header|cookie", "in");
-                break;
-            case "oauth2":
-                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.implicit", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.password", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.clientCredentials", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "authorizationCode", oauthFlowValidator);
-                validateExtensions(securityScheme.getOAuthFlowsExtensions(false), results, "flow");
-                break;
-            case "openIdConnect":
-                validateUrl(securityScheme.getOpenIdConnectUrl(false), results, true, "openIdConnectUrl");
-                break;
-        }
-        validateExtensions(securityScheme.getExtensions(false), results);
-    }
-
+	@Override
+	public void runObjectValidations() {
+		SecurityScheme securityScheme = (SecurityScheme) value.getOverlay();
+		validateStringField(F_description, false);
+		validateStringField(F_type, true, "apiKey|http|oauth2|openIdConnect");
+		String type = securityScheme.getType();
+		// TODO should these type-specific fields be disallowed for non-applicable
+		// types? (At least a warning)
+		if (type != null) {
+			switch (type) {
+			case "http":
+				validateStringField(F_scheme, true);
+				validateStringField(F_bearerFormat, false);
+				break;
+			case "apiKey":
+				validateStringField(F_name, true);
+				validateStringField(F_in, true, "query|header|cookie");
+				break;
+			case "oauth2": {
+				OAuthFlowValidator oauthFlowValidator = new OAuthFlowValidator();
+				validateField(F_implicitOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_passwordOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_clientCredentialsOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_authorizationCodeOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				break;
+			}
+			case "openIdConnect":
+				validateUrlField(F_openIdConnectUrl, true, true, false);
+				break;
+			}
+		}
+		validateExtensions(securityScheme.getExtensions());
+	}
 }

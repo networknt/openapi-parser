@@ -11,18 +11,21 @@
 package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.Xml;
+import com.networknt.oas.model.impl.XmlImpl;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
 
-import javax.print.attribute.standard.Severity;
+import static com.networknt.oas.model.impl.XmlImpl.*;
 
 public class XmlValidator extends ObjectValidatorBase<Xml> {
 
-    @Override
-    public void validateObject(Xml xml, ValidationResults results) {
-        // no validation for: name, prefix, attribute, wrapped
-        validateUrl(xml.getNamespace(false), results, false, "namespace", false, Severity.WARNING);
-        validateExtensions(xml.getExtensions(false), results);
-    }
-
+	@Override
+	public void runObjectValidations() {
+		Xml xml = (Xml) value.getOverlay();
+		validateStringField(F_name, false);
+		validateStringField(F_prefix, false);
+		validateBooleanField(F_attribute, false);
+		validateBooleanField(XmlImpl.F_wrapped, false);
+		validateUrlField(F_namespace, false, true, false);
+		validateExtensions(xml.getExtensions());
+	}
 }

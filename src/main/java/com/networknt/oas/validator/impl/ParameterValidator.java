@@ -10,73 +10,84 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
+import com.networknt.jsonoverlay.Overlay;
+import com.networknt.jsonoverlay.PropertiesOverlay;
 import com.networknt.oas.model.*;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
 
-import static com.networknt.oas.validator.Messages.m;
+import java.util.Map;
+
+import static com.networknt.oas.model.impl.ParameterImpl.*;
+import static com.networknt.oas.validator.impl.OpenApi3Messages.NoPath;
+import static com.networknt.oas.validator.impl.OpenApi3Messages.PathParamReq;
+import static com.networknt.oas.validator.msg.Messages.msg;
 
 public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 
-	private static Validator<Schema> schemaValidator = SingletonServiceFactory.getBean(Validator.class, Schema.class);
-	private static Validator<MediaType> mediaTypeValidator = SingletonServiceFactory.getBean(Validator.class, MediaType.class);
-
 	@Override
-	public void validateObject(Parameter parameter, ValidationResults results) {
-		// no validations for: description, deprecated, allowEmptyValue, explode,
-		// example, examples
-		validateString(parameter.getName(false), results, true, "name");
-		validateString(parameter.getIn(false), results, true, Regexes.PARAM_IN_REGEX, "in");
-		checkPathParam(parameter, results);
-		checkRequired(parameter, results);
-		validateString(parameter.getStyle(false), results, false, Regexes.STYLE_REGEX, "style");
-		checkAllowReserved(parameter, results);
+	public void runObjectValidations() {
+		Parameter parameter = (Parameter) value.getOverlay();
+		validateStringField(F_description, false);
+		validateBooleanField(F_deprecated, false);
+		validateBooleanField(F_allowEmptyValue, false);
+		validateBooleanField(F_explode, false);
+		Overlay<Object> example = validateField(F_example, false, Object.class, null);
+		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+				new ExampleValidator());
+		checkExampleExclusion(examples, example);
+		validateStringField(F_name, true);
+		validateStringField(F_in, true, Regexes.PARAM_IN_REGEX);
+		checkPathParam(parameter);
+		checkRequired(parameter);
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
+		checkAllowReserved(parameter);
 		// TODO Q: Should schema be required in parameter object?
-		validateField(parameter.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(parameter.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX,
-				mediaTypeValidator);
-		validateExtensions(parameter.getExtensions(false), results);
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateExtensions(parameter.getExtensions());
 	}
 
-	private void checkPathParam(Parameter parameter, ValidationResults results) {
-		if (parameter.getIn(false) != null && parameter.getIn(false).equals("path")
-				&& parameter.getName(false) != null) {
+	private void checkPathParam(Parameter parameter) {
+		if (parameter.getIn() != null && parameter.getIn().equals("path") && parameter.getName() != null) {
 			String path = getPathString(parameter);
 			if (path != null) {
-				if (!path.matches(".*/\\{" + parameter.getName(false) + "\\}(/.*)?")) {
-					results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
-							parameter.getName(false), path), "name");
+				if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {
+					results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
 				}
 			} else {
-				results.addWarning(m.msg("NoPath|Could not locate path for parameter", parameter.getName(false),
-						parameter.getIn(false)));
+				results.addWarning(msg(NoPath, parameter.getName(), parameter.getIn()), value);
 			}
 		}
 	}
 
-	private void checkRequired(Parameter parameter, ValidationResults results) {
-		if ("path".equals(parameter.getIn(false))) {
-			if (parameter.getRequired(false) != Boolean.TRUE) {
-				results.addError(m.msg("PathParamReq|Path param must have 'required' property set true",
-						parameter.getName(false)), "required");
+	private void checkRequired(Parameter parameter) {
+		if ("path".equals(parameter.getIn())) {
+			if (parameter.getRequired() != Boolean.TRUE) {
+				results.addError(msg(PathParamReq, parameter.getName()), value);
 			}
 		}
 	}
 
-	private void checkAllowReserved(Parameter parameter, ValidationResults results) {
-		if (parameter.isAllowReserved() && !"query".equals(parameter.getIn(false))) {
-			results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
-					parameter.getName(false), parameter.getIn(false)), "allowReserved");
+	private void checkAllowReserved(Parameter parameter) {
+		if (parameter.isAllowReserved() && !"query".equals(parameter.getIn())) {
+			results.addWarning(msg(OpenApi3Messages.NonQryAllowRsvd, parameter.getName(), parameter.getIn()), value);
 		}
 	}
 
 	private String getPathString(Parameter parameter) {
-		OpenApiObject<OpenApi3, ?> parent = (OpenApiObject<OpenApi3, ?>) parameter.getParentObject();
+		PropertiesOverlay<?> parent = Overlay.of(parameter).getParentPropertiesOverlay();
 		while (parent != null && !(parent instanceof Path)) {
-			parent = (OpenApiObject<OpenApi3, ?>) parent.getParentObject();
+			parent = Overlay.of(parent).getParentPropertiesOverlay();
 		}
-		return parent instanceof Path ? parent.getPathInParent() : null;
+		return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
+	}
+
+	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+		boolean examplesPresent = examples != null && examples.isPresent()
+				&& Overlay.getMapOverlay(examples).size() > 0;
+		boolean examplePresent = example != null && example.isPresent();
+		if (examplesPresent && examplePresent) {
+			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
+		}
 	}
 }

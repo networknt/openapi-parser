@@ -11,47 +11,21 @@
 package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.ServerVariable;
-import com.networknt.oas.validator.Messages;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
 
-import javax.lang.model.type.NullType;
+import static com.networknt.oas.model.impl.ServerVariableImpl.F_defaultValue;
+import static com.networknt.oas.model.impl.ServerVariableImpl.F_description;
+import static com.networknt.oas.model.impl.ServerVariableImpl.F_enumValues;
 
 public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 
-    @Override
-    public void validateObject(final ServerVariable variable, final ValidationResults results) {
-        results.withCrumb("enum", new Runnable() {
-            @Override
-            public void run() {
-                int i = 0;
-                for (Object primitive : variable.getEnumValues(false)) {
-                    checkPrimitive(primitive, results, i++);
-                }
-            }
-        });
-        results.withCrumb("default", new Runnable() {
-            @Override
-            public void run() {
-                checkPrimitive(variable.getDefault(false), results, "default");
-            }
-        });
-        validateString(variable.getDescription(false), results, false, "description");
-    }
-
-    private void checkPrimitive(Object primitive, ValidationResults results, int index) {
-        checkPrimitive(primitive, results, "[" + index + "]");
-    }
-
-    private void checkPrimitive(final Object primitive, ValidationResults results, String crumb) {
-        if (!(primitive instanceof String || primitive instanceof Number || primitive instanceof Boolean)) {
-            results.withCrumb(crumb, new Runnable() {
-                @Override
-                public void run() {
-                    Messages.m.msg("BadPrimitive|Invalid primitive value", String.valueOf(primitive),
-                            (primitive != null ? primitive.getClass() : NullType.class).getName());
-                }
-            });
-        }
-    }
+	@Override
+	public void runObjectValidations() {
+		ServerVariable var = (ServerVariable) value.getOverlay();
+		validateStringField(F_description, false);
+		validateListField(F_enumValues, false, false, String.class, null);
+		// TODO Q: What the heck is does the description in the spec mean???
+		validateField(F_defaultValue, true, String.class, null);
+		validateExtensions(var.getExtensions());
+	}
 }

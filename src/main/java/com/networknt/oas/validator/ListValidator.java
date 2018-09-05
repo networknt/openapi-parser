@@ -10,25 +10,26 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import com.networknt.oas.jsonoverlay.ListOverlay;
+import com.networknt.jsonoverlay.ListOverlay;
+import com.networknt.jsonoverlay.Overlay;
 
-public class ListValidator<T extends ListOverlay<T, ?>> extends OverlayValidator<ListOverlay<T, ?>> {
+import java.util.List;
 
-	Validator<T> elementValidator;
+public class ListValidator<T> extends ValidatorBase<List<T>> {
+
+	Validator<T> itemValidator;
 
 	public ListValidator(Validator<T> elementeValidator) {
-		this.elementValidator = elementeValidator;
+		this.itemValidator = elementeValidator;
 	}
 
 	@Override
-	public void validate(ListOverlay<T, ?> overlay, ValidationResults results) {
-		int i = 0;
-		for (T value : overlay.get()) {
-			elementValidator.validate(value, results, getElementCrumb(i++));
+	public void runValidations() {
+		if (itemValidator != null) {
+			ListOverlay<T> list = Overlay.getListOverlay(value);
+			for (int i = 0; i < list.size(); i++) {
+				itemValidator.validate(Overlay.of(list, i));
+			}
 		}
-	}
-
-	protected String getElementCrumb(int index) {
-		return "[" + index + "]";
 	}
 }

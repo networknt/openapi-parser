@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.networknt.oas;
 
+import com.google.common.io.Resources;
 import com.networknt.oas.model.OpenApi3;
 import org.junit.Test;
 
@@ -18,16 +19,16 @@ import static org.junit.Assert.assertNotNull;
 
 public class LinksTest {
 
-    @Test
-    public void testLinks() {
-        OpenApi3 model = (OpenApi3) new OpenApiParser().parse(LinksTest.class.getClassLoader().getResource("models/linksTest.yaml"), false);
+	@Test
+	public void testLinks() throws Exception {
+		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/linksTest.yaml"), false);
 
-        assertNotNull(model.getLink("PullRequestMerge").getOperationId());
-        assertNotNull(model.getLink("PullRequestMerge").getOperationRef());
-        assertNotNull(model.getLink("PullRequestMerge").getServer());
+		assertNotNull(model.getLink("PullRequestMerge").getOperationId());
+		assertNotNull(model.getLink("PullRequestMerge").getOperationRef());
+		assertNotNull(model.getLink("PullRequestMerge").getServer());
 
-        assertEquals("http://localhost", model.getLink("PullRequestMerge").getServer().getUrl());
-        assertEquals("server", model.getLink("PullRequestMerge").getServer().getDescription());
-    }
+		assertEquals("http://localhost", model.getLink("PullRequestMerge").getServer().getUrl());
+		assertEquals("server", model.getLink("PullRequestMerge").getServer().getDescription());
+	}
 
 }

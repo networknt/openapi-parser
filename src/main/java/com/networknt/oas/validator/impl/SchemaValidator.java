@@ -10,79 +10,63 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
-import com.networknt.oas.model.Example;
+import com.networknt.oas.model.Discriminator;
 import com.networknt.oas.model.ExternalDocs;
 import com.networknt.oas.model.Schema;
 import com.networknt.oas.model.Xml;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
 
-import static com.networknt.oas.validator.Messages.m;
+import static com.networknt.oas.model.impl.SchemaImpl.*;
+import static com.networknt.oas.validator.impl.OpenApi3Messages.ROnlyAndWOnly;
+import static com.networknt.oas.validator.msg.Messages.msg;
 
 public class SchemaValidator extends ObjectValidatorBase<Schema> {
 
-    private static Validator<Xml> xmlValidator = SingletonServiceFactory.getBean(Validator.class, Xml.class);
-    private static Validator<ExternalDocs> externalDocsValidator = SingletonServiceFactory.getBean(Validator.class, ExternalDocs.class);
-    private static Validator<Example> exampleValidator = SingletonServiceFactory.getBean(Validator.class, Example.class);
+	@Override
+	public void runObjectValidations() {
+		Schema schema = (Schema) value.getOverlay();
+		validateStringField(F_title, false);
+		validateStringField(F_description, false);
+		validateNumericField(F_maximum, false, null, null);
+		validateBooleanField(F_exclusiveMaximum, false);
+		validateNumericField(F_minimum, false, null, null);
+		validateBooleanField(F_exclusiveMinimum, false);
+		validateBooleanField(F_uniqueItems, false);
+		validateBooleanField(F_nullable, false);
+		validateField(F_example, false, Object.class, null);
+		validateBooleanField(F_deprecated, false);
+		validatePositiveField(F_multipleOf, false);
+		validateNonNegativeField(F_maxLength, false);
+		validateNonNegativeField(F_minLength, false);
+		validatePatternField(F_pattern, false);
+		validateNonNegativeField(F_maxItems, false);
+		validateNonNegativeField(F_minItems, false);
+		validateNonNegativeField(F_maxProperties, false);
+		validateNonNegativeField(F_minProperties, false);
+		validateListField(F_requiredFields, false, true, String.class, null);
+		validateListField(F_enums, false, true, Object.class, null);
+		validateStringField(F_type, false, "boolean|object|array|number|integer|string");
+		{
+			SchemaValidator schemaValidator = new SchemaValidator();
+			validateListField(F_allOfSchemas, false, false, Schema.class, schemaValidator);
+			validateListField(F_oneOfSchemas, false, false, Schema.class, schemaValidator);
+			validateListField(F_anyOfSchemas, false, false, Schema.class, schemaValidator);
+			validateField(F_notSchema, false, Schema.class, schemaValidator);
+			validateField(F_itemsSchema, false, Schema.class, schemaValidator);
+			validateMapField(F_properties, false, false, Schema.class, schemaValidator);
+		}
+		validateFormatField(F_format, false, schema.getType());
+		validateField(F_defaultValue, false, Object.class, null, field -> checkDefault(field, schema.getType()));
+		validateField(F_discriminator, false, Discriminator.class, new DiscriminatorValidator());
+		checkReadWrite(schema);
+		validateField(F_xml, false, Xml.class, new XmlValidator());
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+		validateExtensions(schema.getExtensions());
+	}
 
-    @Override
-    public void validateObject(Schema schema, ValidationResults results) {
-        // no validation for: title, description, maximum, exclusiveMaximum, minimum exclusiveMinimum, uniqueItems,
-        // nullable, example, deprecated
-        validatePositive(schema.getMultipleOf(false), results, false, "multipleOf");
-        validateNonNegative(schema.getMaxLength(false), results, false, "maxLength");
-        validateNonNegative(schema.getMinLength(false), results, false, "minLength");
-        validatePattern(schema.getPattern(false), results, false, "pattern");
-        validateNonNegative(schema.getMaximum(false), results, false, "maxItems");
-        validateNonNegative(schema.getMaximum(false), results, false, "minItems");
-        validateNonNegative(schema.getMaxProperties(false), results, false, "maxProperties");
-        validateNonNegative(schema.getMinProperties(false), results, false, "minProperties");
-        validateUnique(schema.getRequiredFields(false), results, "required");
-        validateList(schema.getEnums(false), schema.hasEnums(), results, false, "enum", null);
-        validateNonEmpty(schema.getEnums(false), schema.hasEnums(), results, "enum");
-        validateUnique(schema.getEnums(false), results, "enum");
-        validateString(schema.getType(false), results, false, "boolean|object|array|number|integer|string", "type");
-        validateList(schema.getAllOfSchemas(false), schema.hasAllOfSchemas(), results, false, "allOf", this);
-        validateList(schema.getOneOfSchemas(false), schema.hasOneOfSchemas(), results, false, "oneOf", this);
-        validateList(schema.getAnyOfSchemas(false), schema.hasAnyOfSchemas(), results, false, "anyOf", this);
-        if (schema.getNotSchema(false) != null && schema.getNotSchema(false).isPresent()) {
-            validate(schema.getNotSchema(false), results, "not");
-        }
-        if (schema.getItemsSchema(false) != null && schema.getItemsSchema(false).isPresent()) {
-            validate(schema.getItemsSchema(false), results, "items");
-        }
-        validateMap(schema.getProperties(false), results, false, "properties", Regexes.NOEXT_NAME_REGEX, this);
-        validateFormat(schema.getFormat(false), schema.getType(false), results, "format");
-        validateDefault(schema.getDefault(false), schema.getType(false), results, "default");
-        checkDiscriminator(schema, results, "discriminator");
-        checkReadWrite(schema, results);
-        validateField(schema.getXml(false), results, false, "xml", xmlValidator);
-        validateField(schema.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-        validateMap(schema.getExamples(false), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
-        validateExtensions(schema.getExtensions(false), results);
-    }
-
-    private void checkDiscriminator(Schema schema, ValidationResults results, String crumb) {
-        String discriminator = schema.getDiscriminator(false);
-        if (discriminator != null) {
-            if (!schema.getProperties(false).keySet().contains(discriminator)) {
-                results.addError(m.msg("DiscNotProp|The discriminator is not a property of this schema", discriminator),
-                        crumb);
-            }
-            if (!schema.getRequiredFields(false).contains(discriminator)) {
-                results.addError(
-                        m.msg("DiscNotReq|The discriminator property is not required in this schema", discriminator),
-                        crumb);
-            }
-        }
-    }
-
-    private void checkReadWrite(Schema schema, ValidationResults results) {
-        if (schema.isReadOnly() && schema.isWriteOnly()) {
-            // don't set crumb... this validation involves multiple fields so is tied to schema
-            results.addError(m.msg("ROnlyAndWOnly|Schema cannot be both ReadOnly and WriteOnly"));
-        }
-    }
+	private void checkReadWrite(Schema schema) {
+		if (schema.isReadOnly() && schema.isWriteOnly()) {
+			results.addError(msg(ROnlyAndWOnly), value);
+		}
+	}
 }

@@ -13,21 +13,19 @@ package com.networknt.oas.validator.impl;
 import com.networknt.oas.model.Server;
 import com.networknt.oas.model.ServerVariable;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
 
-import static com.networknt.oas.validator.impl.Regexes.NAME_REGEX;
+import static com.networknt.oas.model.impl.ServerImpl.F_description;
+import static com.networknt.oas.model.impl.ServerImpl.F_serverVariables;
+import static com.networknt.oas.model.impl.ServerImpl.F_url;
 
 public class ServerValidator extends ObjectValidatorBase<Server> {
 
-    private static Validator<ServerVariable> serverVariableValidator = SingletonServiceFactory.getBean(Validator.class, ServerVariable.class);
-
-    @Override
-    public void validateObject(Server server, ValidationResults results) {
-        // no validation for: description
-        validateUrl(server.getUrl(false), results, false, "url", true);
-        validateMap(server.getServerVariables(false), results, false, "variables", NAME_REGEX, serverVariableValidator);
-        validateExtensions(server.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Server server = (Server) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, true, true, true);
+		validateMapField(F_serverVariables, false, false, ServerVariable.class, new ServerVariableValidator());
+		validateExtensions(server.getExtensions());
+	}
 }

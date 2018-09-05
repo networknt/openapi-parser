@@ -1,212 +1,183 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.jsonoverlay.Reference;
-
 import java.util.Map;
 
-public interface Parameter extends OpenApiObject<OpenApi3, Parameter> {
+import javax.annotation.Generated;
 
-    // Name
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getName();
+public interface Parameter extends IJsonOverlay<Parameter>, IModelPart<OpenApi3, Parameter> {
 
+	String getKey();
 
-    String getName(boolean elaborate);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    void setName(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    // In
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    String getIn();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    String getIn(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 
-    void setIn(String in);
+	// ContentMediaType
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, MediaType> getContentMediaTypes();
 
-    // Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, MediaType> getContentMediaTypes(boolean elaborate);
 
-    String getDescription();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasContentMediaTypes();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasContentMediaType(String name);
 
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	MediaType getContentMediaType(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
 
-    void setDescription(String description);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setContentMediaType(String name, MediaType contentMediaType);
 
-    // Required
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeContentMediaType(String name);
 
-    Boolean getRequired();
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
 
-    Boolean getRequired(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExample(String name);
 
-    boolean isRequired();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Example getExample(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExamples(Map<String, Example> examples);
 
-    void setRequired(Boolean required);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(String name, Example example);
 
-    // Deprecated
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExample(String name);
 
-    Boolean getDeprecated();
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExample();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(Object example);
 
-    Boolean getDeprecated(boolean elaborate);
+	// Schema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema(boolean elaborate);
 
-    boolean isDeprecated();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSchema(Schema schema);
 
+	// AllowReserved
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAllowReserved();
 
-    void setDeprecated(Boolean deprecated);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAllowReserved();
 
-    // AllowEmptyValue
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllowReserved(Boolean allowReserved);
 
-    Boolean getAllowEmptyValue();
+	// Explode
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getExplode();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isExplode();
 
-    Boolean getAllowEmptyValue(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExplode(Boolean explode);
 
+	// Style
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getStyle();
 
-    boolean isAllowEmptyValue();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setStyle(String style);
 
+	// AllowEmptyValue
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAllowEmptyValue();
 
-    void setAllowEmptyValue(Boolean allowEmptyValue);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAllowEmptyValue();
 
-    // Style
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllowEmptyValue(Boolean allowEmptyValue);
 
-    String getStyle();
+	// Deprecated
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getDeprecated();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isDeprecated();
 
-    String getStyle(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDeprecated(Boolean deprecated);
 
+	// Required
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getRequired();
 
-    void setStyle(String style);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isRequired();
 
-    // Explode
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequired(Boolean required);
 
-    Boolean getExplode();
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    Boolean getExplode(boolean elaborate);
+	// Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getName();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setName(String name);
 
-    boolean isExplode();
+	// In
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getIn();
 
-
-    void setExplode(Boolean explode);
-
-    // AllowReserved
-
-    Boolean getAllowReserved();
-
-
-    Boolean getAllowReserved(boolean elaborate);
-
-
-    boolean isAllowReserved();
-
-
-    void setAllowReserved(Boolean allowReserved);
-
-    // Schema
-
-    Schema getSchema();
-
-
-    Schema getSchema(boolean elaborate);
-
-
-    void setSchema(Schema schema);
-
-
-    boolean isSchemaReference();
-
-
-    Reference getSchemaReference();
-
-    // Example
-
-    Object getExample();
-
-
-    Object getExample(boolean elaborate);
-
-
-    void setExample(Object example);
-
-    // Example
-
-    Map<String, Example> getExamples();
-
-
-    Map<String, Example> getExamples(boolean elaborate);
-
-
-    boolean hasExample(String name);
-
-
-    Example getExample(String name);
-
-
-    void setExamples(Map<String, Example> examples);
-
-
-    void setExample(String name, Example example);
-
-
-    void removeExample(String name);
-
-
-    boolean isExampleReference(String key);
-
-
-    Reference getExampleReference(String key);
-
-    // ContentMediaType
-
-    Map<String, MediaType> getContentMediaTypes();
-
-
-    Map<String, MediaType> getContentMediaTypes(boolean elaborate);
-
-
-    boolean hasContentMediaType(String name);
-
-
-    MediaType getContentMediaType(String name);
-
-
-    void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
-
-
-    void setContentMediaType(String name, MediaType contentMediaType);
-
-
-    void removeContentMediaType(String name);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setIn(String in);
 }

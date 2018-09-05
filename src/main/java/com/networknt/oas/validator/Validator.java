@@ -10,12 +10,8 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-public interface Validator<T> {
+import com.networknt.jsonoverlay.Overlay;
 
-    ValidationResults validate(T object);
-
-    void validate(T object, ValidationResults results);
-
-    void validate(T object, ValidationResults results, String crumb);
-
+public interface Validator<V> {
+	void validate(Overlay<V> value);
 }

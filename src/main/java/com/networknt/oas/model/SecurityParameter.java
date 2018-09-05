@@ -1,35 +1,39 @@
 package com.networknt.oas.model;
 
-import java.util.Collection;
+import java.util.List;
 
-public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParameter> {
+import javax.annotation.Generated;
 
-    // Parameter
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    Collection<String> getParameters();
+public interface SecurityParameter extends IJsonOverlay<SecurityParameter>, IModelPart<OpenApi3, SecurityParameter> {
 
+	// Parameter
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getParameters();
 
-    Collection<String> getParameters(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getParameters(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasParameters();
 
-    boolean hasParameters();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getParameter(int index);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameters(List<String> parameters);
 
-    String getParameter(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameter(int index, String parameter);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addParameter(String parameter);
 
-    void setParameters(Collection<String> parameters);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertParameter(int index, String parameter);
 
-
-    void setParameter(int index, String parameter);
-
-
-    void addParameter(String parameter);
-
-
-    void insertParameter(int index, String parameter);
-
-
-    void removeParameter(int index);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeParameter(int index);
 }

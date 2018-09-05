@@ -2,160 +2,151 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface SecurityScheme extends OpenApiObject<OpenApi3, SecurityScheme> {
+import javax.annotation.Generated;
 
-    // Type
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getType();
+public interface SecurityScheme extends IJsonOverlay<SecurityScheme>, IModelPart<OpenApi3, SecurityScheme> {
 
+	String getKey();
 
-    String getType(boolean elaborate);
+	// Type
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getType();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setType(String type);
 
-    void setType(String type);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
-    // Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    String getDescription();
+	// Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getName();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setName(String name);
 
-    String getDescription(boolean elaborate);
+	// In
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getIn();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setIn(String in);
 
-    void setDescription(String description);
+	// Scheme
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getScheme();
 
-    // Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setScheme(String scheme);
 
-    String getName();
+	// BearerFormat
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getBearerFormat();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setBearerFormat(String bearerFormat);
 
-    String getName(boolean elaborate);
+	// ImplicitOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getImplicitOAuthFlow();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getImplicitOAuthFlow(boolean elaborate);
 
-    void setName(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setImplicitOAuthFlow(OAuthFlow implicitOAuthFlow);
 
-    // In
+	// PasswordOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getPasswordOAuthFlow();
 
-    String getIn();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getPasswordOAuthFlow(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPasswordOAuthFlow(OAuthFlow passwordOAuthFlow);
 
-    String getIn(boolean elaborate);
+	// ClientCredentialsOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getClientCredentialsOAuthFlow();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getClientCredentialsOAuthFlow(boolean elaborate);
 
-    void setIn(String in);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setClientCredentialsOAuthFlow(OAuthFlow clientCredentialsOAuthFlow);
 
-    // Scheme
+	// AuthorizationCodeOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getAuthorizationCodeOAuthFlow();
 
-    String getScheme();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	OAuthFlow getAuthorizationCodeOAuthFlow(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAuthorizationCodeOAuthFlow(OAuthFlow authorizationCodeOAuthFlow);
 
-    String getScheme(boolean elaborate);
+	// OAuthFlowsExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getOAuthFlowsExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getOAuthFlowsExtensions(boolean elaborate);
 
-    void setScheme(String scheme);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOAuthFlowsExtensions();
 
-    // BearerFormat
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOAuthFlowsExtension(String name);
 
-    String getBearerFormat();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getOAuthFlowsExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOAuthFlowsExtensions(Map<String, Object> oAuthFlowsExtensions);
 
-    String getBearerFormat(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOAuthFlowsExtension(String name, Object oAuthFlowsExtension);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeOAuthFlowsExtension(String name);
 
-    void setBearerFormat(String bearerFormat);
+	// OpenIdConnectUrl
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getOpenIdConnectUrl();
 
-    // ImplicitOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOpenIdConnectUrl(String openIdConnectUrl);
 
-    OAuthFlow getImplicitOAuthFlow();
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    OAuthFlow getImplicitOAuthFlow(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    void setImplicitOAuthFlow(OAuthFlow implicitOAuthFlow);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    // PasswordOAuthFlow
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    OAuthFlow getPasswordOAuthFlow();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    OAuthFlow getPasswordOAuthFlow(boolean elaborate);
-
-
-    void setPasswordOAuthFlow(OAuthFlow passwordOAuthFlow);
-
-    // ClientCredentialsOAuthFlow
-
-    OAuthFlow getClientCredentialsOAuthFlow();
-
-
-    OAuthFlow getClientCredentialsOAuthFlow(boolean elaborate);
-
-
-    void setClientCredentialsOAuthFlow(OAuthFlow clientCredentialsOAuthFlow);
-
-    // AuthorizationCodeOAuthFlow
-
-    OAuthFlow getAuthorizationCodeOAuthFlow();
-
-
-    OAuthFlow getAuthorizationCodeOAuthFlow(boolean elaborate);
-
-
-    void setAuthorizationCodeOAuthFlow(OAuthFlow authorizationCodeOAuthFlow);
-
-    // OAuthFlowsExtension
-
-    Map<String, Object> getOAuthFlowsExtensions();
-
-
-    Map<String, Object> getOAuthFlowsExtensions(boolean elaborate);
-
-
-    boolean hasOAuthFlowsExtension(String name);
-
-
-    Object getOAuthFlowsExtension(String name);
-
-
-    void setOAuthFlowsExtensions(Map<String, Object> oAuthFlowsExtensions);
-
-
-    void setOAuthFlowsExtension(String name, Object oAuthFlowsExtension);
-
-
-    void removeOAuthFlowsExtension(String name);
-
-    // OpenIdConnectUrl
-
-    String getOpenIdConnectUrl();
-
-
-    String getOpenIdConnectUrl(boolean elaborate);
-
-
-    void setOpenIdConnectUrl(String openIdConnectUrl);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

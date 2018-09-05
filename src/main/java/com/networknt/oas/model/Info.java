@@ -2,88 +2,83 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface Info extends OpenApiObject<OpenApi3, Info> {
+import javax.annotation.Generated;
 
-    // Title
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getTitle();
+public interface Info extends IJsonOverlay<Info>, IModelPart<OpenApi3, Info> {
 
+	// Title
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getTitle();
 
-    String getTitle(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTitle(String title);
 
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
-    void setTitle(String title);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    // Description
+	// TermsOfService
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getTermsOfService();
 
-    String getDescription();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTermsOfService(String termsOfService);
 
+	// Contact
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Contact getContact();
 
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Contact getContact(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setContact(Contact contact);
 
-    void setDescription(String description);
+	// License
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	License getLicense();
 
-    // TermsOfService
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	License getLicense(boolean elaborate);
 
-    String getTermsOfService();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setLicense(License license);
 
+	// Version
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getVersion();
 
-    String getTermsOfService(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setVersion(String version);
 
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    void setTermsOfService(String termsOfService);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    // Contact
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    Contact getContact();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    Contact getContact(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    void setContact(Contact contact);
-
-    // License
-
-    License getLicense();
-
-
-    License getLicense(boolean elaborate);
-
-
-    void setLicense(License license);
-
-    // Version
-
-    String getVersion();
-
-
-    String getVersion(boolean elaborate);
-
-
-    void setVersion(String version);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

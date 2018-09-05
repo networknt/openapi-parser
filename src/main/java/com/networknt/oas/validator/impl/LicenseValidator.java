@@ -12,15 +12,18 @@ package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.License;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
+
+import static com.networknt.oas.model.impl.LicenseImpl.F_name;
+import static com.networknt.oas.model.impl.LicenseImpl.F_url;
 
 public class LicenseValidator extends ObjectValidatorBase<License> {
 
-    @Override
-    public void validateObject(License license, ValidationResults results) {
-        validateString(license.getName(false), results, true, "name");
-        validateUrl(license.getUrl(false), results, false, "url");
-        validateExtensions(license.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		License license = (License) value.getOverlay();
+		validateStringField(F_name, true);
+		validateUrlField(F_url, false, true, false);
+		validateExtensions(license.getExtensions());
+	}
 
 }

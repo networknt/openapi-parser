@@ -12,15 +12,19 @@ package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.Contact;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
+
+import static com.networknt.oas.model.impl.ContactImpl.F_email;
+import static com.networknt.oas.model.impl.ContactImpl.F_name;
+import static com.networknt.oas.model.impl.ContactImpl.F_url;
 
 public class ContactValidator extends ObjectValidatorBase<Contact> {
 
-    @Override
-    public void validateObject(Contact contact, ValidationResults results) {
-        validateUrl(contact.getUrl(false), results, false, "url");
-        validateEmail(contact.getEmail(false), results, false, "email");
-        validateExtensions(contact.getExtensions(false), results);
-    }
-
+	@Override
+	public void runObjectValidations() {
+		Contact contact = (Contact) value.getOverlay();
+		validateStringField(F_name, false);
+		validateUrlField(F_url, false, true, false);
+		validateEmailField(F_email, false);
+		validateExtensions(contact.getExtensions());
+	}
 }

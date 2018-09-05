@@ -11,27 +11,23 @@
 package com.networknt.oas;
 
 import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import com.networknt.oas.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.JsonOverlay;
+import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.OpenApi3;
-import com.networknt.oas.model.impl.OpenApi3Impl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.function.Predicate;
+import com.google.common.base.Predicate;
 
 /**
  * Tests basic parser operation by loading a swagger spec and then verifying
@@ -43,7 +39,7 @@ import java.util.function.Predicate;
 
 @RunWith(Parameterized.class)
 public class BigParseTest extends Assert {
-	static Logger logger = LoggerFactory.getLogger(BigParseTest.class);
+
 	@Parameters
 	public static Collection<Object[]> resources() {
 		return Arrays.asList(new Object[][] { new URL[] { BigParseTest.class.getResource("/models/parseTest.yaml") } });
@@ -53,21 +49,27 @@ public class BigParseTest extends Assert {
 	public URL modelUrl;
 
 	@Test
-	public void test() throws JsonProcessingException, IOException {
+	public void test() throws Exception {
 		Object parsedYaml = new Yaml().load(modelUrl.openStream());
 		JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
 		final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl, false);
-		Predicate<JsonNode> valueNodePredicate = n -> n.isValueNode();
-
+		Predicate<JsonNode> valueNodePredicate = new Predicate<JsonNode>() {
+			@Override
+			public boolean apply(JsonNode node) {
+				return node.isValueNode();
+			}
+		};
 		JsonTreeWalker.WalkMethod valueChecker = new JsonTreeWalker.WalkMethod() {
 			@Override
 			public void run(JsonNode node, JsonPointer path) {
-				IJsonOverlay<?> overlay = ((OpenApi3Impl) model).find(path);
+				@SuppressWarnings("unchecked")
+                JsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
+				Object value = overlay != null ? Overlay.get(overlay) : null;
 				assertNotNull("No overlay object found for path: " + path, overlay);
 				Object fromJson = getValue(node);
 				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,
-						overlay.get());
-				assertEquals(msg, fromJson, overlay.get());
+						value);
+				assertEquals(msg, fromJson, value);
 			}
 		};
 		JsonTreeWalker.walkTree(tree, valueNodePredicate, valueChecker);

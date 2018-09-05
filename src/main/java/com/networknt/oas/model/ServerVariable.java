@@ -1,78 +1,79 @@
 package com.networknt.oas.model;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-public interface ServerVariable extends OpenApiObject<OpenApi3, ServerVariable> {
+import javax.annotation.Generated;
 
-    // EnumValue
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    Collection<Object> getEnumValues();
+public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart<OpenApi3, ServerVariable> {
 
+	// EnumValue
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getEnumValues();
 
-    Collection<Object> getEnumValues(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getEnumValues(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasEnumValues();
 
-    boolean hasEnumValues();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getEnumValue(int index);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEnumValues(List<String> enumValues);
 
-    Object getEnumValue(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEnumValue(int index, String enumValue);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addEnumValue(String enumValue);
 
-    void setEnumValues(Collection<Object> enumValues);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertEnumValue(int index, String enumValue);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeEnumValue(int index);
 
-    void setEnumValue(int index, Object enumValue);
+	// Default
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDefault();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDefault(String defaultValue);
 
-    void addEnumValue(Object enumValue);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    void insertEnumValue(int index, Object enumValue);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    void removeEnumValue(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    // Default
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    Object getDefault();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    Object getDefault(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    void setDefault(Object defaultValue);
-
-    // Description
-
-    String getDescription();
-
-
-    String getDescription(boolean elaborate);
-
-
-    void setDescription(String description);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

@@ -11,18 +11,29 @@
 package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.EncodingProperty;
+import com.networknt.oas.model.Header;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
+
+import static com.networknt.oas.model.impl.EncodingPropertyImpl.*;
+import static com.networknt.oas.model.impl.ParameterImpl.F_allowReserved;
 
 public class EncodingPropertyValidator extends ObjectValidatorBase<EncodingProperty> {
 
-    @Override
-    public void validateObject(EncodingProperty encodingProperty, ValidationResults results) {
-        // no validation for: contentType, explode
-        // TODO Q: spec says "Headers" (capitalized) for peroperty name -assuming it's a typo
-        validateMap(encodingProperty.getHeaders(false), results, false, "headers", Regexes.NOEXT_REGEX, null);
-        validateString(encodingProperty.getStyle(false), results, false, Regexes.STYLE_REGEX, "style");
-        validateExtensions(encodingProperty.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		EncodingProperty encodingProperty = (EncodingProperty) value.getOverlay();
+
+		// TODO ought to have a pattern for acceptable values "a/b", "a/*", comma-lists
+		// of those.
+		validateStringField(F_contentType, false);
+
+		// TODO Q: spec says "Headers" (capitalized) for property name -assuming it's a
+		// typo
+		validateMapField(F_headers, false, false, Header.class, null);
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
+		validateBooleanField(F_explode, false);
+		validateBooleanField(F_allowReserved, false);
+		validateExtensions(encodingProperty.getExtensions());
+	}
 
 }

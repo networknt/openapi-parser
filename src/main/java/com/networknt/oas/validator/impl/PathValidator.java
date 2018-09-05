@@ -15,22 +15,19 @@ import com.networknt.oas.model.Parameter;
 import com.networknt.oas.model.Path;
 import com.networknt.oas.model.Server;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.model.impl.PathImpl.*;
 
 public class PathValidator extends ObjectValidatorBase<Path> {
 
-    private static Validator<Operation> operationValidator = SingletonServiceFactory.getBean(Validator.class, Operation.class);
-    private static Validator<Server> serverValidator = SingletonServiceFactory.getBean(Validator.class, Server.class);
-    private static Validator<Parameter> parameterValidator = SingletonServiceFactory.getBean(Validator.class, Parameter.class);
-
-    @Override
-    public void validateObject(Path path, ValidationResults results) {
-        // no validation for: summary, description
-        validateMap(path.getOperations(false), results, false, null, Regexes.METHOD_REGEX, operationValidator);
-        validateList(path.getServers(false), path.hasServers(), results, false, "servers", serverValidator);
-        validateList(path.getParameters(false), path.hasParameters(), results, false, "parameters", parameterValidator);
-        validateExtensions(path.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Path path = (Path) value.getOverlay();
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
+		validateMapField(F_operations, false, false, Operation.class, new OperationValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateExtensions(path.getExtensions());
+	}
 }

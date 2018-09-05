@@ -1,177 +1,241 @@
 package com.networknt.oas.model.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.oas.jsonoverlay.*;
+import com.networknt.jsonoverlay.*;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.ServerVariable;
 
-import java.util.Collection;
+import javax.annotation.Generated;
+import java.util.List;
 import java.util.Map;
 
-public class ServerVariableImpl extends OpenApiObjectImpl<OpenApi3, ServerVariable> implements ServerVariable {
 
+public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implements ServerVariable {
 
-    public ServerVariableImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public ServerVariableImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public ServerVariableImpl(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(serverVariable, parent, factory, refMgr);
+	}
 
-    public ServerVariableImpl(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        super(serverVariable, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
-    }
+	// EnumValue
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public List<String> getEnumValues() {
+		return _getList("enumValues", String.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public List<String> getEnumValues(boolean elaborate) {
+		return _getList("enumValues", elaborate, String.class);
+	}
 
-    private ChildListOverlay<Object, PrimitiveOverlay> enumValues = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasEnumValues() {
+		return _isPresent("enumValues");
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public String getEnumValue(int index) {
+		return _get("enumValues", index, String.class);
+	}
 
-    private ChildOverlay<Object, PrimitiveOverlay> defaultValue = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setEnumValues(List<String> enumValues) {
+		_setList("enumValues", enumValues, String.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setEnumValue(int index, String enumValue) {
+		_set("enumValues", index, enumValue, String.class);
+	}
 
-    private ChildOverlay<String, StringOverlay> description = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void addEnumValue(String enumValue) {
+		_add("enumValues", enumValue, String.class);
+	}
 
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void insertEnumValue(int index, String enumValue) {
+		_insert("enumValues", index, enumValue, String.class);
+	}
 
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void removeEnumValue(int index) {
+		_remove("enumValues", index, String.class);
+	}
 
-    // EnumValue
-    @Override
-    public Collection<Object> getEnumValues() {
-        return enumValues.get();
-    }
+	// Default
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public String getDefault() {
+		return _get("defaultValue", String.class);
+	}
 
-    @Override
-    public Collection<Object> getEnumValues(boolean elaborate) {
-        return enumValues.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setDefault(String defaultValue) {
+		_setScalar("defaultValue", defaultValue, String.class);
+	}
 
-    @Override
-    public boolean hasEnumValues() {
-        return enumValues.isPresent();
-    }
+	// Description
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public String getDescription() {
+		return _get("description", String.class);
+	}
 
-    @Override
-    public Object getEnumValue(int index) {
-        return enumValues.get(index);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setDescription(String description) {
+		_setScalar("description", description, String.class);
+	}
 
-    @Override
-    public void setEnumValues(Collection<Object> enumValues) {
-        this.enumValues.set((Collection<Object>) enumValues);
-    }
+	// Extension
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions() {
+		return _getMap("extensions", Object.class);
+	}
 
-    @Override
-    public void setEnumValue(int index, Object enumValue) {
-        enumValues.set(index, enumValue);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
 
-    @Override
-    public void addEnumValue(Object enumValue) {
-        enumValues.add(enumValue);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
+	}
 
-    @Override
-    public void insertEnumValue(int index, Object enumValue) {
-        enumValues.insert(index, enumValue);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtension(String name) {
+		return _getMap("extensions", Object.class).containsKey(name);
+	}
 
-    @Override
-    public void removeEnumValue(int index) {
-        enumValues.remove(index);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Object getExtension(String name) {
+		return _get("extensions", name, Object.class);
+	}
 
-    // Default
-    @Override
-    public Object getDefault() {
-        return defaultValue.get();
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setExtensions(Map<String, Object> extensions) {
+		_setMap("extensions", extensions, Object.class);
+	}
 
-    @Override
-    public Object getDefault(boolean elaborate) {
-        return defaultValue.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setExtension(String name, Object extension) {
+		_set("extensions", name, extension, Object.class);
+	}
 
-    @Override
-    public void setDefault(Object defaultValue) {
-        this.defaultValue.set(defaultValue);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void removeExtension(String name) {
+		_remove("extensions", name, Object.class);
+	}
 
-    // Description
-    @Override
-    public String getDescription() {
-        return description.get();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_enumValues = "enumValues";
 
-    @Override
-    public String getDescription(boolean elaborate) {
-        return description.get(elaborate);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_defaultValue = "defaultValue";
 
-    @Override
-    public void setDescription(String description) {
-        this.description.set(description);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
 
-    // Extension
-    @Override
-    public Map<String, Object> getExtensions() {
-        return extensions.get();
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
 
-    @Override
-    public Map<String, Object> getExtensions(boolean elaborate) {
-        return extensions.get(elaborate);
-    }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected void _elaborateJson() {
+		super._elaborateJson();
+		_createList("enumValues", "enum", StringOverlay.factory);
+		_createScalar("defaultValue", "default", StringOverlay.factory);
+		_createScalar("description", "description", StringOverlay.factory);
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
+	}
 
-    @Override
-    public boolean hasExtension(String name) {
-        return extensions.containsKey(name);
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static OverlayFactory<ServerVariable> factory = new OverlayFactory<ServerVariable>() {
 
-    @Override
-    public Object getExtension(String name) {
-        return extensions.get(name);
-    }
+		@Override
+		protected Class<? extends JsonOverlay<? super ServerVariable>> getOverlayClass() {
+			return ServerVariableImpl.class;
+		}
 
-    @Override
-    public void setExtensions(Map<String, Object> extensions) {
-        this.extensions.set(extensions);
-    }
+		@Override
+		public JsonOverlay<ServerVariable> _create(ServerVariable serverVariable, JsonOverlay<?> parent,
+				ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new ServerVariableImpl(serverVariable, parent, refMgr);
+			@SuppressWarnings("unchecked")
+			JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
+			return castOverlay;
+		}
 
-    @Override
-    public void setExtension(String name, Object extension) {
-        extensions.set(name, extension);
-    }
+		@Override
+		public JsonOverlay<ServerVariable> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new ServerVariableImpl(json, parent, refMgr);
+			@SuppressWarnings("unchecked")
+			JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
+			return castOverlay;
+		}
 
-    @Override
-    public void removeExtension(String name) {
-        extensions.remove(name);
-    }
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
+	};
 
-    @Override
-    protected void elaborateChildren() {
-        enumValues = createChildList("enum", this, PrimitiveOverlay.factory);
-        defaultValue = createChild("default", this, PrimitiveOverlay.factory);
-        description = createChild("description", this, StringOverlay.factory);
-        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
-    }
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	private static Class<? extends ServerVariable> getSubtypeOf(ServerVariable serverVariable) {
+		return ServerVariable.class;
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	private static Class<? extends ServerVariable> getSubtypeOf(JsonNode json) {
+		return ServerVariable.class;
+	}
 
-    public static OverlayFactory<ServerVariable, ServerVariableImpl> factory = new OverlayFactory<ServerVariable, ServerVariableImpl>() {
-        @Override
-        protected Class<? super ServerVariableImpl> getOverlayClass() {
-            return ServerVariableImpl.class;
-        }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
+	}
 
-        @Override
-        public ServerVariableImpl _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerVariableImpl(serverVariable, parent, refReg);
-        }
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
+	}
 
-        @Override
-        public ServerVariableImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerVariableImpl(json, parent, refReg);
-        }
-    };
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static <OV extends IJsonOverlay<?>> Builder<ServerVariable> builder(OV modelMember) {
+		return new Builder<ServerVariable>(factory, modelMember);
+	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static <OV extends IJsonOverlay<?>> ServerVariable create(OV modelMember) {
+		return (ServerVariable) builder(modelMember).build();
+	}
 }

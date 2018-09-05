@@ -12,15 +12,17 @@ package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.ExternalDocs;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
+
+import static com.networknt.oas.model.impl.ExternalDocsImpl.F_description;
+import static com.networknt.oas.model.impl.ExternalDocsImpl.F_url;
 
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
-    @Override
-    public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
-        // no validation for: description
-        validateUrl(externalDocs.getUrl(false), results, true, "externalDocs");
-        validateExtensions(externalDocs.getExtensions(false), results);
-    }
-
+	@Override
+	public void runObjectValidations() {
+		ExternalDocs externalDocs = (ExternalDocs) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, true, true, false);
+		validateExtensions(externalDocs.getExtensions());
+	}
 }

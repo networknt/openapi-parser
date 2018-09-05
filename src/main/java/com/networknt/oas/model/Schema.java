@@ -1,582 +1,456 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.jsonoverlay.Reference;
-
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-public interface Schema extends OpenApiObject<OpenApi3, Schema> {
+import javax.annotation.Generated;
 
-    // Title
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getTitle();
+public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schema> {
 
+	String getName();
 
-    String getTitle(boolean elaborate);
+	// Title
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getTitle();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTitle(String title);
 
-    void setTitle(String title);
+	// MultipleOf
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Number getMultipleOf();
 
-    // MultipleOf
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMultipleOf(Number multipleOf);
 
-    Number getMultipleOf();
+	// Maximum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Number getMaximum();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMaximum(Number maximum);
 
-    Number getMultipleOf(boolean elaborate);
+	// ExclusiveMaximum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getExclusiveMaximum();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isExclusiveMaximum();
 
-    void setMultipleOf(Number multipleOf);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExclusiveMaximum(Boolean exclusiveMaximum);
 
-    // Maximum
+	// Minimum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Number getMinimum();
 
-    Number getMaximum();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMinimum(Number minimum);
 
+	// ExclusiveMinimum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getExclusiveMinimum();
 
-    Number getMaximum(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isExclusiveMinimum();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExclusiveMinimum(Boolean exclusiveMinimum);
 
-    void setMaximum(Number maximum);
+	// MaxLength
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMaxLength();
 
-    // ExclusiveMaximum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMaxLength(Integer maxLength);
 
-    Boolean getExclusiveMaximum();
+	// MinLength
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMinLength();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMinLength(Integer minLength);
 
-    Boolean getExclusiveMaximum(boolean elaborate);
+	// Pattern
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getPattern();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPattern(String pattern);
 
-    boolean isExclusiveMaximum();
+	// MaxItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMaxItems();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMaxItems(Integer maxItems);
 
-    void setExclusiveMaximum(Boolean exclusiveMaximum);
+	// MinItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMinItems();
 
-    // Minimum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMinItems(Integer minItems);
 
-    Number getMinimum();
+	// UniqueItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getUniqueItems();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isUniqueItems();
 
-    Number getMinimum(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setUniqueItems(Boolean uniqueItems);
 
+	// MaxProperties
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMaxProperties();
 
-    void setMinimum(Number minimum);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMaxProperties(Integer maxProperties);
 
-    // ExclusiveMinimum
+	// MinProperties
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Integer getMinProperties();
 
-    Boolean getExclusiveMinimum();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setMinProperties(Integer minProperties);
 
+	// RequiredField
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getRequiredFields();
 
-    Boolean getExclusiveMinimum(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getRequiredFields(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequiredFields();
 
-    boolean isExclusiveMinimum();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getRequiredField(int index);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequiredFields(List<String> requiredFields);
 
-    void setExclusiveMinimum(Boolean exclusiveMinimum);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequiredField(int index, String requiredField);
 
-    // MaxLength
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addRequiredField(String requiredField);
 
-    Integer getMaxLength();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertRequiredField(int index, String requiredField);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeRequiredField(int index);
 
-    Integer getMaxLength(boolean elaborate);
+	// Enum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Object> getEnums();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Object> getEnums(boolean elaborate);
 
-    void setMaxLength(Integer maxLength);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasEnums();
 
-    // MinLength
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getEnum(int index);
 
-    Integer getMinLength();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEnums(List<Object> enums);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEnum(int index, Object enumValue);
 
-    Integer getMinLength(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addEnum(Object enumValue);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertEnum(int index, Object enumValue);
 
-    void setMinLength(Integer minLength);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeEnum(int index);
 
-    // Pattern
+	// Type
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getType();
 
-    String getPattern();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setType(String type);
 
+	// AllOfSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAllOfSchemas();
 
-    String getPattern(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAllOfSchemas(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasAllOfSchemas();
 
-    void setPattern(String pattern);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getAllOfSchema(int index);
 
-    // MaxItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllOfSchemas(List<Schema> allOfSchemas);
 
-    Integer getMaxItems();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllOfSchema(int index, Schema allOfSchema);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addAllOfSchema(Schema allOfSchema);
 
-    Integer getMaxItems(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertAllOfSchema(int index, Schema allOfSchema);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeAllOfSchema(int index);
 
-    void setMaxItems(Integer maxItems);
+	// OneOfSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getOneOfSchemas();
 
-    // MinItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getOneOfSchemas(boolean elaborate);
 
-    Integer getMinItems();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOneOfSchemas();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getOneOfSchema(int index);
 
-    Integer getMinItems(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOneOfSchemas(List<Schema> oneOfSchemas);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOneOfSchema(int index, Schema oneOfSchema);
 
-    void setMinItems(Integer minItems);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addOneOfSchema(Schema oneOfSchema);
 
-    // UniqueItems
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertOneOfSchema(int index, Schema oneOfSchema);
 
-    Boolean getUniqueItems();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeOneOfSchema(int index);
 
+	// AnyOfSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAnyOfSchemas();
 
-    Boolean getUniqueItems(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAnyOfSchemas(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasAnyOfSchemas();
 
-    boolean isUniqueItems();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getAnyOfSchema(int index);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAnyOfSchemas(List<Schema> anyOfSchemas);
 
-    void setUniqueItems(Boolean uniqueItems);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAnyOfSchema(int index, Schema anyOfSchema);
 
-    // MaxProperties
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addAnyOfSchema(Schema anyOfSchema);
 
-    Integer getMaxProperties();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertAnyOfSchema(int index, Schema anyOfSchema);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeAnyOfSchema(int index);
 
-    Integer getMaxProperties(boolean elaborate);
+	// NotSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getNotSchema();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getNotSchema(boolean elaborate);
 
-    void setMaxProperties(Integer maxProperties);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setNotSchema(Schema notSchema);
 
-    // MinProperties
+	// ItemsSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getItemsSchema();
 
-    Integer getMinProperties();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getItemsSchema(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setItemsSchema(Schema itemsSchema);
 
-    Integer getMinProperties(boolean elaborate);
+	// Property
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getProperties();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getProperties(boolean elaborate);
 
-    void setMinProperties(Integer minProperties);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasProperties();
 
-    // RequiredField
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasProperty(String name);
 
-    Collection<String> getRequiredFields();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getProperty(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setProperties(Map<String, Schema> properties);
 
-    Collection<String> getRequiredFields(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setProperty(String name, Schema property);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeProperty(String name);
 
-    boolean hasRequiredFields();
+	// AdditionalPropertiesSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getAdditionalPropertiesSchema();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getAdditionalPropertiesSchema(boolean elaborate);
 
-    String getRequiredField(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
 
+	// AdditionalProperties
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAdditionalProperties();
 
-    void setRequiredFields(Collection<String> requiredFields);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAdditionalProperties();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAdditionalProperties(Boolean additionalProperties);
 
-    void setRequiredField(int index, String requiredField);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    void addRequiredField(String requiredField);
+	// Format
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getFormat();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setFormat(String format);
 
-    void insertRequiredField(int index, String requiredField);
+	// Default
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getDefault();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDefault(Object defaultValue);
 
-    void removeRequiredField(int index);
+	// Nullable
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getNullable();
 
-    // Enum
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isNullable();
 
-    Collection<Object> getEnums();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setNullable(Boolean nullable);
 
+	// Discriminator
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Discriminator getDiscriminator();
 
-    Collection<Object> getEnums(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Discriminator getDiscriminator(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDiscriminator(Discriminator discriminator);
 
-    boolean hasEnums();
+	// ReadOnly
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getReadOnly();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isReadOnly();
 
-    Object getEnum(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setReadOnly(Boolean readOnly);
 
+	// WriteOnly
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getWriteOnly();
 
-    void setEnums(Collection<Object> enums);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isWriteOnly();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setWriteOnly(Boolean writeOnly);
 
-    void setEnum(int index, Object enumValue);
+	// Xml
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Xml getXml();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Xml getXml(boolean elaborate);
 
-    void addEnum(Object enumValue);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setXml(Xml xml);
 
+	// ExternalDocs
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	ExternalDocs getExternalDocs();
 
-    void insertEnum(int index, Object enumValue);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	ExternalDocs getExternalDocs(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExternalDocs(ExternalDocs externalDocs);
 
-    void removeEnum(int index);
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExample();
 
-    // Type
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(Object example);
 
-    String getType();
+	// Deprecated
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getDeprecated();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isDeprecated();
 
-    String getType(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDeprecated(Boolean deprecated);
 
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    void setType(String type);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    // AllOfSchema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    Collection<Schema> getAllOfSchemas();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    Collection<Schema> getAllOfSchemas(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    boolean hasAllOfSchemas();
-
-
-    Schema getAllOfSchema(int index);
-
-
-    void setAllOfSchemas(Collection<Schema> allOfSchemas);
-
-
-    void setAllOfSchema(int index, Schema allOfSchema);
-
-
-    void addAllOfSchema(Schema allOfSchema);
-
-
-    void insertAllOfSchema(int index, Schema allOfSchema);
-
-
-    void removeAllOfSchema(int index);
-
-
-    boolean isAllOfSchemaReference(int index);
-
-
-    Reference getAllOfSchemaReference(int index);
-
-    // OneOfSchema
-
-    Collection<Schema> getOneOfSchemas();
-
-
-    Collection<Schema> getOneOfSchemas(boolean elaborate);
-
-
-    boolean hasOneOfSchemas();
-
-
-    Schema getOneOfSchema(int index);
-
-
-    void setOneOfSchemas(Collection<Schema> oneOfSchemas);
-
-
-    void setOneOfSchema(int index, Schema oneOfSchema);
-
-
-    void addOneOfSchema(Schema oneOfSchema);
-
-
-    void insertOneOfSchema(int index, Schema oneOfSchema);
-
-
-    void removeOneOfSchema(int index);
-
-
-    boolean isOneOfSchemaReference(int index);
-
-
-    Reference getOneOfSchemaReference(int index);
-
-    // AnyOfSchema
-
-    Collection<Schema> getAnyOfSchemas();
-
-
-    Collection<Schema> getAnyOfSchemas(boolean elaborate);
-
-
-    boolean hasAnyOfSchemas();
-
-
-    Schema getAnyOfSchema(int index);
-
-
-    void setAnyOfSchemas(Collection<Schema> anyOfSchemas);
-
-
-    void setAnyOfSchema(int index, Schema anyOfSchema);
-
-
-    void addAnyOfSchema(Schema anyOfSchema);
-
-
-    void insertAnyOfSchema(int index, Schema anyOfSchema);
-
-
-    void removeAnyOfSchema(int index);
-
-
-    boolean isAnyOfSchemaReference(int index);
-
-
-    Reference getAnyOfSchemaReference(int index);
-
-    // NotSchema
-
-    Schema getNotSchema();
-
-
-    Schema getNotSchema(boolean elaborate);
-
-
-    void setNotSchema(Schema notSchema);
-
-
-    boolean isNotSchemaReference();
-
-
-    Reference getNotSchemaReference();
-
-    // ItemsSchema
-
-    Schema getItemsSchema();
-
-
-    Schema getItemsSchema(boolean elaborate);
-
-
-    void setItemsSchema(Schema itemsSchema);
-
-
-    boolean isItemsSchemaReference();
-
-
-    Reference getItemsSchemaReference();
-
-    // Property
-
-    Map<String, Schema> getProperties();
-
-
-    Map<String, Schema> getProperties(boolean elaborate);
-
-
-    boolean hasProperty(String name);
-
-
-    Schema getProperty(String name);
-
-
-    void setProperties(Map<String, Schema> properties);
-
-
-    void setProperty(String name, Schema property);
-
-
-    void removeProperty(String name);
-
-
-    boolean isPropertyReference(String key);
-
-
-    Reference getPropertyReference(String key);
-
-    // AdditionalPropertiesSchema
-
-    Schema getAdditionalPropertiesSchema();
-
-
-    Schema getAdditionalPropertiesSchema(boolean elaborate);
-
-
-    void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
-
-
-    boolean isAdditionalPropertiesSchemaReference();
-
-
-    Reference getAdditionalPropertiesSchemaReference();
-
-    // AdditionalProperties
-
-    Boolean getAdditionalProperties();
-
-
-    Boolean getAdditionalProperties(boolean elaborate);
-
-
-    boolean isAdditionalProperties();
-
-
-    void setAdditionalProperties(Boolean additionalProperties);
-
-    // Description
-
-    String getDescription();
-
-
-    String getDescription(boolean elaborate);
-
-
-    void setDescription(String description);
-
-    // Format
-
-    String getFormat();
-
-
-    String getFormat(boolean elaborate);
-
-
-    void setFormat(String format);
-
-    // Default
-
-    Object getDefault();
-
-
-    Object getDefault(boolean elaborate);
-
-
-    void setDefault(Object defaultValue);
-
-    // Nullable
-
-    Boolean getNullable();
-
-
-    Boolean getNullable(boolean elaborate);
-
-
-    boolean isNullable();
-
-
-    void setNullable(Boolean nullable);
-
-    // Discriminator
-
-    String getDiscriminator();
-
-
-    String getDiscriminator(boolean elaborate);
-
-
-    void setDiscriminator(String discriminator);
-
-    // ReadOnly
-
-    Boolean getReadOnly();
-
-
-    Boolean getReadOnly(boolean elaborate);
-
-
-    boolean isReadOnly();
-
-
-    void setReadOnly(Boolean readOnly);
-
-    // WriteOnly
-
-    Boolean getWriteOnly();
-
-
-    Boolean getWriteOnly(boolean elaborate);
-
-
-    boolean isWriteOnly();
-
-
-    void setWriteOnly(Boolean writeOnly);
-
-    // Xml
-
-    Xml getXml();
-
-
-    Xml getXml(boolean elaborate);
-
-
-    void setXml(Xml xml);
-
-    // ExternalDocs
-
-    ExternalDocs getExternalDocs();
-
-
-    ExternalDocs getExternalDocs(boolean elaborate);
-
-
-    void setExternalDocs(ExternalDocs externalDocs);
-
-    // Example
-
-    Map<String, Example> getExamples();
-
-
-    Map<String, Example> getExamples(boolean elaborate);
-
-
-    boolean hasExample(String name);
-
-
-    Example getExample(String name);
-
-
-    void setExamples(Map<String, Example> examples);
-
-
-    void setExample(String name, Example example);
-
-
-    void removeExample(String name);
-
-    // Example
-
-    Object getExample();
-
-
-    Object getExample(boolean elaborate);
-
-
-    void setExample(Object example);
-
-    // Deprecated
-
-    Boolean getDeprecated();
-
-
-    Boolean getDeprecated(boolean elaborate);
-
-
-    boolean isDeprecated();
-
-
-    void setDeprecated(Boolean deprecated);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

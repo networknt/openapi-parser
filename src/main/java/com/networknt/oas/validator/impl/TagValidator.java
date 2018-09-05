@@ -13,19 +13,19 @@ package com.networknt.oas.validator.impl;
 import com.networknt.oas.model.ExternalDocs;
 import com.networknt.oas.model.Tag;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.model.impl.TagImpl.F_description;
+import static com.networknt.oas.model.impl.TagImpl.F_externalDocs;
+import static com.networknt.oas.model.impl.TagImpl.F_name;
 
 public class TagValidator extends ObjectValidatorBase<Tag> {
 
-    private static Validator<ExternalDocs> externalDocsValidator = SingletonServiceFactory.getBean(Validator.class, ExternalDocs.class);
-
-    @Override
-    public void validateObject(Tag tag, ValidationResults results) {
-        validateString(tag.getName(false), results, true, "name");
-        validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-        validateExtensions(tag.getExtensions(false), results);
-    }
-
+	@Override
+	public void runObjectValidations() {
+		Tag tag = (Tag) value.getOverlay();
+		validateStringField(F_name, true);
+		validateStringField(F_description, false);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+		validateExtensions(tag.getExtensions());
+	}
 }

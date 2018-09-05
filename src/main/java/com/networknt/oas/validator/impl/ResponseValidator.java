@@ -15,22 +15,18 @@ import com.networknt.oas.model.Link;
 import com.networknt.oas.model.MediaType;
 import com.networknt.oas.model.Response;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.model.impl.ResponseImpl.*;
 
 public class ResponseValidator extends ObjectValidatorBase<Response> {
 
-    private static Validator<Header> headerValidator = SingletonServiceFactory.getBean(Validator.class, Header.class);
-    private static Validator<MediaType> mediaTypeValidator = SingletonServiceFactory.getBean(Validator.class, MediaType.class);
-    private static Validator<Link> linkValidator = SingletonServiceFactory.getBean(Validator.class, Link.class);
-
-    @Override
-    public void validateObject(Response response, ValidationResults results) {
-        validateMap(response.getHeaders(false), results, false, "headers", null, headerValidator);
-        validateMap(response.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX,
-                mediaTypeValidator);
-        validateMap(response.getLinks(false), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
-        validateExtensions(response.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Response response = (Response) value.getOverlay();
+		validateStringField(F_description, false);
+		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateMapField(F_links, false, false, Link.class, new LinkValidator());
+		validateExtensions(response.getExtensions());
+	}
 }

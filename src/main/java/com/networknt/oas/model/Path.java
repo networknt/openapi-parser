@@ -1,216 +1,214 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.jsonoverlay.Reference;
-
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-public interface Path extends OpenApiObject<OpenApi3, Path> {
+import javax.annotation.Generated;
 
-    // Summary
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getSummary();
+public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 
+	String getPathString();
 
-    String getSummary(boolean elaborate);
+	// Summary
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getSummary();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSummary(String summary);
 
-    void setSummary(String summary);
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
-    // Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    String getDescription();
+	// Operation
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Operation> getOperations();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Operation> getOperations(boolean elaborate);
 
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOperations();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOperation(String name);
 
-    void setDescription(String description);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getOperation(String name);
 
-    // Operation
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOperations(Map<String, Operation> operations);
 
-    Map<String, Operation> getOperations();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOperation(String name, Operation operation);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeOperation(String name);
 
-    Map<String, Operation> getOperations(boolean elaborate);
+	// Get
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getGet();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getGet(boolean elaborate);
 
-    boolean hasOperation(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setGet(Operation get);
 
+	// Put
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPut();
 
-    Operation getOperation(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPut(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPut(Operation put);
 
-    void setOperations(Map<String, Operation> operations);
+	// Post
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPost();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPost(boolean elaborate);
 
-    void setOperation(String name, Operation operation);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPost(Operation post);
 
+	// Delete
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getDelete();
 
-    void removeOperation(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getDelete(boolean elaborate);
 
-    // Get
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDelete(Operation delete);
 
-    Operation getGet();
+	// Options
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getOptions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getOptions(boolean elaborate);
 
-    Operation getGet(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOptions(Operation options);
 
+	// Head
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getHead();
 
-    void setGet(Operation get);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getHead(boolean elaborate);
 
-    // Put
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setHead(Operation head);
 
-    Operation getPut();
+	// Patch
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPatch();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getPatch(boolean elaborate);
 
-    Operation getPut(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPatch(Operation patch);
 
+	// Trace
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getTrace();
 
-    void setPut(Operation put);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Operation getTrace(boolean elaborate);
 
-    // Post
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTrace(Operation trace);
 
-    Operation getPost();
+	// Server
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers(boolean elaborate);
 
-    Operation getPost(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasServers();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Server getServer(int index);
 
-    void setPost(Operation post);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServers(List<Server> servers);
 
-    // Delete
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServer(int index, Server server);
 
-    Operation getDelete();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addServer(Server server);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertServer(int index, Server server);
 
-    Operation getDelete(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeServer(int index);
 
+	// Parameter
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Parameter> getParameters();
 
-    void setDelete(Operation delete);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Parameter> getParameters(boolean elaborate);
 
-    // Options
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasParameters();
 
-    Operation getOptions();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Parameter getParameter(int index);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameters(List<Parameter> parameters);
 
-    Operation getOptions(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameter(int index, Parameter parameter);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addParameter(Parameter parameter);
 
-    void setOptions(Operation options);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertParameter(int index, Parameter parameter);
 
-    // Head
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeParameter(int index);
 
-    Operation getHead();
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    Operation getHead(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    void setHead(Operation head);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    // Patch
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    Operation getPatch();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    Operation getPatch(boolean elaborate);
-
-
-    void setPatch(Operation patch);
-
-    // Trace
-
-    Operation getTrace();
-
-
-    Operation getTrace(boolean elaborate);
-
-
-    void setTrace(Operation trace);
-
-    // Server
-
-    Collection<Server> getServers();
-
-
-    Collection<Server> getServers(boolean elaborate);
-
-
-    boolean hasServers();
-
-
-    Server getServer(int index);
-
-
-    void setServers(Collection<Server> servers);
-
-
-    void setServer(int index, Server server);
-
-
-    void addServer(Server server);
-
-
-    void insertServer(int index, Server server);
-
-
-    void removeServer(int index);
-
-    // Parameter
-
-    Collection<Parameter> getParameters();
-
-
-    Collection<Parameter> getParameters(boolean elaborate);
-
-
-    boolean hasParameters();
-
-
-    Parameter getParameter(int index);
-
-
-    void setParameters(Collection<Parameter> parameters);
-
-
-    void setParameter(int index, Parameter parameter);
-
-
-    void addParameter(Parameter parameter);
-
-
-    void insertParameter(int index, Parameter parameter);
-
-
-    void removeParameter(int index);
-
-
-    boolean isParameterReference(int index);
-
-
-    Reference getParameterReference(int index);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

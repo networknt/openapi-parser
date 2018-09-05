@@ -2,92 +2,99 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface Server extends OpenApiObject<OpenApi3, Server> {
+import javax.annotation.Generated;
 
-    // Url
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getUrl();
+public interface Server extends IJsonOverlay<Server>, IModelPart<OpenApi3, Server> {
 
+	// Url
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getUrl();
 
-    String getUrl(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setUrl(String url);
 
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
 
-    void setUrl(String url);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
 
-    // Description
+	// ServerVariable
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, ServerVariable> getServerVariables();
 
-    String getDescription();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, ServerVariable> getServerVariables(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasServerVariables();
 
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasServerVariable(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	ServerVariable getServerVariable(String name);
 
-    void setDescription(String description);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServerVariables(Map<String, ServerVariable> serverVariables);
 
-    // ServerVariable
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServerVariable(String name, ServerVariable serverVariable);
 
-    Map<String, ServerVariable> getServerVariables();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeServerVariable(String name);
 
+	// VariablesExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getVariablesExtensions();
 
-    Map<String, ServerVariable> getServerVariables(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getVariablesExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasVariablesExtensions();
 
-    boolean hasServerVariable(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasVariablesExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getVariablesExtension(String name);
 
-    ServerVariable getServerVariable(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setVariablesExtensions(Map<String, Object> variablesExtensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setVariablesExtension(String name, Object variablesExtension);
 
-    void setServerVariables(Map<String, ServerVariable> serverVariables);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeVariablesExtension(String name);
 
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    void setServerVariable(String name, ServerVariable serverVariable);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    void removeServerVariable(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    // VariablesExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    Map<String, Object> getVariablesExtensions();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    Map<String, Object> getVariablesExtensions(boolean elaborate);
-
-
-    boolean hasVariablesExtension(String name);
-
-
-    Object getVariablesExtension(String name);
-
-
-    void setVariablesExtensions(Map<String, Object> variablesExtensions);
-
-
-    void setVariablesExtension(String name, Object variablesExtension);
-
-
-    void removeVariablesExtension(String name);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

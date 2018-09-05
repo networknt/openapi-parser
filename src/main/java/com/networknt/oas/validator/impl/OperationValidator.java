@@ -12,44 +12,28 @@ package com.networknt.oas.validator.impl;
 
 import com.networknt.oas.model.*;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
 
-import static com.networknt.oas.validator.Messages.m;
+import static com.networknt.oas.model.impl.OperationImpl.*;
 
 public class OperationValidator extends ObjectValidatorBase<Operation> {
 
-    private static Validator<ExternalDocs> externalDocsValidator = SingletonServiceFactory.getBean(Validator.class, ExternalDocs.class);
-    private static Validator<Parameter> parameterValidator = SingletonServiceFactory.getBean(Validator.class, Parameter.class);
-    private static Validator<RequestBody> requestBodyValidator = SingletonServiceFactory.getBean(Validator.class, RequestBody.class);
-    private static Validator<Response> responseValidator = SingletonServiceFactory.getBean(Validator.class, Response.class);
-    private static Validator<Callback> callbackValidator = SingletonServiceFactory.getBean(Validator.class, Callback.class);
-    private static Validator<SecurityRequirement> securityRequirementValidator = SingletonServiceFactory.getBean(Validator.class, SecurityRequirement.class);
-    private static Validator<Server> serverValidator = SingletonServiceFactory.getBean(Validator.class, Server.class);
-
-    @Override
-    public void validateObject(Operation operation, ValidationResults results) {
-        // no validation for: tags, description, deprecated
-        checkSummaryLength(operation, results);
-        validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-        // TODO Q: Not marked as required in spec, but spec says they all must be unique within the API. Seems like it
-        // should be required.
-        validateString(operation.getOperationId(false), results, false, "operationId");
-        validateList(operation.getParameters(false), operation.hasParameters(), results, false, "parameters",
-                parameterValidator);
-        validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
-        validateMap(operation.getResponses(false), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
-        validateMap(operation.getCallbacks(false), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
-        validateList(operation.getSecurityRequirements(false), operation.hasSecurityRequirements(), results, false,
-                "security", securityRequirementValidator);
-        validateList(operation.getServers(false), operation.hasServers(), results, false, "servers", serverValidator);
-    }
-
-    private void checkSummaryLength(Operation operation, ValidationResults results) {
-        String summary = operation.getSummary(false);
-        if (summary != null && summary.length() > 120) {
-            results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
-        }
-    }
+	@Override
+	public void runObjectValidations() {
+		Operation operation = (Operation) value.getOverlay();
+		validateListField(F_tags, false, false, String.class, null);
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+		// TODO Q: Not marked as required in spec, but spec says they all must be unique
+		// within the API. Seems like it should be required.
+		validateStringField(F_operationId, false);
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateField(F_requestBody, false, RequestBody.class, new RequestBodyValidator());
+		validateMapField(F_responses, true, false, Response.class, new ResponseValidator());
+		validateMapField(F_callbacks, false, false, Callback.class, new CallbackValidator());
+		validateListField(F_securityRequirements, false, false, SecurityRequirement.class,
+				new SecurityRequirementValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateExtensions(operation.getExtensions());
+	}
 }

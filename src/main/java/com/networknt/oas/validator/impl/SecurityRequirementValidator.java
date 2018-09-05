@@ -10,43 +10,38 @@
  *******************************************************************************/
 package com.networknt.oas.validator.impl;
 
+import com.networknt.jsonoverlay.MapOverlay;
+import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.SecurityParameter;
 import com.networknt.oas.model.SecurityRequirement;
-import com.networknt.oas.validator.Messages;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
 
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.Set;
 
-import static com.networknt.oas.validator.Messages.m;
+import static com.networknt.oas.model.impl.SecurityRequirementImpl.F_requirements;
+import static com.networknt.oas.validator.impl.OpenApi3Messages.UnkSecScheme;
+import static com.networknt.oas.validator.msg.Messages.msg;
 
 public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRequirement> {
 
 	@Override
-	public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
-		OpenApi3 model = (OpenApi3) securityRequirement.getModel();
-		Set<String> definedSchemes = model.getSecuritySchemes(false).keySet();
-		for (Entry<String, ? extends SecurityParameter> entry : securityRequirement.getRequirements(false).entrySet()) {
-			if (!definedSchemes.contains(entry.getKey())) {
-				results.addError(
-						m.msg("UnkSecScheme|Security scheme not defined in components object", entry.getKey()));
-			} else {
-				String type = model.getSecurityScheme(entry.getKey()).getType();
-				switch (type) {
-				case "oauth2":
-				case "openIdConnect":
-					// TODO Q: anything to test here? do we know what the allowed scope names are?
-					break;
-				default:
-					if (!entry.getValue().getParameters(false).isEmpty()) {
-						results.addError(Messages.m.msg(
-								"NonEmptySecReqParms|Security requirement parameters must be empty unless scheme type is oauth2 or openIdConnect",
-								entry.getKey(), type));
-					}
-				}
+	public void runObjectValidations() {
+		Overlay<Map<String, SecurityParameter>> requirements = validateMapField(F_requirements, false, false,
+				SecurityParameter.class, new SecurityParameterValidator());
+		checkAllSchemesDefined(requirements);
+	}
+
+	public void checkAllSchemesDefined(Overlay<Map<String, SecurityParameter>> requirements) {
+		OpenApi3 model = value.getModel();
+		Set<String> definedSchemes = model.getSecuritySchemes().keySet();
+		MapOverlay<SecurityParameter> mapOverlay = Overlay.getMapOverlay(requirements);
+		for (String name : mapOverlay.keySet()) {
+			if (!definedSchemes.contains(name)) {
+				results.addError(msg(UnkSecScheme, name), Overlay.of(mapOverlay, name));
 			}
 		}
+
 	}
 }

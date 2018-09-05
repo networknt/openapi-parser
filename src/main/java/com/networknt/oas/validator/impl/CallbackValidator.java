@@ -17,14 +17,15 @@ import com.networknt.oas.validator.ValidationResults;
 import com.networknt.oas.validator.Validator;
 import com.networknt.service.SingletonServiceFactory;
 
+import static com.networknt.oas.model.impl.CallbackImpl.F_callbackPaths;
+
 public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
-    private static Validator<Path> pathValidator = SingletonServiceFactory.getBean(Validator.class, Path.class);
-
-    @Override
-    public void validateObject(Callback callback, ValidationResults results) {
-        validateMap(callback.getCallbackPaths(false), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
-        validateExtensions(callback.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Callback callback = (Callback) value.getOverlay();
+		validateMapField(F_callbackPaths, false, false, Path.class, new PathValidator());
+		validateExtensions(callback.getExtensions());
+	}
 
 }

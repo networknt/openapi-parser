@@ -1,0 +1,446 @@
+openapi: 3.0.0
+info:
+  version: 2.7.0
+  title: Lexikon Service
+  description: foo
+
+servers:
+  - url: /v2
+    description: The current Lexikon Service instance
+
+components:
+
+  securitySchemes:
+    lexikon_auth:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credential grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://localhost:6882/token'
+          scopes:
+            'read:server.info': Read server info
+            'read:person': Read People
+            'read:team': Read Teams
+
+  schemas:
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+          format: int32
+
+    List:
+      description: A list of results
+      type: object
+      properties:
+        info:
+          type: object
+          properties:
+            page:
+              type: integer
+              format: int32
+              minimum: 1
+            page_size:
+              type: integer
+              format: int32
+              minimum: 1
+              maximum: 500
+            count:
+              type: integer
+              format: int64
+            total_count:
+              type: integer
+              format: int64
+            total_pages:
+              type: integer
+              format: int64
+
+    StringList:
+      allOf:
+        - $ref: '#/components/schemas/List'
+        - type: object
+          description: A list of strings
+          properties:
+            results:
+              type: array
+              items:
+                type: string
+
+    #
+    # Person Entity
+    #
+    PersonList:
+      allOf:
+        - $ref: '#/components/schemas/List'
+        - type: object
+          description: A list of Persons
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Person'
+
+    Person:
+      required:
+        - id
+        - gid
+        - username
+        - name
+        - email
+        - is_active
+      properties:
+        id:
+          type: integer
+          format: int64
+        gid:
+          type: string
+        username:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        slack:
+          type: string
+        is_active:
+          type: boolean
+        n_queries:
+          type: integer
+          format: int64
+        n_tables_queried:
+          type: integer
+          format: int64
+        n_tables_owned:
+          type: integer
+          format: int64
+        last_query_date:
+          type: string
+          format: 'date-time'
+
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+
+    #
+    # Team Entity
+    #
+    TeamList:
+      allOf:
+        - $ref: '#/components/schemas/List'
+        - type: object
+          description: A list of Teams
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Team'
+
+    Team:
+      required:
+        - id
+        - gid
+        - name
+        - email
+        - is_active
+      properties:
+        id:
+          type: integer
+          format: int64
+        gid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        slack:
+          type: string
+        n_queries:
+          type: integer
+          format: int64
+        n_tables_queried:
+          type: integer
+          format: int64
+        n_tables_owned:
+          type: integer
+          format: int64
+        n_team_members:
+          type: integer
+          format: int64
+        last_query_date:
+          type: string
+          format: 'date-time'
+
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+
+    #
+    # Relations objects
+    #
+
+    TeamMember:
+      required:
+        - team_id
+        - person_id
+      properties:
+        team_id:
+          type: integer
+          format: int64
+        team:
+          $ref: '#/components/schemas/Team'
+        person_id:
+          type: integer
+          format: int64
+        person:
+          $ref: '#/components/schemas/Person'
+        role:
+          type: string
+
+paths:
+  '/health':
+    get:
+      responses:
+        '200':
+          description: successful operation
+      parameters: []
+
+  '/server/info':
+    get:
+      security:
+        - lexikon_auth:
+          - 'read:server.info'
+      responses:
+        '200':
+          description: successful operation
+      parameters: []
+
+  '/spec.html':
+    get:
+      summary: Lexikon Service API Documentation.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: object
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/spec.yaml':
+    get:
+      summary: The OpenAPI Spec in YAML format.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/yaml:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/spec.json':
+    get:
+      summary: The OpenAPI Spec in JSON format.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/person':
+    get:
+      summary: List all Persons
+      operationId: listPersons
+      tags:
+        - person
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      security:
+        - lexikon_auth:
+            - 'read:person'
+      responses:
+        '200':
+          description: An paged array of Persons
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonList'
+              example:
+                - id: 1
+                  gid: '47c76cf0-1415-4232-a2b7-e705bc07435b'
+                  username: 'jd'
+                  name: 'Jon Doe'
+                  email: 'jd@spotify.com'
+                  slack: 'jd'
+                  is_active: true
+                - id: 2
+                  gid: 'eead9528-afac-11e8-84ff-784f436131ec'
+                  username: 'jsmith'
+                  name: 'Jane Smith'
+                  email: 'jsmith@spotify.com'
+                  slack: 'jsmith'
+                  is_active: true
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/person/{id}':
+    get:
+      summary: Info for a specific Person
+      operationId: showPersonById
+      tags:
+        - person
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the Person to retrieve
+          schema:
+            type: string
+      security:
+        - lexikon_auth:
+            - 'read:person'
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+              example:
+                id: 1
+                gid: '47c76cf0-1415-4232-a2b7-e705bc07435b'
+                username: 'jd'
+                name: 'Jon Doe'
+                email: 'jd@spotify.com'
+                slack: 'jd'
+                is_active: true
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/team':
+    get:
+      summary: List all Teams
+      operationId: listTeams
+      tags:
+        - team
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      security:
+        - lexikon_auth:
+            - 'read:team'
+      responses:
+        '200':
+          description: An paged array of Teams
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamList'
+              example:
+                - id: 1
+                  gid: '47c76cf0-1415-4232-a2b7-e705bc07435b'
+                  name: 'some-squad'
+                  email: 'jome-squad@spotify.com'
+                  slack: 'some-squad'
+                  is_active: true
+                - id: 2
+                  gid: 'eead9528-afac-11e8-84ff-784f436131ec'
+                  name: 'another-squad'
+                  email: 'another-squad@spotify.com'
+                  slack: 'another-squad'
+                  is_active: true
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  '/team/{id}':
+    get:
+      summary: Info for a specific Team
+      operationId: showTeamById
+      tags:
+        - team
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the Team to retrieve
+          schema:
+            type: string
+      security:
+        - lexikon_auth:
+            - 'read:team'
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              example:
+                id: 1
+                gid: '47c76cf0-1415-4232-a2b7-e705bc07435b'
+                name: 'some-squad'
+                email: 'jome-squad@spotify.com'
+                slack: 'some-squad'
+                is_active: true
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

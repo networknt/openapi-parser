@@ -14,21 +14,20 @@ import com.networknt.oas.model.Contact;
 import com.networknt.oas.model.Info;
 import com.networknt.oas.model.License;
 import com.networknt.oas.validator.ObjectValidatorBase;
-import com.networknt.oas.validator.ValidationResults;
-import com.networknt.oas.validator.Validator;
-import com.networknt.service.SingletonServiceFactory;
+
+import static com.networknt.oas.model.impl.InfoImpl.*;
 
 public class InfoValidator extends ObjectValidatorBase<Info> {
 
-    private static Validator<Contact> contactValidator = SingletonServiceFactory.getBean(Validator.class, Contact.class);
-    private static Validator<License> licenseValidator = SingletonServiceFactory.getBean(Validator.class, License.class);
-
-    @Override
-    public void validateObject(Info info, ValidationResults results) {
-        validateString(info.getTitle(false), results, true, "title");
-        validateField(info.getContact(false), results, false, "contact", contactValidator);
-        validateField(info.getLicense(false), results, false, "license", licenseValidator);
-        validateString(info.getVersion(false), results, true, "version");
-        validateExtensions(info.getExtensions(false), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Info info = (Info) value.getOverlay();
+		validateStringField(F_title, true);
+		validateStringField(F_description, false);
+		validateUrlField(F_termsOfService, false, true, false);
+		validateField(F_contact, false, Contact.class, new ContactValidator());
+		validateField(F_license, false, License.class, new LicenseValidator());
+		validateStringField(F_version, true);
+		validateExtensions(info.getExtensions());
+	}
 }

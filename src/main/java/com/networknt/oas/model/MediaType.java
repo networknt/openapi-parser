@@ -1,107 +1,103 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.jsonoverlay.Reference;
-
 import java.util.Map;
 
-public interface MediaType extends OpenApiObject<OpenApi3, MediaType> {
+import javax.annotation.Generated;
 
-    // Schema
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    Schema getSchema();
+public interface MediaType extends IJsonOverlay<MediaType>, IModelPart<OpenApi3, MediaType> {
 
+	// Schema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema();
 
-    Schema getSchema(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSchema(Schema schema);
 
-    void setSchema(Schema schema);
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
 
-    boolean isSchemaReference();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExample(String name);
 
-    Reference getSchemaReference();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Example getExample(String name);
 
-    // Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExamples(Map<String, Example> examples);
 
-    Map<String, Example> getExamples();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(String name, Example example);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExample(String name);
 
-    Map<String, Example> getExamples(boolean elaborate);
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExample();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(Object example);
 
-    boolean hasExample(String name);
+	// EncodingProperty
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, EncodingProperty> getEncodingProperties();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, EncodingProperty> getEncodingProperties(boolean elaborate);
 
-    Example getExample(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasEncodingProperties();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasEncodingProperty(String name);
 
-    void setExamples(Map<String, Example> examples);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	EncodingProperty getEncodingProperty(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEncodingProperties(Map<String, EncodingProperty> encodingProperties);
 
-    void setExample(String name, Example example);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setEncodingProperty(String name, EncodingProperty encodingProperty);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeEncodingProperty(String name);
 
-    void removeExample(String name);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    boolean isExampleReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    Reference getExampleReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    // Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    Object getExample();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    Object getExample(boolean elaborate);
-
-
-    void setExample(Object example);
-
-    // EncodingProperty
-
-    Map<String, EncodingProperty> getEncodingProperties();
-
-
-    Map<String, EncodingProperty> getEncodingProperties(boolean elaborate);
-
-
-    boolean hasEncodingProperty(String name);
-
-
-    EncodingProperty getEncodingProperty(String name);
-
-
-    void setEncodingProperties(Map<String, EncodingProperty> encodingProperties);
-
-
-    void setEncodingProperty(String name, EncodingProperty encodingProperty);
-
-
-    void removeEncodingProperty(String name);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

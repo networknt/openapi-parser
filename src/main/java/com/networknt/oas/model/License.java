@@ -2,48 +2,49 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface License extends OpenApiObject<OpenApi3, License> {
+import javax.annotation.Generated;
 
-    // Name
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getName();
+public interface License extends IJsonOverlay<License>, IModelPart<OpenApi3, License> {
 
+	// Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getName();
 
-    String getName(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setName(String name);
 
+	// Url
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getUrl();
 
-    void setName(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setUrl(String url);
 
-    // Url
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    String getUrl();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    String getUrl(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    void setUrl(String url);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    // Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

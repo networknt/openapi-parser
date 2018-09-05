@@ -2,84 +2,76 @@ package com.networknt.oas.model;
 
 import java.util.Map;
 
-public interface Xml extends OpenApiObject<OpenApi3, Xml> {
+import javax.annotation.Generated;
 
-    // Name
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
 
-    String getName();
+public interface Xml extends IJsonOverlay<Xml>, IModelPart<OpenApi3, Xml> {
 
+	// Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getName();
 
-    String getName(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setName(String name);
 
+	// Namespace
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getNamespace();
 
-    void setName(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setNamespace(String namespace);
 
-    // Namespace
+	// Prefix
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getPrefix();
 
-    String getNamespace();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPrefix(String prefix);
 
+	// Attribute
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAttribute();
 
-    String getNamespace(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAttribute();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAttribute(Boolean attribute);
 
-    void setNamespace(String namespace);
+	// Wrapped
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getWrapped();
 
-    // Prefix
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isWrapped();
 
-    String getPrefix();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setWrapped(Boolean wrapped);
 
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    String getPrefix(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
-    void setPrefix(String prefix);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    // Attribute
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    Boolean getAttribute();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    Boolean getAttribute(boolean elaborate);
-
-
-    boolean isAttribute();
-
-
-    void setAttribute(Boolean attribute);
-
-    // Wrapped
-
-    Boolean getWrapped();
-
-
-    Boolean getWrapped(boolean elaborate);
-
-
-    boolean isWrapped();
-
-
-    void setWrapped(Boolean wrapped);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }

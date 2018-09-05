@@ -10,7 +10,5 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.networknt.oas.model.OpenApiObject;
-
-public interface OpenApi<T extends OpenApi<?>> extends OpenApiObject<T, T> {
+public interface OpenApi<M> {
 }

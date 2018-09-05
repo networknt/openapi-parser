@@ -1,480 +1,459 @@
 package com.networknt.oas.model;
 
-import com.networknt.oas.OpenApi;
-import com.networknt.oas.jsonoverlay.Reference;
-import com.networknt.oas.validator.ValidationResults;
-
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-public interface OpenApi3 extends OpenApiObject<OpenApi3, OpenApi3>, OpenApi<OpenApi3> {
+import javax.annotation.Generated;
 
-    public void validate();
+import com.networknt.jsonoverlay.IJsonOverlay;
+import com.networknt.jsonoverlay.IModelPart;
+import com.networknt.oas.OpenApi;
+import com.networknt.oas.validator.ValidationResults;
 
-    public boolean isValid();
+public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, OpenApi3>, OpenApi<OpenApi3> {
 
-    public ValidationResults getValidationResults();
+	public void validate();
 
-    public Collection<ValidationResults.ValidationItem> getValidationItems();
+	public boolean isValid();
 
-    // OpenApi
+	public ValidationResults getValidationResults();
 
-    String getOpenApi();
+	public Collection<ValidationResults.ValidationItem> getValidationItems();
 
+	// OpenApi
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getOpenApi();
 
-    String getOpenApi(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setOpenApi(String openApi);
 
+	// Info
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Info getInfo();
 
-    void setOpenApi(String openApi);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Info getInfo(boolean elaborate);
 
-    // Info
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setInfo(Info info);
 
-    Info getInfo();
+	// Server
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers(boolean elaborate);
 
-    Info getInfo(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasServers();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Server getServer(int index);
 
-    void setInfo(Info info);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServers(List<Server> servers);
 
-    // Server
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setServer(int index, Server server);
 
-    Collection<Server> getServers();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addServer(Server server);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertServer(int index, Server server);
 
-    Collection<Server> getServers(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeServer(int index);
 
+	// Path
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Path> getPaths();
 
-    boolean hasServers();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Path> getPaths(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPaths();
 
-    Server getServer(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPath(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Path getPath(String name);
 
-    void setServers(Collection<Server> servers);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPaths(Map<String, Path> paths);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPath(String name, Path path);
 
-    void setServer(int index, Server server);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removePath(String name);
 
+	// PathsExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getPathsExtensions();
 
-    void addServer(Server server);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getPathsExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPathsExtensions();
 
-    void insertServer(int index, Server server);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPathsExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getPathsExtension(String name);
 
-    void removeServer(int index);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPathsExtensions(Map<String, Object> pathsExtensions);
 
-    // Path
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setPathsExtension(String name, Object pathsExtension);
 
-    Map<String, Path> getPaths();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removePathsExtension(String name);
 
+	// Schema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getSchemas();
 
-    Map<String, Path> getPaths(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getSchemas(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSchemas();
 
-    boolean hasPath(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSchema(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema(String name);
 
-    Path getPath(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSchemas(Map<String, Schema> schemas);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSchema(String name, Schema schema);
 
-    void setPaths(Map<String, Path> paths);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeSchema(String name);
 
+	// Response
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Response> getResponses();
 
-    void setPath(String name, Path path);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Response> getResponses(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasResponses();
 
-    void removePath(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasResponse(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Response getResponse(String name);
 
-    boolean isPathReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setResponses(Map<String, Response> responses);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setResponse(String name, Response response);
 
-    Reference getPathReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeResponse(String name);
 
-    // PathsExtension
+	// Parameter
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Parameter> getParameters();
 
-    Map<String, Object> getPathsExtensions();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Parameter> getParameters(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasParameters();
 
-    Map<String, Object> getPathsExtensions(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasParameter(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Parameter getParameter(String name);
 
-    boolean hasPathsExtension(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameters(Map<String, Parameter> parameters);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setParameter(String name, Parameter parameter);
 
-    Object getPathsExtension(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeParameter(String name);
 
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples();
 
-    void setPathsExtensions(Map<String, Object> pathsExtensions);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
 
-    void setPathsExtension(String name, Object pathsExtension);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExample(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Example getExample(String name);
 
-    void removePathsExtension(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExamples(Map<String, Example> examples);
 
-    // Schema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(String name, Example example);
 
-    Map<String, Schema> getSchemas();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExample(String name);
 
+	// RequestBody
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, RequestBody> getRequestBodies();
 
-    Map<String, Schema> getSchemas(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, RequestBody> getRequestBodies(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequestBodies();
 
-    boolean hasSchema(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequestBody(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	RequestBody getRequestBody(String name);
 
-    Schema getSchema(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequestBodies(Map<String, RequestBody> requestBodies);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequestBody(String name, RequestBody requestBody);
 
-    void setSchemas(Map<String, Schema> schemas);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeRequestBody(String name);
 
+	// Header
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders();
 
-    void setSchema(String name, Schema schema);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeaders();
 
-    void removeSchema(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeader(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Header getHeader(String name);
 
-    boolean isSchemaReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setHeaders(Map<String, Header> headers);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setHeader(String name, Header header);
 
-    Reference getSchemaReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeHeader(String name);
 
-    // Response
+	// SecurityScheme
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, SecurityScheme> getSecuritySchemes();
 
-    Map<String, Response> getResponses();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, SecurityScheme> getSecuritySchemes(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSecuritySchemes();
 
-    Map<String, Response> getResponses(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSecurityScheme(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	SecurityScheme getSecurityScheme(String name);
 
-    boolean hasResponse(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSecuritySchemes(Map<String, SecurityScheme> securitySchemes);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSecurityScheme(String name, SecurityScheme securityScheme);
 
-    Response getResponse(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeSecurityScheme(String name);
 
+	// Link
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks();
 
-    void setResponses(Map<String, Response> responses);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLinks();
 
-    void setResponse(String name, Response response);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLink(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Link getLink(String name);
 
-    void removeResponse(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setLinks(Map<String, Link> links);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setLink(String name, Link link);
 
-    boolean isResponseReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeLink(String name);
 
+	// Callback
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Callback> getCallbacks();
 
-    Reference getResponseReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Callback> getCallbacks(boolean elaborate);
 
-    // Parameter
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallbacks();
 
-    Map<String, Parameter> getParameters();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallback(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Callback getCallback(String name);
 
-    Map<String, Parameter> getParameters(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setCallbacks(Map<String, Callback> callbacks);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setCallback(String name, Callback callback);
 
-    boolean hasParameter(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeCallback(String name);
 
+	// ComponentsExtension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getComponentsExtensions();
 
-    Parameter getParameter(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getComponentsExtensions(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasComponentsExtensions();
 
-    void setParameters(Map<String, Parameter> parameters);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasComponentsExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getComponentsExtension(String name);
 
-    void setParameter(String name, Parameter parameter);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setComponentsExtensions(Map<String, Object> componentsExtensions);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setComponentsExtension(String name, Object componentsExtension);
 
-    void removeParameter(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeComponentsExtension(String name);
 
+	// SecurityRequirement
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<SecurityRequirement> getSecurityRequirements();
 
-    boolean isParameterReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<SecurityRequirement> getSecurityRequirements(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSecurityRequirements();
 
-    Reference getParameterReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	SecurityRequirement getSecurityRequirement(int index);
 
-    // Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSecurityRequirements(List<SecurityRequirement> securityRequirements);
 
-    Map<String, Example> getExamples();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addSecurityRequirement(SecurityRequirement securityRequirement);
 
-    Map<String, Example> getExamples(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertSecurityRequirement(int index, SecurityRequirement securityRequirement);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeSecurityRequirement(int index);
 
-    boolean hasExample(String name);
+	// Tag
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Tag> getTags();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Tag> getTags(boolean elaborate);
 
-    Example getExample(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasTags();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Tag getTag(int index);
 
-    void setExamples(Map<String, Example> examples);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTags(List<Tag> tags);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setTag(int index, Tag tag);
 
-    void setExample(String name, Example example);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void addTag(Tag tag);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void insertTag(int index, Tag tag);
 
-    void removeExample(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeTag(int index);
 
+	// ExternalDocs
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	ExternalDocs getExternalDocs();
 
-    boolean isExampleReference(String key);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	ExternalDocs getExternalDocs(boolean elaborate);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExternalDocs(ExternalDocs externalDocs);
 
-    Reference getExampleReference(String key);
+	// Extension
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    // RequestBody
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    Map<String, RequestBody> getRequestBodies();
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    Map<String, RequestBody> getRequestBodies(boolean elaborate);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExtension(String name);
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    boolean hasRequestBody(String name);
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-
-    RequestBody getRequestBody(String name);
-
-
-    void setRequestBodies(Map<String, RequestBody> requestBodies);
-
-
-    void setRequestBody(String name, RequestBody requestBody);
-
-
-    void removeRequestBody(String name);
-
-
-    boolean isRequestBodyReference(String key);
-
-
-    Reference getRequestBodyReference(String key);
-
-    // Header
-
-    Map<String, Header> getHeaders();
-
-
-    Map<String, Header> getHeaders(boolean elaborate);
-
-
-    boolean hasHeader(String name);
-
-
-    Header getHeader(String name);
-
-
-    void setHeaders(Map<String, Header> headers);
-
-
-    void setHeader(String name, Header header);
-
-
-    void removeHeader(String name);
-
-
-    boolean isHeaderReference(String key);
-
-
-    Reference getHeaderReference(String key);
-
-    // SecurityScheme
-
-    Map<String, SecurityScheme> getSecuritySchemes();
-
-
-    Map<String, SecurityScheme> getSecuritySchemes(boolean elaborate);
-
-
-    boolean hasSecurityScheme(String name);
-
-
-    SecurityScheme getSecurityScheme(String name);
-
-
-    void setSecuritySchemes(Map<String, SecurityScheme> securitySchemes);
-
-
-    void setSecurityScheme(String name, SecurityScheme securityScheme);
-
-
-    void removeSecurityScheme(String name);
-
-
-    boolean isSecuritySchemeReference(String key);
-
-
-    Reference getSecuritySchemeReference(String key);
-
-    // Link
-
-    Map<String, Link> getLinks();
-
-
-    Map<String, Link> getLinks(boolean elaborate);
-
-
-    boolean hasLink(String name);
-
-
-    Link getLink(String name);
-
-
-    void setLinks(Map<String, Link> links);
-
-
-    void setLink(String name, Link link);
-
-
-    void removeLink(String name);
-
-
-    boolean isLinkReference(String key);
-
-
-    Reference getLinkReference(String key);
-
-    // Callback
-
-    Map<String, Callback> getCallbacks();
-
-
-    Map<String, Callback> getCallbacks(boolean elaborate);
-
-
-    boolean hasCallback(String name);
-
-
-    Callback getCallback(String name);
-
-
-    void setCallbacks(Map<String, Callback> callbacks);
-
-
-    void setCallback(String name, Callback callback);
-
-
-    void removeCallback(String name);
-
-
-    boolean isCallbackReference(String key);
-
-
-    Reference getCallbackReference(String key);
-
-    // ComponentsExtension
-
-    Map<String, Object> getComponentsExtensions();
-
-
-    Map<String, Object> getComponentsExtensions(boolean elaborate);
-
-
-    boolean hasComponentsExtension(String name);
-
-
-    Object getComponentsExtension(String name);
-
-
-    void setComponentsExtensions(Map<String, Object> componentsExtensions);
-
-
-    void setComponentsExtension(String name, Object componentsExtension);
-
-
-    void removeComponentsExtension(String name);
-
-    // SecurityRequirement
-
-    Collection<SecurityRequirement> getSecurityRequirements();
-
-
-    Collection<SecurityRequirement> getSecurityRequirements(boolean elaborate);
-
-
-    boolean hasSecurityRequirements();
-
-
-    SecurityRequirement getSecurityRequirement(int index);
-
-
-    void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements);
-
-
-    void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
-
-
-    void addSecurityRequirement(SecurityRequirement securityRequirement);
-
-
-    void insertSecurityRequirement(int index, SecurityRequirement securityRequirement);
-
-
-    void removeSecurityRequirement(int index);
-
-    // Tag
-
-    Collection<Tag> getTags();
-
-
-    Collection<Tag> getTags(boolean elaborate);
-
-
-    boolean hasTags();
-
-
-    Tag getTag(int index);
-
-
-    void setTags(Collection<Tag> tags);
-
-
-    void setTag(int index, Tag tag);
-
-
-    void addTag(Tag tag);
-
-
-    void insertTag(int index, Tag tag);
-
-
-    void removeTag(int index);
-
-    // ExternalDocs
-
-    ExternalDocs getExternalDocs();
-
-
-    ExternalDocs getExternalDocs(boolean elaborate);
-
-
-    void setExternalDocs(ExternalDocs externalDocs);
-
-    // Extension
-
-    Map<String, Object> getExtensions();
-
-
-    Map<String, Object> getExtensions(boolean elaborate);
-
-
-    boolean hasExtension(String name);
-
-
-    Object getExtension(String name);
-
-
-    void setExtensions(Map<String, Object> extensions);
-
-
-    void setExtension(String name, Object extension);
-
-
-    void removeExtension(String name);
-
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void removeExtension(String name);
 }
