@@ -13,12 +13,14 @@ package com.networknt.oas.validator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import com.networknt.jsonoverlay.*;
-import com.networknt.oas.validator.oasparser.fake.scheme.Handler;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLStreamHandler;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -104,12 +106,15 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		return validateStringField(name, required, pattern, field -> checkUrl(field, allowRelative, allowVars));
 	}
 
-	public static final String SPECIAL_SCHEME = Handler.class.getPackage().getName()
-			.substring(ValidatorBase.class.getPackage().getName().length() + 1);
-	private static boolean specialSchemeInited = false;
+	private static String FAKE_SCHEME = "oasparser.fake.scheme";
+	private static URLStreamHandler fakeHandler = new URLStreamHandler() {
+		@Override
+		protected URLConnection openConnection(URL u) throws IOException {
+			return null;
+		}
+	};
 
 	private void checkUrl(Overlay<String> overlay, boolean allowRelative, boolean allowVars) {
-		initSpecialScheme();
 		// TODO Q: Any help from spec in being able to validate URLs with vars? E.g is
 		// our treatment here valid? We assume vars can only appear where simple text
 		// can appear, so handling vars means relacing {.*} with "1" and testing for URL
@@ -117,44 +122,28 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		// port, and elsewhere digits are always allowed where letters are.
 		String origUrl = overlay.get();
 		String url = origUrl;
+		boolean fake = false;
 		if (allowVars) {
 			url = url.replaceAll("\\{[^}]+\\}", "1");
 			if (url.startsWith("1:")) {
 				// "1" is not a valid scheme name, so we need to replace it with special scheme,
 				// for which we provide a do-nothing protocol handler implementation
-				url = SPECIAL_SCHEME + url.substring(1);
+				url = FAKE_SCHEME + url.substring(1);
+				fake = true;
 			}
 		}
 		try {
-			new URL(url);
+			new URL(null, url, fake ? fakeHandler : null);
 		} catch (MalformedURLException e) {
 			try {
-				new URL(new URL(SPECIAL_SCHEME + ":/"), url);
+				URL context = new URL(null, FAKE_SCHEME + ":/", fakeHandler);
+				new URL(context, url);
 				if (!allowRelative) {
 					results.addError(msg(BaseValidationMessages.NoRelUrl, origUrl, e.toString()), overlay);
 				}
 			} catch (MalformedURLException e1) {
 				results.addError(msg(BadUrl, origUrl, e.toString()), overlay);
 			}
-		}
-	}
-
-	private void initSpecialScheme() {
-		if (!specialSchemeInited) {
-			String prop = "java.protocol.handler.pkgs";
-			String former = System.getProperty(prop);
-			try {
-				System.setProperty(prop, ValidatorBase.class.getPackage().getName());
-				new URL(SPECIAL_SCHEME + ":");
-			} catch (MalformedURLException e) {
-			} finally {
-				if (former != null) {
-					System.setProperty(prop, former);
-				} else {
-					System.getProperties().remove(prop);
-				}
-			}
-			specialSchemeInited = true;
 		}
 	}
 
@@ -206,7 +195,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	public final <F> Overlay<F> validateField(String name, boolean required, Class<F> fieldClass,
 			Validator<F> validator, Consumer<Overlay<F>>... otherChecks) {
 		@SuppressWarnings("unchecked")
-        PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
+		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
 		Overlay<F> field = Overlay.of(propValue, name, fieldClass);
 		checkJsonType(field, getAllowedJsonTypes(field), results);
 		checkMissing(field, required);
@@ -220,7 +209,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	}
 
 	public <X> Overlay<List<X>> validateListField(String name, boolean nonEmpty, boolean unique, Class<X> itemClass,
-                                                  Validator<X> itemValidator) {
+			Validator<X> itemValidator) {
 		@SuppressWarnings("unchecked")
 		Overlay<List<X>> list = (Overlay<List<X>>) (Object) Overlay.of((PropertiesOverlay<V>) value.get(), name,
 				List.class);
