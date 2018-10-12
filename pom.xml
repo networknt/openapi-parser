@@ -63,7 +63,9 @@
     </distributionManagement>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.light-4j>1.5.21</version.light-4j>
         <version.json-overlay>1.5.21</version.json-overlay>
@@ -74,6 +76,7 @@
         <version.junit>4.12</version.junit>
         <version.jsonassert>1.5.0</version.jsonassert>
         <version.guava>26.0-jre</version.guava>
+        <version.javax.annotation>1.3.2</version.javax.annotation>
     </properties>
 
 
@@ -127,6 +130,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${version.javax.annotation}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -203,7 +211,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
