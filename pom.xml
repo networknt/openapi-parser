@@ -67,7 +67,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.light-4j>1.5.26</version.light-4j>
         <version.json-overlay>1.5.26</version.json-overlay>
-        <version.jackson>2.9.5</version.jackson>
+        <version.jackson>2.9.8</version.jackson>
         <version.javamail>1.6.1</version.javamail>
         <version.slf4j>1.7.25</version.slf4j>
         <version.logback>1.2.3</version.logback>
