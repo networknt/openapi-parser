@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.0](https://github.com/networknt/openapi-parser/tree/2.0.0) (2019-03-20)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.32...2.0.0)
+
+## [1.5.32](https://github.com/networknt/openapi-parser/tree/1.5.32) (2019-03-19)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.31...1.5.32)
+
 ## [1.5.31](https://github.com/networknt/openapi-parser/tree/1.5.31) (2019-03-02)
 [Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.30...1.5.31)
 
