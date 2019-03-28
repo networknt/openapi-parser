@@ -1,5 +1,44 @@
 # Change Log
 
+## [1.5.32](https://github.com/networknt/openapi-parser/tree/1.5.32) (2019-03-19)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.31...1.5.32)
+
+## [1.5.31](https://github.com/networknt/openapi-parser/tree/1.5.31) (2019-03-02)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.30...1.5.31)
+
+## [1.5.30](https://github.com/networknt/openapi-parser/tree/1.5.30) (2019-02-21)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.29...1.5.30)
+
+## [1.5.29](https://github.com/networknt/openapi-parser/tree/1.5.29) (2019-02-16)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.28...1.5.29)
+
+## [1.5.28](https://github.com/networknt/openapi-parser/tree/1.5.28) (2019-01-13)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.27...1.5.28)
+
+## [1.5.27](https://github.com/networknt/openapi-parser/tree/1.5.27) (2019-01-12)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/2.0.0-BETA2...1.5.27)
+
+## [2.0.0-BETA2](https://github.com/networknt/openapi-parser/tree/2.0.0-BETA2) (2018-12-30)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.25...2.0.0-BETA2)
+
+## [1.5.25](https://github.com/networknt/openapi-parser/tree/1.5.25) (2018-12-24)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.24...1.5.25)
+
+## [1.5.24](https://github.com/networknt/openapi-parser/tree/1.5.24) (2018-12-15)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.23...1.5.24)
+
+## [1.5.23](https://github.com/networknt/openapi-parser/tree/1.5.23) (2018-12-01)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.22...1.5.23)
+
+## [1.5.22](https://github.com/networknt/openapi-parser/tree/1.5.22) (2018-11-10)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.21...1.5.22)
+
+## [1.5.21](https://github.com/networknt/openapi-parser/tree/1.5.21) (2018-10-26)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.20...1.5.21)
+
+## [1.5.20](https://github.com/networknt/openapi-parser/tree/1.5.20) (2018-09-22)
+[Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.19...1.5.20)
+
 ## [1.5.19](https://github.com/networknt/openapi-parser/tree/1.5.19) (2018-09-22)
 [Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.18...1.5.19)
 
