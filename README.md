@@ -15,4 +15,4 @@ dependency on javaparser-core, guava, commons-cli, commons-io, javax.mail and gu
 
 ### License
 
-The OpenAPI Parser is provided under the Eclipse Public License (https://www.eclipse.org/legal/epl-v10.html) following the parent [KaiZen OpenAPI Parser](https://github.com/RepreZen/KaiZen-OpenApi-Parser)
+The OpenAPI Parser is provided under the Eclipse Public License 1.0 following the parent [KaiZen OpenAPI Parser](https://github.com/RepreZen/KaiZen-OpenApi-Parser)
