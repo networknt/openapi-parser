@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.6.0](https://github.com/networknt/openapi-parser/tree/1.6.0) (2019-04-05)
+
+
+**Merged pull requests:**
+
+
+- fixes \#10 update license and readme [\#11](https://github.com/networknt/openapi-parser/pull/11) ([stevehu](https://github.com/stevehu))
+- fixes \#7 put copyright and license in source code [\#8](https://github.com/networknt/openapi-parser/pull/8) ([stevehu](https://github.com/stevehu))
 ## [1.5.31](https://github.com/networknt/openapi-parser/tree/1.5.31) (2019-03-02)
 [Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.30...1.5.31)
 
