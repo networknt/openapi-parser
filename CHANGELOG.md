@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.6.1](https://github.com/networknt/openapi-parser/tree/1.6.1) (2019-05-03)
+
+
+**Merged pull requests:**
+
+
+- fixes \#12 remove the json-overlay version to use light-4j version [\#13](https://github.com/networknt/openapi-parser/pull/13) ([stevehu](https://github.com/stevehu))
 ## [1.6.0](https://github.com/networknt/openapi-parser/tree/1.6.0) (2019-04-05)
 
 
