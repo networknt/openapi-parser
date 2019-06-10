@@ -62,14 +62,39 @@
         </repository>
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>
+                https://oss.sonatype.org/content/repositories/releases
+            </url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>
+                https://oss.sonatype.org/content/repositories/snapshots
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+                <!-- never, daily, interval:X (where X is in minutes) or always -->
+                <!--<updatePolicy>daily</updatePolicy> -->
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.light-4j>2.0.0-BETA2</version.light-4j>
-        <version.json-overlay>2.0.0-BETA2</version.json-overlay>
-        <version.jackson>2.9.5</version.jackson>
+        <version.light-4j>2.0.0</version.light-4j>
+        <version.jackson>2.9.9</version.jackson>
         <version.javamail>1.6.1</version.javamail>
         <version.slf4j>1.7.25</version.slf4j>
         <version.logback>1.2.3</version.logback>
@@ -83,23 +108,13 @@
     <dependencies>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>utility</artifactId>
-            <version>${version.light-4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>config</artifactId>
-            <version>${version.light-4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
             <artifactId>service</artifactId>
             <version>${version.light-4j}</version>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>json-overlay</artifactId>
-            <version>${version.json-overlay}</version>
+            <version>${version.light-4j}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
