@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.6.4](https://github.com/networknt/openapi-parser/tree/1.6.4) (2019-06-10)
+
+
+**Merged pull requests:**
+
+
+- fixes \#16 Add back the service dependency in the pom.xml [\#17](https://github.com/networknt/openapi-parser/pull/17) ([stevehu](https://github.com/stevehu))
+- fixes \#14 add both release and snapshot repositories [\#15](https://github.com/networknt/openapi-parser/pull/15) ([stevehu](https://github.com/stevehu))
 ## [1.6.2](https://github.com/networknt/openapi-parser/tree/1.6.2) (2019-05-17)
 
 
