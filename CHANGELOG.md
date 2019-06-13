@@ -1,5 +1,17 @@
 # Change Log
 
+## [2.0.1](https://github.com/networknt/openapi-parser/tree/2.0.1) (2019-06-13)
+
+
+**Merged pull requests:**
+
+
+- fixes \#16 Add back the service dependency in the pom.xml [\#17](https://github.com/networknt/openapi-parser/pull/17) ([stevehu](https://github.com/stevehu))
+- fixes \#14 add both release and snapshot repositories [\#15](https://github.com/networknt/openapi-parser/pull/15) ([stevehu](https://github.com/stevehu))
+- fixes \#12 remove the json-overlay version to use light-4j version [\#13](https://github.com/networknt/openapi-parser/pull/13) ([stevehu](https://github.com/stevehu))
+- fixes \#10 update license and readme [\#11](https://github.com/networknt/openapi-parser/pull/11) ([stevehu](https://github.com/stevehu))
+- fixes \#7 put copyright and license in source code [\#8](https://github.com/networknt/openapi-parser/pull/8) ([stevehu](https://github.com/stevehu))
+- fixes \#7 put copyright and license in source code [\#8](https://github.com/networknt/openapi-parser/pull/8) ([stevehu](https://github.com/stevehu))
 ## [1.5.32](https://github.com/networknt/openapi-parser/tree/1.5.32) (2019-03-19)
 [Full Changelog](https://github.com/networknt/openapi-parser/compare/1.5.31...1.5.32)
 
