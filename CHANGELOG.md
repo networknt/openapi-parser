@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.6.7](https://github.com/networknt/openapi-parser/tree/1.6.7) (2019-08-16)
+
+
+**Merged pull requests:**
+
+
+- fixes \#21 upgrade jackson-databind to 2.9.9.3 [\#22](https://github.com/networknt/openapi-parser/pull/22) ([stevehu](https://github.com/stevehu))
 ## [1.6.6](https://github.com/networknt/openapi-parser/tree/1.6.6) (2019-07-31)
 
 
