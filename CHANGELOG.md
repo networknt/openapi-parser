@@ -6,6 +6,8 @@
 **Merged pull requests:**
 
 
+
+
 ## [2.0.9](https://github.com/networknt/openapi-parser/tree/2.0.9) (2019-12-30)
 
 
