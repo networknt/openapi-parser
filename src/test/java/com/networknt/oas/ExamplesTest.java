@@ -33,7 +33,7 @@ import java.util.Iterator;
 public class ExamplesTest extends Assert {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-specification";
-	private static final String EXAMPLES_BRANCH = "master";
+	private static final String EXAMPLES_BRANCH = "main";
 	private static final String EXAMPLES_ROOT = "examples/v3.0";
 
 	@Parameters(name = "{index}: {1}")
