@@ -7,6 +7,8 @@
 
 
 - fixes \#30 update github OAI/OpenAPI-specification repo from master to… [\#31](https://github.com/networknt/openapi-parser/pull/31) ([stevehu](https://github.com/stevehu))
+
+
 ## [1.6.33](https://github.com/networknt/openapi-parser/tree/1.6.33) (2021-03-28)
 
 
