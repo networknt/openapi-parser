@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.26](https://github.com/networknt/openapi-parser/tree/2.0.26) (2021-04-27)
+
+
+**Merged pull requests:**
+
+
+- fixes \#30 update github OAI/OpenAPI-specification repo from master to… [\#31](https://github.com/networknt/openapi-parser/pull/31) ([stevehu](https://github.com/stevehu))
+- Bump guava from 26.0-jre to 29.0-jre [\#29](https://github.com/networknt/openapi-parser/pull/29) ([dependabot](https://github.com/apps/dependabot))
 ## [2.0.25](https://github.com/networknt/openapi-parser/tree/2.0.25) (2021-03-28)
 
 
