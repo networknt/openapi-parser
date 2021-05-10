@@ -13,8 +13,6 @@ package com.networknt.oas;
 import com.networknt.oas.model.OpenApi3;
 import org.junit.Test;
 
-import javax.annotation.Resources;
-
 import static org.junit.Assert.assertEquals;
 
 public class CircularTest {
