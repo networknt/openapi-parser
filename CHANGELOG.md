@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.27](https://github.com/networknt/openapi-parser/tree/2.0.27) (2021-05-25)
+
+
+**Merged pull requests:**
+
+
+- fixes \#32 remove the generated annotation to eliminate javax.annotati… [\#33](https://github.com/networknt/openapi-parser/pull/33) ([stevehu](https://github.com/stevehu))
 ## [2.0.26](https://github.com/networknt/openapi-parser/tree/2.0.26) (2021-04-27)
 
 
