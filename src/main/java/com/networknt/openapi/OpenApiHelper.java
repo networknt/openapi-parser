@@ -79,6 +79,11 @@ public class OpenApiHelper {
         return INSTANCE;
     }
 
+    public synchronized static OpenApiHelper reset(String spec) {
+        INSTANCE = new OpenApiHelper(spec);
+        return INSTANCE;
+    }
+
     /**
      * merge inject map to openapi map
      * @param openapi {@link Map} openapi
