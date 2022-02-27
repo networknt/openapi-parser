@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.1.0](https://github.com/networknt/openapi-parser/tree/2.1.0) (2022-02-27)
+
+
+**Merged pull requests:**
+
+
+- fixes \#36 add a new method to reset the specification for the light-p… [\#37](https://github.com/networknt/openapi-parser/pull/37) ([stevehu](https://github.com/stevehu))
+- fixes \#34 move the openapi-helper from light-rest-4j to this repo for… [\#35](https://github.com/networknt/openapi-parser/pull/35) ([stevehu](https://github.com/stevehu))
+
+
 ## [2.0.32](https://github.com/networknt/openapi-parser/tree/2.0.32) (2021-10-19)
 
 
