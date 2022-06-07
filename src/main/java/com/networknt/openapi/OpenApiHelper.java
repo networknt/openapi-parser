@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -47,6 +48,7 @@ public class OpenApiHelper {
     public static List<String> oauth2Names;
     public static String basePath;
     private static OpenApiHelper INSTANCE = null;
+    private static String spec = null;
 
     private OpenApiHelper(String spec) {
         try {
@@ -72,10 +74,11 @@ public class OpenApiHelper {
     }
 
     public synchronized static OpenApiHelper init(String spec) {
-        if(INSTANCE != null) {
+        if(INSTANCE != null && Objects.equals(spec, OpenApiHelper.spec)) {
             return INSTANCE;
         }
         INSTANCE = new OpenApiHelper(spec);
+        OpenApiHelper.spec = spec;
         return INSTANCE;
     }
 
