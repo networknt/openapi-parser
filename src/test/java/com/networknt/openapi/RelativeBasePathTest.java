@@ -11,28 +11,27 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class RelativeBasePathTest {
+    OpenApiHelper helper = null;
     @Before
     public void testOAuth2Name() throws Exception {
         URL url = Resources.getResource("models/openapi-relative-server-url.yaml");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
-        OpenApiHelper.init(spec);
+        helper = new OpenApiHelper(spec);
     }
 
     @After
     public void tearDown() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = OpenApiHelper.class.getDeclaredField("INSTANCE");
-        instance.setAccessible(true);
-        instance.set(null, null);
+        helper = null;
     }
 
     @Test
     public void testBasePath() {
-        Assert.assertEquals("/v1", OpenApiHelper.basePath);
+        Assert.assertEquals("/v1", helper.basePath);
     }
 
     @Test
     public void testApiNormalized() {
-        ApiNormalisedPath normalisedPath = new ApiNormalisedPath("/v1/pets/26", null);
+        ApiNormalisedPath normalisedPath = new ApiNormalisedPath("/v1/pets/26", helper.basePath);
         Assert.assertEquals("/pets/26", normalisedPath.normalised());
     }
 }

@@ -32,25 +32,24 @@ import static org.junit.Assert.assertEquals;
  * Created by steve on 23/09/16.
  */
 public class OpenApiHelperTest {
+    OpenApiHelper helper = null;
     @Before
     public void testOAuth2Name() throws Exception {
         URL url = Resources.getResource("models/petstore.yaml");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
-        OpenApiHelper.init(spec);
-        Assert.assertEquals(1, OpenApiHelper.oauth2Names.size());
-        Assert.assertEquals("petstore_auth", OpenApiHelper.oauth2Names.get(0));
+        helper = new OpenApiHelper(spec);
+        Assert.assertEquals(1, helper.oauth2Names.size());
+        Assert.assertEquals("petstore_auth", helper.oauth2Names.get(0));
     }
 
     @After
     public void tearDown() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = OpenApiHelper.class.getDeclaredField("INSTANCE");
-        instance.setAccessible(true);
-        instance.set(null, null);
+        helper = null;
     }
 
     @Test
     public void testBasePath() {
-        Assert.assertEquals("/v1", OpenApiHelper.basePath);
+        Assert.assertEquals("/v1", helper.basePath);
     }
 
     @Test

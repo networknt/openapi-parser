@@ -14,11 +14,11 @@ public class EndpointTest {
     public void testJson() throws Exception {
         URL url = Resources.getResource("models/petstore.json");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
-        OpenApiHelper.init(spec);
+        OpenApiHelper helper = new OpenApiHelper(spec);
 
-        String basePath = OpenApiHelper.basePath;
+        String basePath = helper.basePath;
         Map<String, Object> endpoints = new HashMap<>();
-        Map<String, Path> paths = OpenApiHelper.openApi3.getPaths();
+        Map<String, Path> paths = helper.openApi3.getPaths();
         for (Map.Entry<String, Path> pathPair : paths.entrySet()) {
             String path = pathPair.getKey();
             for (Map.Entry<String, Operation> entries : pathPair.getValue().getOperations().entrySet()) {
@@ -30,7 +30,7 @@ public class EndpointTest {
                 if(securityRequirements != null) {
                     for(SecurityRequirement requirement: securityRequirements) {
                         SecurityParameter securityParameter = null;
-                        for(String oauth2Name: OpenApiHelper.oauth2Names) {
+                        for(String oauth2Name: helper.oauth2Names) {
                             securityParameter = requirement.getRequirement(oauth2Name);
                             if(securityParameter != null) break;
                         }
@@ -52,11 +52,11 @@ public class EndpointTest {
     public void testYaml() throws Exception {
         URL url = Resources.getResource("models/petstore.yaml");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
-        OpenApiHelper.init(spec);
+        OpenApiHelper helper = new OpenApiHelper(spec);
 
-        String basePath = OpenApiHelper.basePath;
+        String basePath = helper.basePath;
         Map<String, Object> endpoints = new HashMap<>();
-        Map<String, Path> paths = OpenApiHelper.openApi3.getPaths();
+        Map<String, Path> paths = helper.openApi3.getPaths();
         for (Map.Entry<String, Path> pathPair : paths.entrySet()) {
             String path = pathPair.getKey();
             for (Map.Entry<String, Operation> entries : pathPair.getValue().getOperations().entrySet()) {
@@ -68,7 +68,7 @@ public class EndpointTest {
                 if(securityRequirements != null) {
                     for(SecurityRequirement requirement: securityRequirements) {
                         SecurityParameter securityParameter = null;
-                        for(String oauth2Name: OpenApiHelper.oauth2Names) {
+                        for(String oauth2Name: helper.oauth2Names) {
                             securityParameter = requirement.getRequirement(oauth2Name);
                             if(securityParameter != null) break;
                         }
