@@ -38,17 +38,22 @@ import java.util.function.BiFunction;
  * This handler supports openapi.yml, openapi.yaml and openapi.json and above
  * is the loading sequence.
  *
+ * Due to the high demand, we have changed this class from singleton to normal
+ * class to support multiple instances of specifications in light-rest-4j.
+ *
+ * Some of our users want to use one light-gateway to support multiple backend
+ * services to reduce the resource utilization.
+ *
  * @author Steve Hu
  */
 public class OpenApiHelper {
     static final Logger logger = LoggerFactory.getLogger(OpenApiHelper.class);
 
-    public static OpenApi3 openApi3;
-    public static List<String> oauth2Names;
-    public static String basePath;
-    private static OpenApiHelper INSTANCE = null;
+    public OpenApi3 openApi3;
+    public List<String> oauth2Names;
+    public String basePath;
 
-    private OpenApiHelper(String spec) {
+    public OpenApiHelper(String spec) {
         try {
             openApi3 = (OpenApi3) new OpenApiParser().parse(spec, new URL("https://oas.lightapi.net/"));
         } catch (MalformedURLException e) {
@@ -64,25 +69,6 @@ public class OpenApiHelper {
 
     }
 
-    public static OpenApiHelper getInstance() {
-        if(INSTANCE == null) {
-            return null;
-        }
-        return INSTANCE;
-    }
-
-    public synchronized static OpenApiHelper init(String spec) {
-        if(INSTANCE != null) {
-            return INSTANCE;
-        }
-        INSTANCE = new OpenApiHelper(spec);
-        return INSTANCE;
-    }
-
-    public synchronized static OpenApiHelper reset(String spec) {
-        INSTANCE = new OpenApiHelper(spec);
-        return INSTANCE;
-    }
 
     /**
      * merge inject map to openapi map
@@ -117,10 +103,10 @@ public class OpenApiHelper {
     }
 
     public Optional<NormalisedPath> findMatchingApiPath(final NormalisedPath requestPath) {
-        if(OpenApiHelper.openApi3 != null) {
-            return OpenApiHelper.openApi3.getPaths().keySet()
+        if(openApi3 != null) {
+            return openApi3.getPaths().keySet()
                     .stream()
-                    .map(p -> (NormalisedPath) new ApiNormalisedPath(p))
+                    .map(p -> (NormalisedPath) new ApiNormalisedPath(p, basePath))
                     .filter(p -> pathMatches(requestPath, p))
                     .findFirst();
         } else {
@@ -163,6 +149,17 @@ public class OpenApiHelper {
             }
         }
         return basePath;
+    }
+
+    /**
+     * This method should only be called in the multiple specification use case to set the base path
+     * based on the OpenApiHandler config with the pathSpecMapping. For single specification use case,
+     * this method should be called to overwrite the basePath from the handler.yml configuration in
+     * case the openapi.yaml cannot derive the basePath from the server section.
+     * @param basePath string
+     */
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
     }
 
     private boolean pathMatches(final NormalisedPath requestPath, final NormalisedPath apiPath) {

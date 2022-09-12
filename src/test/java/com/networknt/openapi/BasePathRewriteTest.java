@@ -11,23 +11,22 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class BasePathRewriteTest {
+    OpenApiHelper helper = null;
     @Before
     public void testOAuth2Name() throws Exception {
         URL url = Resources.getResource("models/openapi-server-url-rewrite.yaml");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
-        OpenApiHelper.init(spec);
+        helper = new OpenApiHelper(spec);
     }
 
     @After
     public void tearDown() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = OpenApiHelper.class.getDeclaredField("INSTANCE");
-        instance.setAccessible(true);
-        instance.set(null, null);
+        helper = null;
     }
 
     @Test
     public void testBasePath() {
-        Assert.assertEquals("/namespace/application/v1", OpenApiHelper.basePath);
+        Assert.assertEquals("/namespace/application/v1", helper.basePath);
     }
 
     @Test
