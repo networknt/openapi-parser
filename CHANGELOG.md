@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.1.2](https://github.com/networknt/openapi-parser/tree/2.1.2) (2022-10-22)
+
+
+**Merged pull requests:**
+
+
+- fixes \#39 handle multiple schemas to support multiple specs in light-… [\#41](https://github.com/networknt/openapi-parser/pull/41) ([stevehu](https://github.com/stevehu))
 ## [2.1.1](https://github.com/networknt/openapi-parser/tree/2.1.1) (2022-04-26)
 
 
