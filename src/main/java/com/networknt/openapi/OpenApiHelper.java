@@ -74,6 +74,7 @@ public class OpenApiHelper {
      * merge inject map to openapi map
      * @param openapi {@link Map} openapi
      * @param inject {@link Map} openapi
+     * @return {@link Map} merged openapi
      */
     public static Map<String, Object> merge(Map<String, Object> openapi, Map<String, Object> inject) {
         if(openapi == null) {
