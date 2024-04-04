@@ -1,6 +1,6 @@
 # openapi-parser
 
-A light-weight, fast OpenAPI 3.0 parser and validator with minimum third party dependencies. 
+A light-weight, fast OpenAPI 3.0 parser and validator with minimum third party dependencies.
 
 [Stack Overflow](https://stackoverflow.com/questions/tagged/light-4j) |
 [Google Group](https://groups.google.com/forum/#!forum/light-4j) |
@@ -11,7 +11,7 @@ A light-weight, fast OpenAPI 3.0 parser and validator with minimum third party d
 [Contribution Guide](https://doc.networknt.com/contribute/) |
 
 It is based on the generated code from [KaiZen OpenAPI Parser](https://github.com/RepreZen/KaiZen-OpenApi-Parser) without
-dependency on javaparser-core, guava, commons-cli, commons-io, javax.mail and guice. 
+dependency on javaparser-core, guava, commons-cli, commons-io, javax.mail and guice.
 
 ### License
 

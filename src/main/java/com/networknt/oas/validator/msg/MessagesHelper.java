@@ -50,7 +50,7 @@ public class MessagesHelper {
 	 * The result is obtained by replacing each placeholder with the corresponding
 	 * argument's {@link #toString()} value (except that null arguments are rendered
 	 * as empty strings).
-	 * 
+	 *
 	 * @param message Messages
 	 * @param args Args
 	 * @param locale Locale

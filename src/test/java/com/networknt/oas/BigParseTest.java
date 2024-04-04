@@ -32,7 +32,7 @@ import com.google.common.base.Predicate;
 /**
  * Tests basic parser operation by loading a swagger spec and then verifying
  * that all values can be obtained reliably from the model
- * 
+ *
  * @author Andy Lowry
  *
  */

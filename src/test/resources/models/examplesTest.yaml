@@ -2,7 +2,7 @@ openapi: "3.0.0"
 info:
   title: Simple API overview
   version: v2
-paths:  
+paths:
   /v2:
     get:
       operationId: getVersionDetailsv2
@@ -12,7 +12,7 @@ paths:
           description: |-
             200 response
           content:
-            application/json: 
+            application/json:
               examples:
                 foo:
                   summary: First Example
@@ -20,17 +20,17 @@ paths:
                   value: {
                     "foo": "bar",
                     "person": {
-                      "name": "Paul"                      
+                      "name": "Paul"
                     }
                   }
         203:
           description: |-
             203 response
           content:
-            application/json: 
+            application/json:
               example: {
                 "foo": "bar",
                 "person": {
-                  "name": "Paul"                      
+                  "name": "Paul"
                 }
               }
