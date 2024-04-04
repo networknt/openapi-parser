@@ -75,13 +75,19 @@ public class OpenApiHelper {
      * @param openapi {@link Map} openapi
      * @param inject {@link Map} openapi
      */
-    public static void merge(Map<String, Object> openapi, Map<String, Object> inject) {
+    public static Map<String, Object> merge(Map<String, Object> openapi, Map<String, Object> inject) {
+        if(openapi == null) {
+            // in the case of light-gateway with multiple specs disabled, openapi is null,
+            // but we still need the validation for the admin endpoint access.
+            return inject;
+        }
         if (inject == null) {
-            return;
+            return openapi;
         }
         for (Map.Entry<String, Object> entry : inject.entrySet()) {
             openapi.merge(entry.getKey(), entry.getValue(), new Merger());
         }
+        return openapi;
     }
 
     // merge in case of map, add in case of list
