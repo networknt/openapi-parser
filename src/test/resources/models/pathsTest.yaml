@@ -9,7 +9,7 @@ paths:
       summary: List API versions
       responses:
         200:
-          description: Ok          
+          description: Ok
   /v2:
     get:
       operationId: getVersionDetailsv2

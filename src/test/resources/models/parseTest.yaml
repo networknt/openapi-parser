@@ -63,11 +63,11 @@ paths:
         explode: true
         allowReserved: true
         examples:
-          first: 
+          first:
             value: example
           second:
             value: 10
-          third: 
+          third:
             value: 5.5
         example: example
         content:
@@ -103,7 +103,6 @@ paths:
           text/plain:
             schema:
               title: title
-        required: true
       responses:
         default:
           description: description
@@ -120,7 +119,7 @@ paths:
             name:
               operationRef: operationRef
               operationId: operationId
-              parameters: 
+              parameters:
                 param1: xxxx
                 param2: yyyy
               description: description
@@ -129,7 +128,7 @@ paths:
           description: description
       callbacks:
         xxx:
-          expr1: 
+          expr1:
             summary: summary
             description: description
             get:
@@ -141,7 +140,7 @@ paths:
             get:
               operationId: operationid
         yyy:
-          expr1: 
+          expr1:
             summary: summary
             description: description
             get:
@@ -177,7 +176,7 @@ components:
       uniqueItems: true
       maxProperties: 30
       minProperties: 15
-      required: 
+      required:
         - x
         - "y"
         - z
@@ -208,7 +207,7 @@ components:
       format: format
       default: xyzzy
       nullable: true
-      discriminator: 
+      discriminator:
         propertyName: foo
         mapping:
           Foo: foo
@@ -230,12 +229,12 @@ components:
       title: title
       additionalProperties:
         type: integer
-  responses: 
+  responses:
     resp1:
       description: description
     resp2:
       description: description
-  parameters: 
+  parameters:
     param1:
       name: name
       in: in
@@ -243,11 +242,11 @@ components:
       name: name
       in: in
   examples:
-    example1: 
+    example1:
       value: null
-    example2: 
+    example2:
       value: xyzzy
-  requestBodies: 
+  requestBodies:
     reqBody1:
       description: description
     reqBody2:
@@ -257,7 +256,7 @@ components:
       description: description
     header2:
       description: description
-  securitySchemes: 
+  securitySchemes:
     scheme1:
       type: apiKey
       description: description
@@ -274,7 +273,7 @@ components:
       in: query
       scheme: http
       bearerFormat: bearerFormat
-      flow: 
+      flow:
         implicit:
           authorizationUrl: authorizationUrl
           tokenUrl: tokenUrl
@@ -314,14 +313,14 @@ components:
         x-foo: foo
       openIdConnectUrl: openIdConnect
       x-foo: foo
-  links: 
-    link1: 
+  links:
+    link1:
       operationRef: operationRef
     link2:
       operationRef: operationRef
   callbacks:
     cb1:
-      expr1: 
+      expr1:
         summary: summary
       expr2:
         summary: summary
