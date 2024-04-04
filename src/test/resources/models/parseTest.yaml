@@ -15,36 +15,36 @@ info:
   version: version
   x-foo: foo
 servers:
-- url: url
-  description: description
-  variables:
-    var1:
-      enum:
-      - string
-      - number
-      default: string
-      description: description
-      x-foo: foo
-    var2:
-      enum:
-      - string
-      - number
-      default: string
-      description: description
+  - url: url
+    description: description
+    variables:
+      var1:
+        enum:
+          - string
+          - number
+        default: string
+        description: description
+        x-foo: foo
+      var2:
+        enum:
+          - string
+          - number
+        default: string
+        description: description
+        x-foo: foo
       x-foo: foo
     x-foo: foo
-  x-foo: foo
-- url: url2
-  description: description2
-  x-foo: foo
+  - url: url2
+    description: description2
+    x-foo: foo
 paths:
   /foo:
     summary: summary
     description: description
     get:
       tags:
-      - foo
-      - bar
+        - foo
+        - bar
       summary: summary
       description: description
       externalDocs:
@@ -53,49 +53,48 @@ paths:
         x-foo: foo
       operationId: operationId
       parameters:
-      - name: name
-        in: in
-        description: description
-        required: true
-        deprecated: false
-        allowEmptyValue: true
-        style: style
-        explode: true
-        allowReserved: true
-        examples:
-          first:
-            value: example
-          second:
-            value: 10
-          third:
-            value: 5.5
-        example: example
-        content:
-          application/json:
-            schema:
-              title: title
-            examples:
-              x:
-                value: x
-              y:
-                value: "y"
-              z:
-                value: z
-            example: 10
-            encoding:
-              fooEncoding:
-                contentType: contentType
-                headers:
-                  foo: foo
-                  bar: bar
-                style: style
-                explode: true
-                x-foo: foo
-            x-foo: foo
-        x-foo: foo
+        - name: name
+          in: in
+          description: description
+          required: true
+          deprecated: false
+          allowEmptyValue: true
+          style: style
+          explode: true
+          allowReserved: true
+          examples:
+            first:
+              value: example
+            second:
+              value: 10
+            third:
+              value: 5.5
+          example: example
+          content:
+            application/json:
+              schema:
+                title: title
+              examples:
+                x:
+                  value: x
+                y:
+                  value: "y"
+                z:
+                  value: z
+              example: 10
+              encoding:
+                fooEncoding:
+                  contentType: contentType
+                  headers:
+                    foo: foo
+                    bar: bar
+                  style: style
+                  explode: true
+                  x-foo: foo
+              x-foo: foo
+          x-foo: foo
       requestBody:
         description: description
-        required: ture
         content:
           application/json:
             schema:
@@ -103,6 +102,7 @@ paths:
           text/plain:
             schema:
               title: title
+        required: true
       responses:
         default:
           description: description
