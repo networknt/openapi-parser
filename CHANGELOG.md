@@ -1,5 +1,18 @@
 # Change Log
 
+## [2.1.34](https://github.com/networknt/openapi-parser/tree/2.1.34) (2024-06-22)
+
+
+**Merged pull requests:**
+
+
+- fixes \#52 Fix the parseTest.yaml in the right position to remove the … [\#53](https://github.com/networknt/openapi-parser/pull/53) ([stevehu](https://github.com/stevehu))
+- fixes \#50 add pre-commit hook configuration [\#51](https://github.com/networknt/openapi-parser/pull/51) ([stevehu](https://github.com/stevehu))
+- fixes \#48 fix javadoc issue for the merge [\#49](https://github.com/networknt/openapi-parser/pull/49) ([stevehu](https://github.com/stevehu))
+- Bump guava from 29.0-jre to 32.0.0-jre [\#44](https://github.com/networknt/openapi-parser/pull/44) ([dependabot](https://github.com/apps/dependabot))
+- fixes \#46 update openapi and inject merge to return inject if openapi… [\#47](https://github.com/networknt/openapi-parser/pull/47) ([stevehu](https://github.com/stevehu))
+
+
 ## [2.1.33](https://github.com/networknt/openapi-parser/tree/2.1.33) (2024-03-31)
 
 
