@@ -564,6 +564,23 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_setScalar("additionalProperties", additionalProperties, Boolean.class);
 	}
 
+	// UnevaluatedProperties
+	@Override
+	public Boolean getUnevaluatedProperties() {
+		return _get("unevaluatedProperties", Boolean.class);
+	}
+
+	@Override
+	public boolean isUnevaluatedProperties() {
+		Boolean bool = _get("unevaluatedProperties", Boolean.class);
+		return bool != null ? bool : false;
+	}
+
+	@Override
+	public void setUnevaluatedProperties(Boolean additionalProperties) {
+		_setScalar("unevaluatedProperties", additionalProperties, Boolean.class);
+	}
+
 	// Description
 	@Override
 	public String getDescription() {
@@ -867,6 +884,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_createMap("properties", "properties", SchemaImpl.factory, null);
 		_createScalar("additionalPropertiesSchema", "additionalProperties", SchemaImpl.factory);
 		_createScalar("additionalProperties", "additionalProperties", BooleanOverlay.factory);
+		_createScalar("unevaluatedProperties", "unevaluatedProperties", BooleanOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("format", "format", StringOverlay.factory);
 		_createScalar("defaultValue", "default", ObjectOverlay.factory);
