@@ -241,6 +241,13 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	void setAdditionalProperties(Boolean additionalProperties);
 
+	// UnevaluatedProperties
+	Boolean getUnevaluatedProperties();
+
+	boolean isUnevaluatedProperties();
+
+	void setUnevaluatedProperties(Boolean additionalProperties);
+
 	// Description
 	String getDescription();
 
