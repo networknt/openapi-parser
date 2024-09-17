@@ -1,10 +1,11 @@
 package com.networknt.oas.validator.mail;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class InternetAddress implements Cloneable {
+public class InternetAddress implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -5817656766382648751L;
 
