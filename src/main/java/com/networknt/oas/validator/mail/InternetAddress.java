@@ -58,15 +58,11 @@ public class InternetAddress implements Cloneable {
 						+ JAVAX_INTERNETADDRESS + " can be loaded").initCause(cnfe2);
 			}
 		} finally {
-			System.err.println("x7");
 			if (iacJakarta != null) {
-				System.err.println("x8");
 				internetAddress_Clazz = iacJakarta;
 			} else if (iacJavax != null) {
-				System.err.println("x9");
 				internetAddress_Clazz = iacJavax;
 			} else {
-				System.err.println("x10");
 				throw new ExceptionInInitializerError("FATAL: Neither " + JAKARTA_INTERNETADDRESS + " nor "
 						+ JAVAX_INTERNETADDRESS + " have been assigned");
 			}

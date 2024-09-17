@@ -10,57 +10,27 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import static com.networknt.oas.validator.BaseValidationMessages.BadEmail;
-import static com.networknt.oas.validator.BaseValidationMessages.BadPattern;
-import static com.networknt.oas.validator.BaseValidationMessages.BadUrl;
-import static com.networknt.oas.validator.BaseValidationMessages.DuplicateValue;
-import static com.networknt.oas.validator.BaseValidationMessages.EmptyList;
-import static com.networknt.oas.validator.BaseValidationMessages.MissingField;
-import static com.networknt.oas.validator.BaseValidationMessages.NumberConstraint;
-import static com.networknt.oas.validator.BaseValidationMessages.PatternMatchFail;
-import static com.networknt.oas.validator.BaseValidationMessages.WrongTypeJson;
-import static com.networknt.oas.validator.msg.Messages.msg;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.*;
+import com.networknt.jsonoverlay.*;
+
+import com.networknt.oas.validator.mail.AddressException;
+import com.networknt.oas.validator.mail.InternetAddress;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.BigIntegerNode;
-import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.fasterxml.jackson.databind.node.IntNode;
-import com.fasterxml.jackson.databind.node.NumericNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ShortNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.networknt.jsonoverlay.BooleanOverlay;
-import com.networknt.jsonoverlay.IntegerOverlay;
-import com.networknt.jsonoverlay.JsonOverlay;
-import com.networknt.jsonoverlay.ListOverlay;
-import com.networknt.jsonoverlay.MapOverlay;
-import com.networknt.jsonoverlay.NumberOverlay;
-import com.networknt.jsonoverlay.ObjectOverlay;
-import com.networknt.jsonoverlay.Overlay;
-import com.networknt.jsonoverlay.PrimitiveOverlay;
-import com.networknt.jsonoverlay.PropertiesOverlay;
-import com.networknt.jsonoverlay.StringOverlay;
-import com.networknt.oas.validator.mail.AddressException;
-import com.networknt.oas.validator.mail.InternetAddress;
+import static com.networknt.oas.validator.BaseValidationMessages.*;
+import static com.networknt.oas.validator.msg.Messages.msg;
 
 public abstract class ValidatorBase<V> implements Validator<V> {
 	protected Overlay<V> value;
