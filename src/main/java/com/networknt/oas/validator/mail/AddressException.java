@@ -35,8 +35,8 @@ public class AddressException extends Exception {
 						true, Thread.currentThread().getContextClassLoader());
 				aecJavax = aec;
 			} catch (ClassNotFoundException cnfe2) {
-				throw new ExceptionInInitializerError("FATAL: Neither " + JAKARTA_ADDRESSEXCEPTION + " nor "
-						+ JAVAX_ADDRESSEXCEPTION + " can be loaded");
+				throw (ExceptionInInitializerError) new ExceptionInInitializerError("FATAL: Neither " + JAKARTA_ADDRESSEXCEPTION + " nor "
+						+ JAVAX_ADDRESSEXCEPTION + " can be loaded").initCause(cnfe2);
 			}
 		} finally {
 			if (aecJakarta != null) {
