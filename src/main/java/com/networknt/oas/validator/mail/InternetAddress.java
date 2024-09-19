@@ -39,8 +39,9 @@ public class InternetAddress implements Serializable, Cloneable {
 						Thread.currentThread().getContextClassLoader());
 				iacJavax = iac;
 			} catch (ClassNotFoundException cnfe2) {
-				throw (ExceptionInInitializerError) new ExceptionInInitializerError("FATAL: Neither " + JAKARTA_INTERNETADDRESS + " nor "
-						+ JAVAX_INTERNETADDRESS + " can be loaded").initCause(cnfe2);
+				throw (ExceptionInInitializerError) new ExceptionInInitializerError("FATAL: Neither "
+						+ JAKARTA_INTERNETADDRESS + " nor " + JAVAX_INTERNETADDRESS + " can be loaded")
+						.initCause(cnfe2);
 			}
 		} finally {
 			if (iacJakarta != null) {
@@ -238,6 +239,30 @@ public class InternetAddress implements Serializable, Cloneable {
 		}
 	}
 
+	public void validate() throws AddressException {
+		try {
+			validate_Method.invoke(delegate);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new IllegalStateException("FATAL: Unable to call validate()", e);
+		}
+	}
+
+	public boolean isGroup() {
+		try {
+			return (Boolean) isGroup_Method.invoke(delegate);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new IllegalStateException("FATAL: Unable to call isGroup()", e);
+		}
+	}
+
+	public InternetAddress[] getGroup(boolean strict) throws AddressException {
+		try {
+			return (InternetAddress[]) getGroup_Method.invoke(delegate, strict);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new IllegalStateException("FATAL: Unable to call isGroup()", e);
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		return delegate.hashCode();
@@ -264,20 +289,6 @@ public class InternetAddress implements Serializable, Cloneable {
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			throw new IllegalStateException("FATAL: Unable to call finalize()", e);
 		}
-	}
-
-	public void validate() throws AddressException {
-		// super.validate();
-	}
-
-	public boolean isGroup() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public InternetAddress[] getGroup(boolean strict) throws AddressException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
