@@ -14,8 +14,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import com.networknt.jsonoverlay.*;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import com.networknt.oas.validator.mail.AddressException;
+import com.networknt.oas.validator.mail.InternetAddress;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
