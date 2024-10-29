@@ -273,7 +273,7 @@ components:
       in: query
       scheme: http
       bearerFormat: bearerFormat
-      flows:
+      flow:
         implicit:
           authorizationUrl: authorizationUrl
           tokenUrl: tokenUrl
