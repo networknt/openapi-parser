@@ -34,7 +34,7 @@ public class ExamplesTest extends Assert {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-specification";
 	private static final String EXAMPLES_BRANCH = "main";
-	private static final String EXAMPLES_ROOT = "examples/v3.0";
+	private static final String EXAMPLES_ROOT = "tests/v3.0/pass";
 
 	@Parameters(name = "{index}: {1}")
 	public static Collection<Object[]> findExamples() throws IOException {
