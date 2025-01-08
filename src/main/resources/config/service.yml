@@ -23,7 +23,7 @@ singletons:
 - com.networknt.oas.validator.Validator<com.networknt.oas.model.MediaType>:
   - com.networknt.oas.validator.impl.MediaTypeValidator
 - com.networknt.oas.validator.Validator<com.networknt.oas.model.OAuthFlow>:
-  - com.networknt.oas.validator.impl.OAuthFlowValidator
+  - com.networknt.oas.validator.impl.ClientCredentialsOAuthFlowValidator
 - com.networknt.oas.validator.Validator<com.networknt.oas.model.OpenApi3>:
   - com.networknt.oas.validator.impl.OpenApi3Validator
 - com.networknt.oas.validator.Validator<com.networknt.oas.model.RequestBody>:
