@@ -13,9 +13,10 @@ package com.networknt.oas.validator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import com.networknt.jsonoverlay.*;
+import com.sanctionco.jmail.EmailValidator;
+import com.sanctionco.jmail.FailureReason;
+import com.sanctionco.jmail.JMail;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -161,12 +162,11 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	private void checkEmail(Overlay<String> overlay) {
 		String email = overlay.get();
-		try {
-			InternetAddress addr = new InternetAddress();
-			addr.setAddress(email);
-			addr.validate();
-		} catch (AddressException e) {
-			results.addError(msg(BadEmail, email, e.toString()), overlay);
+		EmailValidator validator = JMail.strictValidator();
+		FailureReason failureReason = validator.validate(email).getFailureReason();
+		if (!FailureReason.NONE.equals(failureReason)) {
+			results.addError(msg(BadEmail, email, failureReason.toString() + " [" + failureReason.ordinal() + "]"),
+					overlay);
 		}
 	}
 
