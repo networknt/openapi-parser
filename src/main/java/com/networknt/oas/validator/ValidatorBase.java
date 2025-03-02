@@ -13,9 +13,6 @@ package com.networknt.oas.validator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import com.networknt.jsonoverlay.*;
-import com.sanctionco.jmail.EmailValidator;
-import com.sanctionco.jmail.FailureReason;
-import com.sanctionco.jmail.JMail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -162,11 +159,10 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	private void checkEmail(Overlay<String> overlay) {
 		String email = overlay.get();
-		EmailValidator validator = JMail.strictValidator();
-		FailureReason failureReason = validator.validate(email).getFailureReason();
-		if (!FailureReason.NONE.equals(failureReason)) {
-			results.addError(msg(BadEmail, email, failureReason.toString() + " [" + failureReason.ordinal() + "]"),
-					overlay);
+		EmailValidator validator = new IPv6AwareEmailValidator(true, true);
+		boolean valid = validator.isValid(email);
+		if (!valid) {
+			results.addError(msg(BadEmail, email, "invalid email"), overlay);
 		}
 	}
 
