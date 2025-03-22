@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.2.1](https://github.com/networknt/openapi-parser/tree/2.2.1) (2025-03-22)
+
+
+**Merged pull requests:**
+
+
+- fixes \#67 remove the email validator dependency [\#68](https://github.com/networknt/openapi-parser/pull/68) ([stevehu](https://github.com/stevehu))
+- Change E-Mail validator to "com.sanctionco.jmail:jmail" (issue https://github.com/networknt/openapi-parser/issues/64) [\#65](https://github.com/networknt/openapi-parser/pull/65) ([AndreasALoew](https://github.com/AndreasALoew))
+
+
 ## [2.2.0](https://github.com/networknt/openapi-parser/tree/2.2.0) (2025-02-12)
 
 
