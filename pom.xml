@@ -103,6 +103,7 @@
         <version.javax.annotation>1.3.2</version.javax.annotation>
         <version.javadoc-packagelist-plugin>1.0.0</version.javadoc-packagelist-plugin>
         <version.maven-javadoc>3.4.1</version.maven-javadoc>
+        <version.nexus-staging-maven>1.7.0</version.nexus-staging-maven>
     </properties>
 
 
@@ -201,7 +202,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
+                <version>${version.nexus-staging-maven}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
