@@ -42,7 +42,7 @@ public class SimpleSerializationTest extends Assert {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-Specification";
 	private static final String EXAMPLES_BRANCH = "main";
-	private static final String EXAMPLES_ROOT = "tests/v3.0/pass";
+	private static final String EXAMPLES_ROOT = "tests/md2html";
 
 	private static ObjectMapper mapper = new ObjectMapper();
 	private static ObjectMapper yamlMapper = new YAMLMapper();
