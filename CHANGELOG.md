@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.2.2](https://github.com/networknt/openapi-parser/tree/2.2.2) (2025-06-05)
+
+
+**Merged pull requests:**
+
+
+- fixes \#69 update url of github api url for tests [\#70](https://github.com/networknt/openapi-parser/pull/70) ([stevehu](https://github.com/stevehu))
 ## [2.2.1](https://github.com/networknt/openapi-parser/tree/2.2.1) (2025-03-22)
 
 
