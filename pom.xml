@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.networknt</groupId>
     <artifactId>openapi-parser</artifactId>
-    <version>2.3.3-SNAPSHOT</version>
+    <version>2.3.3</version>
     <description>A light-weight, fast OpenAPI 3.0 parser and validator</description>
     <url>https://github.com/networknt/openapi-parser</url>
     <name>OpenAPIParser</name>
@@ -96,7 +96,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.light-4j>2.3.3-SNAPSHOT</version.light-4j>
+        <version.light-4j>2.3.3</version.light-4j>
         <version.jackson>2.18.3</version.jackson>
         <version.slf4j>2.0.17</version.slf4j>
         <version.logback>1.5.26</version.logback>
