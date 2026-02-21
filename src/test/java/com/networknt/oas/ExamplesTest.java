@@ -14,12 +14,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.networknt.jsonoverlay.JsonLoader;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.validator.ValidationResults.ValidationItem;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 
@@ -29,15 +25,15 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-@RunWith(Parameterized.class)
-public class ExamplesTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class ExamplesTest {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-specification";
 	private static final String EXAMPLES_BRANCH = "main";
 	private static final String EXAMPLES_ROOT = "tests/md2html";
 
-	@Parameters(name = "{index}: {1}")
-	public static Collection<Object[]> findExamples() throws IOException {
+	private static Collection<Object[]> findExamples() throws IOException {
 		Collection<Object[]> examples = Lists.newArrayList();
 		Deque<URL> dirs = Queues.newArrayDeque();
 		String auth = System.getenv("GITHUB_AUTH") != null ? System.getenv("GITHUB_AUTH") + "@" : "";
@@ -62,20 +58,19 @@ public class ExamplesTest extends Assert {
 		return examples;
 	}
 
-	@Parameter
-	public URL exampleUrl;
-
-	@Parameter(1)
-	public String fileName;
-
 	@Test
 	public void exampleCanBeParsed() throws Exception {
-		if (!exampleUrl.toString().contains("callback-example")) {
-			OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
-			for (ValidationItem item : model.getValidationItems()) {
-				System.out.println(item);
+		Collection<Object[]> examples = findExamples();
+		Assumptions.assumeFalse(examples.isEmpty(), "No examples found (GITHUB_AUTH may not be set)");
+		for (Object[] example : examples) {
+			URL exampleUrl = (URL) example[0];
+			if (!exampleUrl.toString().contains("callback-example")) {
+				OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
+				for (ValidationItem item : model.getValidationItems()) {
+					System.out.println(item);
+				}
+				assertTrue(model.isValid(), "Example was not valid: " + exampleUrl);
 			}
-			assertTrue("Example was not valid: " + exampleUrl, model.isValid());
 		}
 	}
 

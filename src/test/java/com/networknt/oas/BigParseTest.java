@@ -16,18 +16,17 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.networknt.jsonoverlay.JsonOverlay;
 import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.OpenApi3;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.yaml.snakeyaml.Yaml;
 
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Stream;
 import com.google.common.base.Predicate;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests basic parser operation by loading a swagger spec and then verifying
@@ -37,19 +36,15 @@ import com.google.common.base.Predicate;
  *
  */
 
-@RunWith(Parameterized.class)
-public class BigParseTest extends Assert {
+public class BigParseTest {
 
-	@Parameters
-	public static Collection<Object[]> resources() {
-		return Arrays.asList(new Object[][] { new URL[] { BigParseTest.class.getResource("/models/parseTest.yaml") } });
+	public static Stream<URL> resources() {
+		return Stream.of(BigParseTest.class.getResource("/models/parseTest.yaml"));
 	}
 
-	@Parameter
-	public URL modelUrl;
-
-	@Test
-	public void test() throws Exception {
+	@ParameterizedTest
+	@MethodSource("resources")
+	public void test(URL modelUrl) throws Exception {
 		Object parsedYaml = new Yaml().load(modelUrl.openStream());
 		JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
 		final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl, false);
@@ -65,11 +60,11 @@ public class BigParseTest extends Assert {
 				@SuppressWarnings("unchecked")
                 JsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
 				Object value = overlay != null ? Overlay.get(overlay) : null;
-				assertNotNull("No overlay object found for path: " + path, overlay);
+				assertNotNull(overlay, "No overlay object found for path: " + path);
 				Object fromJson = getValue(node);
 				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,
 						value);
-				assertEquals(msg, fromJson, value);
+				assertEquals(fromJson, value, msg);
 			}
 		};
 		JsonTreeWalker.walkTree(tree, valueNodePredicate, valueChecker);

@@ -21,13 +21,9 @@ import com.networknt.jsonoverlay.SerializationOptions.Option;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.Schema;
 import com.networknt.oas.model.impl.OpenApi3Impl;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -37,8 +33,9 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-@RunWith(Enclosed.class)
-public class SimpleSerializationTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class SimpleSerializationTest {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-Specification";
 	private static final String EXAMPLES_BRANCH = "main";
@@ -47,10 +44,10 @@ public class SimpleSerializationTest extends Assert {
 	private static ObjectMapper mapper = new ObjectMapper();
 	private static ObjectMapper yamlMapper = new YAMLMapper();
 
-	@RunWith(Parameterized.class)
-	public static class ParameterizedTests extends Assert {
-		@Parameters(name = "{index}: {1}")
-		public static Collection<Object[]> findExamples() throws IOException {
+	@Nested
+	public class ParameterizedTests {
+
+		private static Collection<Object[]> findExamples() throws IOException {
 			Collection<Object[]> examples = Lists.newArrayList();
 			Deque<URL> dirs = Queues.newArrayDeque();
 			String auth = System.getenv("GITHUB_AUTH") != null ? System.getenv("GITHUB_AUTH") + "@" : "";
@@ -75,25 +72,25 @@ public class SimpleSerializationTest extends Assert {
 			return examples;
 		}
 
-		@Parameter
-		public URL exampleUrl;
-
-		@Parameter(1)
-		public String fileName;
-
 		@Test
-		public void serializeExample() throws Exception {
-			if (!exampleUrl.toString().contains("callback-example")) {
-				OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
-				JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
-				JsonNode expected = yamlMapper.readTree(exampleUrl);
-				JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
-						JSONCompareMode.STRICT);
+		public void serializeExamples() throws Exception {
+			Collection<Object[]> examples = findExamples();
+			Assumptions.assumeFalse(examples.isEmpty(), "No examples found (GITHUB_AUTH may not be set)");
+			for (Object[] example : examples) {
+				URL exampleUrl = (URL) example[0];
+				if (!exampleUrl.toString().contains("callback-example")) {
+					OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
+					JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
+					JsonNode expected = yamlMapper.readTree(exampleUrl);
+					JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
+							JSONCompareMode.STRICT);
+				}
 			}
 		}
 	}
 
-	public static class NonParameterizedTests {
+	@Nested
+	public class NonParameterizedTests {
 
 		@Test
 		public void toJsonNoticesChanges() throws Exception {

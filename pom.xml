@@ -100,7 +100,7 @@
         <version.jackson>2.18.3</version.jackson>
         <version.slf4j>2.0.17</version.slf4j>
         <version.logback>1.5.26</version.logback>
-        <version.junit>4.13.2</version.junit>
+        <version.junit>5.11.4</version.junit>
         <version.jsonassert>1.5.0</version.jsonassert>
         <version.guava>33.4.8-jre</version.guava>
         <version.javax.annotation>1.3.2</version.javax.annotation>
@@ -149,8 +149,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
@@ -241,14 +241,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.19.1</version>
-                    </dependency>
-                </dependencies>
+                <version>3.5.2</version>
             </plugin>
 
 
@@ -285,7 +278,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>3.5.2</version>
             </plugin>
         </plugins>
     </reporting>

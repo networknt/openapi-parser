@@ -11,9 +11,9 @@
 package com.networknt.oas;
 
 import com.networknt.oas.model.OpenApi3;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CircularTest {
     @Test

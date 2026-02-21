@@ -2,7 +2,7 @@ package com.networknt.openapi;
 
 import com.google.common.io.Resources;
 import com.networknt.oas.model.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.util.*;

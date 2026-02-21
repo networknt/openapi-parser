@@ -17,39 +17,39 @@
 package com.networknt.openapi;
 
 import com.google.common.io.Resources;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by steve on 23/09/16.
  */
 public class OpenApiHelperTest {
     OpenApiHelper helper = null;
-    @Before
+    @BeforeEach
     public void testOAuth2Name() throws Exception {
         URL url = Resources.getResource("models/petstore.yaml");
         String spec = new Scanner(url.openStream(), "UTF-8").useDelimiter("\\A").next();
         helper = new OpenApiHelper(spec);
-        Assert.assertEquals(1, helper.oauth2Names.size());
-        Assert.assertEquals("petstore_auth", helper.oauth2Names.get(0));
+        Assertions.assertEquals(1, helper.oauth2Names.size());
+        Assertions.assertEquals("petstore_auth", helper.oauth2Names.get(0));
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws NoSuchFieldException, IllegalAccessException {
         helper = null;
     }
 
     @Test
     public void testBasePath() {
-        Assert.assertEquals("/v1", helper.basePath);
+        Assertions.assertEquals("/v1", helper.basePath);
     }
 
     @Test

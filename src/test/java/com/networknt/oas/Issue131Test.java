@@ -13,12 +13,13 @@ package com.networknt.oas;
 import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.model.Schema;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.io.Resources;
 
-public class Issue131Test extends Assert {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class Issue131Test {
 
 	@Test
 	public void testSchemaRefs() throws Exception {
@@ -29,7 +30,7 @@ public class Issue131Test extends Assert {
 		Schema viaMoreData = model.getSchema("MoreData").getProperty("master");
 		Schema viaPath = model.getPath("/sampledatamanagement/v1/sampledata/custom/{id}").getGet().getResponse("200")
 				.getContentMediaType("application/json").getSchema();
-		assertTrue(direct == viaMoreData);
-		assertTrue(direct == viaPath);
+		assertSame(direct, viaMoreData);
+		assertSame(direct, viaPath);
 	}
 }

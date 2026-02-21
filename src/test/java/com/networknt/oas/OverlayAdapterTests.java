@@ -19,24 +19,25 @@ import com.networknt.jsonoverlay.MapOverlay;
 import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.*;
 import com.networknt.oas.model.impl.PathImpl;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class OverlayAdapterTests extends Assert {
+public class OverlayAdapterTests {
 
 	private OpenApi3 model;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		this.model = parseLocalModel("linksTest");
 	}
 
 	@Test
 	public void testPropertiesAdapter() {
-		assertTrue(model == Overlay.of(model).get());
-		assertTrue(model.getInfo() == new Overlay<Info>(model.getInfo()).get());
+		assertSame(model, Overlay.of(model).get());
+		assertSame(model.getInfo(), new Overlay<Info>(model.getInfo()).get());
 	}
 
 	@Test
@@ -44,7 +45,7 @@ public class OverlayAdapterTests extends Assert {
 		assertEquals(model.getOpenApi(), Overlay.of(model, "openApi", String.class).get());
 		@SuppressWarnings("unchecked")
 		Map<String, PathImpl> pathsMapOverlay = Overlay.of(model, "paths", Map.class).get();
-		assertTrue(model.getPath("/2.0/users/{username}") == pathsMapOverlay.get("/2.0/users/{username}"));
+		assertSame(model.getPath("/2.0/users/{username}"), pathsMapOverlay.get("/2.0/users/{username}"));
 	}
 
 	@Test
@@ -55,7 +56,7 @@ public class OverlayAdapterTests extends Assert {
 		MapOverlay<Path> castMapOverlay = Overlay.getMapOverlay(mapOverlay);
 		assertTrue(castMapOverlay instanceof MapOverlay);
 		Path path = Overlay.of(castMapOverlay, "/2.0/users/{username}").get();
-		assertTrue(model.getPath("/2.0/users/{username}") == path);
+		assertSame(model.getPath("/2.0/users/{username}"), path);
 	}
 
 	@Test
@@ -67,7 +68,7 @@ public class OverlayAdapterTests extends Assert {
 		ListOverlay<Parameter> castListOverlay = Overlay.getListOverlay(listOverlay);
 		assertTrue(castListOverlay instanceof ListOverlay);
 		Parameter param = Overlay.of(castListOverlay, 1).get();
-		assertTrue(method.getParameter(1) == param);
+		assertSame(method.getParameter(1), param);
 	}
 
 	@Test

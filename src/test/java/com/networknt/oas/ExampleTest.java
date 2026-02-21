@@ -14,13 +14,13 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
 import com.networknt.oas.model.Example;
 import com.networknt.oas.model.OpenApi3;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExampleTest {
 
@@ -30,7 +30,7 @@ public class ExampleTest {
 			"person", ImmutableMap.<String, Object>of( //
 					"name", "Paul"));
 
-	@BeforeClass
+	@BeforeAll
 	public static void beforeClass() throws Exception {
 		model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/examplesTest.yaml"), true);
 	}
