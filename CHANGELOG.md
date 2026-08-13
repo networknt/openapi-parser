@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.3.7](https://github.com/networknt/openapi-parser/tree/2.3.7) (2026-08-12)
+
+
+**Merged pull requests:**
+
+
 ## [2.3.6](https://github.com/networknt/openapi-parser/tree/2.3.6) (2026-08-05)
 
 
