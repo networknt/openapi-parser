@@ -39,7 +39,7 @@ public class SimpleSerializationTest {
 
 	private static final String SPEC_REPO = "OAI/OpenAPI-Specification";
 	private static final String EXAMPLES_BRANCH = "main";
-	private static final String EXAMPLES_ROOT = "tests/md2html";
+	private static final String EXAMPLES_ROOT = "_archive_/schemas/v3.0/pass";
 
 	private static ObjectMapper mapper = new ObjectMapper();
 	private static ObjectMapper yamlMapper = new YAMLMapper();
