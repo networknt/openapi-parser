@@ -92,6 +92,7 @@
     </pluginRepositories>
 
     <properties>
+    <version.central-publishing-maven>0.11.0</version.central-publishing-maven>
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -318,7 +319,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.7.0</version>
+                        <version>${version.central-publishing-maven}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
