@@ -1,5 +1,22 @@
 # Change Log
 
+## [2.4.0](https://github.com/networknt/openapi-parser/tree/2.4.0) (2026-10-07)
+
+**Commits:**
+
+- upgrade to version 2.4.0 before release in master branch ([f6da2cd](https://github.com/networknt/openapi-parser/commit/f6da2cddaf0ec2588637bb3586a68b07de3ebd9c)) (by Steve Hu)
+- upgrade maven-javadoc to 3.12.0 from 3.4.1 ([ff7cafd](https://github.com/networknt/openapi-parser/commit/ff7cafda325b533fb6983f19c7ebd10fac579ab6)) (by Steve Hu)
+- upgrade slf4j to 2.0.20 from 2.0.19 ([a5a5b34](https://github.com/networknt/openapi-parser/commit/a5a5b34b262414809f69734e253f5889b8616ae4)) (by Steve Hu)
+- upgrade jackson to 2.22.3 from 2.22.1 ([ecdc9ce](https://github.com/networknt/openapi-parser/commit/ecdc9ce94d806075c2e2071cf65e46f37628818b)) (by Steve Hu)
+- upgrade to version 2.3.8-SNAPSHOT after release in master branch ([1121815](https://github.com/networknt/openapi-parser/commit/11218156eb9733567ec794f132b35f80724f75a9)) (by Steve Hu)
+- upgrade slf4j to 2.0.19 from 2.0.17 ([128491e](https://github.com/networknt/openapi-parser/commit/128491eef9ea8040aa8541518fafe5cbfaca51bb)) (by Steve Hu)
+- upgrade maven-surefire to 3.6.0 ([f090ba5](https://github.com/networknt/openapi-parser/commit/f090ba5209a7b14d0d920dd6fe16fb76ca394a5a)) (by Steve Hu)
+- upgrade logback to 1.6.3 from 1.5.37 ([f7c9234](https://github.com/networknt/openapi-parser/commit/f7c9234e71aa49799bbe1bed3880d797d1183195)) (by Steve Hu)
+- Remove obsolete javadoc-packagelist-maven-plugin workaround ([8d27648](https://github.com/networknt/openapi-parser/commit/8d27648b861eb433c70cc7fae5a6327d54403b9a)) (by Steve Hu)
+- upgrade central-publishing-maven to 0.11.0 from 0.7.0 ([63b8722](https://github.com/networknt/openapi-parser/commit/63b8722a7ebb20268b0771157a9c3cb48aef4e83)) (by Steve Hu)
+- fixes #77 fix unstable upstream dependencies for specs ([d24768d](https://github.com/networknt/openapi-parser/commit/d24768d5a5656a1d13ab386402bbd6ffbd4cb429)) (by Steve Hu)
+- upgrade to version 2.3.8-SNAPSHOT after release in master branch ([898a9db](https://github.com/networknt/openapi-parser/commit/898a9dbe4b34b9c4ab3888e7b54c6ca0e0cad711)) (by Steve Hu)
+
 ## [2.3.7](https://github.com/networknt/openapi-parser/tree/2.3.7) (2026-08-12)
 
 
