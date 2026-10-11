@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.4.1](https://github.com/networknt/openapi-parser/tree/2.4.1) (2026-10-11)
+
+**Commits:**
+
+- upgrade to version 2.4.1 before release in master branch ([ed78857](https://github.com/networknt/openapi-parser/commit/ed7885754e7091caf7f7ec1296527a7f404db2a1)) (by Steve Hu)
+- upgrade maven-gpg to 3.2.8 from 3.2.7 ([4ef75bd](https://github.com/networknt/openapi-parser/commit/4ef75bd63ab1f562aa208395546b748b70ad1e8b)) (by Steve Hu)
+- build: upgrade JUnit to 6.1.3 ([ed190fc](https://github.com/networknt/openapi-parser/commit/ed190fc8ca4ddd36e428bd435daefca18c8d953e)) (by Steve Hu)
+- upgrade logback to 1.6.5 from 1.6.3 ([279a696](https://github.com/networknt/openapi-parser/commit/279a69665064e34bde0c9819cddd974c9bbe3af5)) (by Steve Hu)
+- upgrade to version 2.4.1-SNAPSHOT after release in master branch ([a1ff865](https://github.com/networknt/openapi-parser/commit/a1ff86556b469431133bc7e01d87c82d3f5217e6)) (by Steve Hu)
+
 ## [2.4.0](https://github.com/networknt/openapi-parser/tree/2.4.0) (2026-10-07)
 
 **Commits:**
