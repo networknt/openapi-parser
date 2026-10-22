@@ -41,7 +41,7 @@ public class ApiNormalisedPath implements NormalisedPath {
      * @param basePath the path you want to overwrite
      *                 - put null will use the base path parsed from {@link OpenApiHelper}
      *                 - put "" empty String will not trigger any overwrites
-     *                 - put regex will replace the first basePath with empty String
+     *                 - put regex will remove a matching leading base path at a segment boundary
      */
     public ApiNormalisedPath(final String path, final String basePath) {
         if (logger.isDebugEnabled()) logger.debug("path = {}, base path is set to: {}", path, basePath);
@@ -89,7 +89,11 @@ public class ApiNormalisedPath implements NormalisedPath {
     // case basePath == null, use OpenApiHelper.basePath
     // case basePath != null, remove the basePath
     private String normalise(String requestPath, String basePath) {
-        requestPath = requestPath.replaceFirst(basePath, "");
+        // Root is already represented by the leading slash. Do not remove a
+        // matching segment from the middle of a request or a specification path.
+        if (!basePath.isEmpty() && !"/".equals(basePath)) {
+            requestPath = requestPath.replaceFirst("^(?:" + basePath + ")(?=/|$|(?<=/))", "");
+        }
 
         if (!requestPath.startsWith("/")) {
             return "/" + requestPath;
