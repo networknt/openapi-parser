@@ -18,8 +18,13 @@ package com.networknt.openapi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import static java.util.Objects.requireNonNull;
 
@@ -30,7 +35,13 @@ import static java.util.Objects.requireNonNull;
  * @author Steve Hu
  */
 public class ApiNormalisedPath implements NormalisedPath {
-    Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
+    private static final LoadingCache<String, BasePrefix> BASE_PREFIXES = prefixCache(BasePrefix::compile);
+    private static final Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
+
+    static LoadingCache<String, BasePrefix> prefixCache(Function<String, BasePrefix> loader) {
+        return Caffeine.newBuilder().maximumSize(64).build(loader::apply);
+    }
+
     private final List<String> pathParts;
     private final String original;
     private final String normalised;
@@ -39,9 +50,9 @@ public class ApiNormalisedPath implements NormalisedPath {
      * Construct normalized path
      * @param path original path
      * @param basePath the path you want to overwrite
-     *                 - put null will use the base path parsed from {@link OpenApiHelper}
+     *                 - must not be null; use the helper base path explicitly
      *                 - put "" empty String will not trigger any overwrites
-     *                 - put regex will replace the first basePath with empty String
+     *                 - put regex will remove a matching leading base path at a segment boundary
      */
     public ApiNormalisedPath(final String path, final String basePath) {
         if (logger.isDebugEnabled()) logger.debug("path = {}, base path is set to: {}", path, basePath);
@@ -86,14 +97,37 @@ public class ApiNormalisedPath implements NormalisedPath {
         return normalised;
     }
 
-    // case basePath == null, use OpenApiHelper.basePath
-    // case basePath != null, remove the basePath
     private String normalise(String requestPath, String basePath) {
-        requestPath = requestPath.replaceFirst(basePath, "");
-
-        if (!requestPath.startsWith("/")) {
-            return "/" + requestPath;
+        requireNonNull(basePath, "A base path is required; use an empty string for specification paths");
+        if ("/".equals(basePath)) {
+            // Preserve the historical root behavior, including //pets -> /pets.
+            if (requestPath.startsWith("/")) requestPath = requestPath.substring(1);
+        } else if (!basePath.isEmpty()) {
+            requestPath = BASE_PREFIXES.get(basePath).removeFrom(requestPath);
         }
-        return requestPath;
+        return requestPath.startsWith("/") ? requestPath : "/" + requestPath;
+    }
+
+    record BasePrefix(String literal, Pattern regex) {
+        static BasePrefix compile(String basePath) {
+            String prefix = basePath;
+            while (prefix.endsWith("/")) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.endsWith("\\")) prefix = prefix.substring(0, prefix.length() - 1);
+            }
+            boolean literal = prefix.chars().noneMatch(c -> ".[]{}()*+?^$|\\".indexOf(c) >= 0);
+            return literal ? new BasePrefix(prefix, null)
+                    : new BasePrefix(null, Pattern.compile("^(?:" + prefix + ")(?=/|\\z)"));
+        }
+
+        String removeFrom(String path) {
+            if (regex == null) {
+                int end = literal.length();
+                return path.startsWith(literal) && (end == path.length() || path.charAt(end) == '/')
+                        ? path.substring(end) : path;
+            }
+            Matcher matcher = regex.matcher(path);
+            return matcher.lookingAt() ? path.substring(matcher.end()) : path;
+        }
     }
 }

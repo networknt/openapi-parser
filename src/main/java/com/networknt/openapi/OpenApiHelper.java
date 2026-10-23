@@ -52,6 +52,7 @@ public class OpenApiHelper {
     public OpenApi3 openApi3;
     public List<String> oauth2Names;
     public String basePath;
+    private final List<NormalisedPath> apiPaths;
 
     public OpenApiHelper(String spec) {
         try {
@@ -65,6 +66,11 @@ public class OpenApiHelper {
         } else {
             oauth2Names = getOAuth2Name();
             basePath = getBasePath();
+            // OpenAPI path keys are relative to servers, even when their first
+            // segment happens to equal the server base path. Normalize once.
+            apiPaths = openApi3.getPaths().keySet().stream()
+                    .map(p -> (NormalisedPath) new ApiNormalisedPath(p, ""))
+                    .toList();
         }
 
     }
@@ -111,9 +117,7 @@ public class OpenApiHelper {
 
     public Optional<NormalisedPath> findMatchingApiPath(final NormalisedPath requestPath) {
         if(openApi3 != null) {
-            return openApi3.getPaths().keySet()
-                    .stream()
-                    .map(p -> (NormalisedPath) new ApiNormalisedPath(p, basePath))
+            return apiPaths.stream()
                     .filter(p -> pathMatches(requestPath, p))
                     .findFirst();
         } else {
