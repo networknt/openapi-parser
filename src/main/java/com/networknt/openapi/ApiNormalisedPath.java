@@ -20,8 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import static java.util.Objects.requireNonNull;
@@ -35,12 +34,7 @@ import static java.util.Objects.requireNonNull;
 public class ApiNormalisedPath implements NormalisedPath {
     // Base paths are configuration, not request input. Bound the cache for callers
     // that construct paths with dynamically changing configurations.
-    private static final Map<String, Pattern> BASE_PATTERNS = new LinkedHashMap<>(64, 0.75f, true) {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<String, Pattern> eldest) {
-            return size() > 64;
-        }
-    };
+    private static final ConcurrentHashMap<String, Pattern> BASE_PATTERNS = new ConcurrentHashMap<>();
 
     Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
     private final List<String> pathParts;
@@ -104,21 +98,34 @@ public class ApiNormalisedPath implements NormalisedPath {
             // Preserve the historical root behavior, including //pets -> /pets.
             if (requestPath.startsWith("/")) requestPath = requestPath.substring(1);
         } else if (!basePath.isEmpty()) {
-            Pattern pattern;
-            synchronized (BASE_PATTERNS) {
-                pattern = BASE_PATTERNS.computeIfAbsent(basePath, base -> {
-                    // A trailing slash already supplies the segment boundary. Keep
-                    // the alternatives grouped so the boundary applies to each one.
-                    String prefix = base;
-                    while (prefix.endsWith("/")) {
-                        prefix = prefix.substring(0, prefix.length() - 1);
-                        if (prefix.endsWith("\\")) prefix = prefix.substring(0, prefix.length() - 1);
-                    }
-                    return Pattern.compile("^(?:" + prefix + ")(?=/|$)");
-                });
-            }
+            Pattern pattern = basePattern(basePath);
             requestPath = pattern.matcher(requestPath).replaceFirst("");
         }
         return requestPath.startsWith("/") ? requestPath : "/" + requestPath;
+    }
+
+    private static Pattern basePattern(String basePath) {
+        Pattern cached = BASE_PATTERNS.get(basePath);
+        if (cached != null) return cached;
+
+        // Hits do not acquire this monitor. Serialize only misses so insertion
+        // and eviction preserve the exact size bound under concurrent churn.
+        synchronized (BASE_PATTERNS) {
+            cached = BASE_PATTERNS.get(basePath);
+            if (cached != null) return cached;
+            String prefix = basePath;
+            while (prefix.endsWith("/")) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.endsWith("\\")) prefix = prefix.substring(0, prefix.length() - 1);
+            }
+            Pattern compiled = Pattern.compile("^(?:" + prefix + ")(?=/|$)");
+            // Eviction order is deliberately unspecified; cache hits need not
+            // update shared access-order bookkeeping.
+            if (BASE_PATTERNS.size() >= 64) {
+                BASE_PATTERNS.remove(BASE_PATTERNS.keySet().iterator().next());
+            }
+            BASE_PATTERNS.put(basePath, compiled);
+            return compiled;
+        }
     }
 }
