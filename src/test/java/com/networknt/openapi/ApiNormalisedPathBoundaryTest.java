@@ -2,7 +2,7 @@ package com.networknt.openapi;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ApiNormalisedPathBoundaryTest {
     @Test
@@ -13,6 +13,7 @@ class ApiNormalisedPathBoundaryTest {
         assertEquals("/v10/pets", new ApiNormalisedPath("/v10/pets", "/v1").normalised());
         assertEquals("/pets", new ApiNormalisedPath("/pets", "/v1").normalised());
         assertEquals("/pets", new ApiNormalisedPath("/v1/pets", "/v1/").normalised());
+        assertEquals("/pets", new ApiNormalisedPath("/v1/pets", "\\/v1\\/").normalised());
     }
 
     @Test
@@ -29,6 +30,28 @@ class ApiNormalisedPathBoundaryTest {
             assertEquals("/pets", new ApiNormalisedPath("/pets", base).normalised());
             assertEquals("/", new ApiNormalisedPath("/", base).normalised());
         }
+    }
+
+    @Test
+    void preservesRootDoubleSlashCompatibilityAndRejectsNullBaseExplicitly() {
+        assertEquals("/pets", new ApiNormalisedPath("//pets", "/").normalised());
+        assertThrows(NullPointerException.class, () -> new ApiNormalisedPath("/pets", null));
+    }
+
+    @Test
+    void specificationPathsAreNeverStrippedEvenWhenTheyStartWithTheBase() {
+        OpenApiHelper helper = new OpenApiHelper("""
+                {"openapi":"3.0.0","info":{"title":"test","version":"1"},
+                 "servers":[{"url":"/pets"}],"paths":{
+                   "/pets":{"get":{"responses":{"200":{"description":"OK"}}}},
+                   "/pets/{petId}":{"get":{"responses":{"200":{"description":"OK"}}}}
+                 }}
+                """);
+        assertEquals("/pets/{petId}", helper.findMatchingApiPath(
+                new ApiNormalisedPath("/pets/pets/42", helper.basePath)).orElseThrow().normalised());
+        assertEquals("/pets", helper.findMatchingApiPath(
+                new ApiNormalisedPath("/pets/pets", helper.basePath)).orElseThrow().normalised());
+        assertTrue(helper.findMatchingApiPath(new ApiNormalisedPath("/pets/42", helper.basePath)).isEmpty());
     }
 
     @Test

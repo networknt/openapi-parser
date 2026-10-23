@@ -20,6 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import static java.util.Objects.requireNonNull;
 
@@ -30,6 +33,15 @@ import static java.util.Objects.requireNonNull;
  * @author Steve Hu
  */
 public class ApiNormalisedPath implements NormalisedPath {
+    // Base paths are configuration, not request input. Bound the cache for callers
+    // that construct paths with dynamically changing configurations.
+    private static final Map<String, Pattern> BASE_PATTERNS = new LinkedHashMap<>(64, 0.75f, true) {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, Pattern> eldest) {
+            return size() > 64;
+        }
+    };
+
     Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
     private final List<String> pathParts;
     private final String original;
@@ -39,7 +51,7 @@ public class ApiNormalisedPath implements NormalisedPath {
      * Construct normalized path
      * @param path original path
      * @param basePath the path you want to overwrite
-     *                 - put null will use the base path parsed from {@link OpenApiHelper}
+     *                 - must not be null; use the helper base path explicitly
      *                 - put "" empty String will not trigger any overwrites
      *                 - put regex will remove a matching leading base path at a segment boundary
      */
@@ -86,18 +98,27 @@ public class ApiNormalisedPath implements NormalisedPath {
         return normalised;
     }
 
-    // case basePath == null, use OpenApiHelper.basePath
-    // case basePath != null, remove the basePath
     private String normalise(String requestPath, String basePath) {
-        // Root is already represented by the leading slash. Do not remove a
-        // matching segment from the middle of a request or a specification path.
-        if (!basePath.isEmpty() && !"/".equals(basePath)) {
-            requestPath = requestPath.replaceFirst("^(?:" + basePath + ")(?=/|$|(?<=/))", "");
+        requireNonNull(basePath, "A base path is required; use an empty string for specification paths");
+        if ("/".equals(basePath)) {
+            // Preserve the historical root behavior, including //pets -> /pets.
+            if (requestPath.startsWith("/")) requestPath = requestPath.substring(1);
+        } else if (!basePath.isEmpty()) {
+            Pattern pattern;
+            synchronized (BASE_PATTERNS) {
+                pattern = BASE_PATTERNS.computeIfAbsent(basePath, base -> {
+                    // A trailing slash already supplies the segment boundary. Keep
+                    // the alternatives grouped so the boundary applies to each one.
+                    String prefix = base;
+                    while (prefix.endsWith("/")) {
+                        prefix = prefix.substring(0, prefix.length() - 1);
+                        if (prefix.endsWith("\\")) prefix = prefix.substring(0, prefix.length() - 1);
+                    }
+                    return Pattern.compile("^(?:" + prefix + ")(?=/|$)");
+                });
+            }
+            requestPath = pattern.matcher(requestPath).replaceFirst("");
         }
-
-        if (!requestPath.startsWith("/")) {
-            return "/" + requestPath;
-        }
-        return requestPath;
+        return requestPath.startsWith("/") ? requestPath : "/" + requestPath;
     }
 }

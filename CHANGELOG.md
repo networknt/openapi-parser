@@ -1,9 +1,5 @@
 # Change Log
 
-## Unreleased
-
-- Fix base-path rewriting for [light-rest-4j #444](https://github.com/networknt/light-rest-4j/issues/444): only remove a leading base path at a segment boundary, preserving regex and trailing-slash base paths. Paths containing the base path later in the URL are no longer rewritten. Unprefixed paths remain supported for compatibility.
-
 ## [2.4.1](https://github.com/networknt/openapi-parser/tree/2.4.1) (2026-10-11)
 
 **Commits:**
