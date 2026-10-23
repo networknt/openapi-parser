@@ -17,6 +17,29 @@ class ApiNormalisedPathBoundaryTest {
     }
 
     @Test
+    void aFinalLineTerminatorIsNotASegmentBoundary() {
+        for (String end : new String[]{"\n", "\r", "\r\n", "\u0085", "\u2028", "\u2029"}) {
+            assertEquals("/v1" + end, new ApiNormalisedPath("/v1" + end, "/v1").normalised());
+            assertEquals("/v1" + end, new ApiNormalisedPath("/v1" + end, "/v[0-9]+").normalised());
+        }
+    }
+
+    @Test
+    void pathKeysThatEmbedTheServerPrefixAreStillRelativeToThatServer() {
+        OpenApiHelper helper = new OpenApiHelper("""
+                {"openapi":"3.0.0","info":{"title":"test","version":"1"},
+                 "servers":[{"url":"/v1"}],"paths":{
+                   "/v1/pets":{"get":{"responses":{"200":{"description":"OK"}}}}
+                 }}
+                """);
+        assertTrue(helper.findMatchingApiPath(new ApiNormalisedPath("/v1/pets", helper.basePath)).isEmpty());
+        NormalisedPath operation = helper.findMatchingApiPath(
+                new ApiNormalisedPath("/v1/v1/pets", helper.basePath)).orElseThrow();
+        assertEquals("/v1/pets", operation.original());
+        assertEquals("/v1/v1/pets@get", helper.basePath + operation.normalised() + "@get");
+    }
+
+    @Test
     void preservesRegexBasePathsAndChecksTheirBoundary() {
         assertEquals("/pets", new ApiNormalisedPath("/v12/pets", "/v[0-9]+").normalised());
         assertEquals("/v12suffix/pets", new ApiNormalisedPath("/v12suffix/pets", "/v[0-9]+").normalised());

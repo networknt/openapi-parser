@@ -18,10 +18,13 @@ package com.networknt.openapi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import static java.util.Objects.requireNonNull;
 
@@ -32,11 +35,13 @@ import static java.util.Objects.requireNonNull;
  * @author Steve Hu
  */
 public class ApiNormalisedPath implements NormalisedPath {
-    // Base paths are configuration, not request input. Bound the cache for callers
-    // that construct paths with dynamically changing configurations.
-    private static final ConcurrentHashMap<String, Pattern> BASE_PATTERNS = new ConcurrentHashMap<>();
+    private static final LoadingCache<String, BasePrefix> BASE_PREFIXES = prefixCache(BasePrefix::compile);
+    private static final Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
 
-    Logger logger = LoggerFactory.getLogger(ApiNormalisedPath.class);
+    static LoadingCache<String, BasePrefix> prefixCache(Function<String, BasePrefix> loader) {
+        return Caffeine.newBuilder().maximumSize(64).build(loader::apply);
+    }
+
     private final List<String> pathParts;
     private final String original;
     private final String normalised;
@@ -98,34 +103,31 @@ public class ApiNormalisedPath implements NormalisedPath {
             // Preserve the historical root behavior, including //pets -> /pets.
             if (requestPath.startsWith("/")) requestPath = requestPath.substring(1);
         } else if (!basePath.isEmpty()) {
-            Pattern pattern = basePattern(basePath);
-            requestPath = pattern.matcher(requestPath).replaceFirst("");
+            requestPath = BASE_PREFIXES.get(basePath).removeFrom(requestPath);
         }
         return requestPath.startsWith("/") ? requestPath : "/" + requestPath;
     }
 
-    private static Pattern basePattern(String basePath) {
-        Pattern cached = BASE_PATTERNS.get(basePath);
-        if (cached != null) return cached;
-
-        // Hits do not acquire this monitor. Serialize only misses so insertion
-        // and eviction preserve the exact size bound under concurrent churn.
-        synchronized (BASE_PATTERNS) {
-            cached = BASE_PATTERNS.get(basePath);
-            if (cached != null) return cached;
+    record BasePrefix(String literal, Pattern regex) {
+        static BasePrefix compile(String basePath) {
             String prefix = basePath;
             while (prefix.endsWith("/")) {
                 prefix = prefix.substring(0, prefix.length() - 1);
                 if (prefix.endsWith("\\")) prefix = prefix.substring(0, prefix.length() - 1);
             }
-            Pattern compiled = Pattern.compile("^(?:" + prefix + ")(?=/|$)");
-            // Eviction order is deliberately unspecified; cache hits need not
-            // update shared access-order bookkeeping.
-            if (BASE_PATTERNS.size() >= 64) {
-                BASE_PATTERNS.remove(BASE_PATTERNS.keySet().iterator().next());
+            boolean literal = prefix.chars().noneMatch(c -> ".[]{}()*+?^$|\\".indexOf(c) >= 0);
+            return literal ? new BasePrefix(prefix, null)
+                    : new BasePrefix(null, Pattern.compile("^(?:" + prefix + ")(?=/|\\z)"));
+        }
+
+        String removeFrom(String path) {
+            if (regex == null) {
+                int end = literal.length();
+                return path.startsWith(literal) && (end == path.length() || path.charAt(end) == '/')
+                        ? path.substring(end) : path;
             }
-            BASE_PATTERNS.put(basePath, compiled);
-            return compiled;
+            Matcher matcher = regex.matcher(path);
+            return matcher.lookingAt() ? path.substring(matcher.end()) : path;
         }
     }
 }
