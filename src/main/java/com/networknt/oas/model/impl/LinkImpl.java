@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.networknt.oas.model.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import com.networknt.jsonoverlay.*;
 import com.networknt.oas.model.Link;
 import com.networknt.oas.model.OpenApi3;

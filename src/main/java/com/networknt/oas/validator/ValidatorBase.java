@@ -10,8 +10,8 @@
  *******************************************************************************/
 package com.networknt.oas.validator;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.*;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.*;
 import com.networknt.jsonoverlay.*;
 
 import java.io.IOException;
@@ -180,7 +180,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		checkMissing(field, required);
 		if (field != null && field.isPresent() && test != null) {
 			Number n = field.get();
-			if (!test.apply(n)) {
+			// A rejected scalar has no numeric overlay value; the type error is already recorded.
+			if (n != null && !test.apply(n)) {
 				results.addError(msg(NumberConstraint, desc, n), field);
 			}
 		}
@@ -378,7 +379,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	}
 
 	private String getJsonValueType(Class<? extends JsonNode> node) {
-		String type = node.getSimpleName();
+		// Keep validation messages stable across Jackson's TextNode -> StringNode rename.
+		String type = node == StringNode.class ? "TextNode" : node.getSimpleName();
 		return type.endsWith("Node") ? type.substring(0, type.length() - 4) : type;
 	}
 
@@ -395,11 +397,11 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	private static void createAllowedJsonTypes() {
 		Map<Class<?>, List<Class<? extends JsonNode>>> types = new HashMap<>();
-		types.put(StringOverlay.class, Arrays.asList(TextNode.class));
+		types.put(StringOverlay.class, Arrays.asList(StringNode.class));
 		types.put(BooleanOverlay.class, Arrays.asList(BooleanNode.class));
 		types.put(IntegerOverlay.class, Arrays.asList(IntNode.class, ShortNode.class, BigIntegerNode.class));
 		types.put(NumberOverlay.class, Arrays.asList(NumericNode.class));
-		types.put(PrimitiveOverlay.class, Arrays.asList(TextNode.class, NumericNode.class, BooleanNode.class));
+		types.put(PrimitiveOverlay.class, Arrays.asList(StringNode.class, NumericNode.class, BooleanNode.class));
 		types.put(ObjectOverlay.class, Arrays.asList(JsonNode.class));
 		types.put(MapOverlay.class, Arrays.asList(ObjectNode.class));
 		types.put(ListOverlay.class, Arrays.asList(ArrayNode.class));

@@ -10,10 +10,10 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.core.JsonPointer;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.ObjectNode;
 import com.google.common.base.Predicates;
 
 import java.util.Iterator;
@@ -50,7 +50,7 @@ public class JsonTreeWalker {
 
 	private void walkChildren(JsonNode node, JsonPointer path) {
 		if (node instanceof ObjectNode) {
-			for (Entry<String, JsonNode> field : iterable(node.fields())) {
+			for (Entry<String, JsonNode> field : iterable(node.properties().iterator())) {
 				walk(field.getValue(), childPointer(path, field.getKey()));
 			}
 		} else if (node instanceof ArrayNode) {

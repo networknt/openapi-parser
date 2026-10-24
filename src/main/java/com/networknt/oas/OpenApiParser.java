@@ -10,7 +10,8 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
 import com.networknt.jsonoverlay.JsonLoader;
 import com.networknt.jsonoverlay.ReferenceManager;
 import com.networknt.oas.model.OpenApi3;
@@ -34,7 +35,7 @@ public class OpenApiParser {
 			JsonNode tree = loader.loadString(resolutionBase, spec);
 			return parse(tree, resolutionBase, validate, loader);
 
-		} catch (IOException e) {
+		} catch (IOException | JacksonException e) {
 			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
 		}
 	}
@@ -81,6 +82,9 @@ public class OpenApiParser {
 	}
 
 	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate, JsonLoader loader) {
+		if (tree == null) {
+			throw new OpenApiParserException("Spec document is empty");
+		}
 		ReferenceManager manager = new ReferenceManager(resolutionBase, tree, loader);
 		return parse(manager, validate);
 	}
@@ -89,6 +93,9 @@ public class OpenApiParser {
 		JsonNode tree;
 		try {
 			tree = manager.loadDoc();
+			if (tree == null) {
+				throw new OpenApiParserException("Spec document is empty");
+			}
 			if (isVersion3(tree)) {
 				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
 				((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
@@ -100,14 +107,14 @@ public class OpenApiParser {
 				throw new OpenApiParserException(
 						"Could not determine OpenApi version from model: no 'openapi' property");
 			}
-		} catch (IOException e) {
+		} catch (IOException | JacksonException e) {
 			throw new OpenApiParserException("Failed to parse model", e);
 		}
 	}
 
 	protected boolean isVersion3(JsonNode tree) {
 		JsonNode versionNode = tree.path("openapi");
-		return versionNode.isTextual() && versionNode.asText().startsWith("3.");
+		return versionNode.isString() && versionNode.asString().startsWith("3.");
 	}
 
 	public static class OpenApiParserException extends RuntimeException {

@@ -32,6 +32,45 @@ Request-prefix strategies use a Caffeine cache with a maximum size of 64 after
 maintenance; concurrent activity can temporarily exceed that size. Literal base
 paths use string comparisons, while regex base paths use cached patterns.
 
+### Jackson 3 migration
+
+This development line uses Jackson 3.2.3 and the migrated json-overlay API.
+Public parser and model constructors accepting `JsonNode` now use
+`tools.jackson.databind` types. This is a source and binary incompatible change;
+downstream users, including light-rest-4j, light-gateway, http-sidecar and
+light-codegen, must migrate together. Project versions remain unchanged during
+implementation; a next-major version and release decision is required before
+publication.
+
+YAML follows the Jackson 3 SnakeYAML Engine resolver. The spellings
+`yes/no/on/off`, `True/TRUE/False/FALSE`, `Null/NULL`, `012`, `0b11`, `0x1F`,
+`1_000` and `~` now produce strings. Use lowercase `true`, `false`, `null` and
+ordinary decimal numbers without leading zeros for typed values. For example,
+`required: True` and `deprecated: FALSE` yield null Boolean overlay values.
+The validator reports type errors for parameter `required` and `deprecated`,
+request-body `required`, and schema Boolean fields. Path parameters additionally
+require `required: true`. Numeric keywords using noncanonical spellings report
+type errors; normalize specifications before upgrading.
+Enum and example values also retain these spellings as strings. Duplicate keys
+remain last-wins. The parser reads only the first YAML document and ignores
+subsequent documents.
+
+Malformed input is wrapped in `OpenApiParserException`, including Jackson 3's
+unchecked `JacksonException`. Empty and comment-only specifications are rejected
+with `Spec document is empty`. File I/O error handling remains in place.
+
 ### License
 
 The OpenAPI Parser is provided under the Eclipse Public License 1.0 following the parent [KaiZen OpenAPI Parser](https://github.com/RepreZen/KaiZen-OpenApi-Parser)
+
+### Building the migration before release
+
+The unchanged `com.networknt:json-overlay:2.4.2-SNAPSHOT` coordinate must resolve
+to the Jackson 3 implementation merged in json-overlay PR #28. An older cached
+or remotely deployed Jackson 2 snapshot is incompatible. For a clean local
+build, use an isolated Maven repository, build/install json-overlay's migrated
+master first, then build/install openapi-parser with that same Maven repository.
+For consumers of remote snapshots, deploy the migrated json-overlay snapshot
+before openapi-parser, then migrate downstream consumers. Neither repository
+currently defines a GitHub Actions workflow; the reported results are local
+validation, not remote CI. This PR does not deploy either artifact.
