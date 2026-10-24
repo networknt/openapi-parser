@@ -53,9 +53,9 @@ class Jackson3MigrationTest {
         assertNull(parameter.getRequired());
         assertNull(parameter.getDeprecated());
         assertFalse(model.isValid());
-        // The existing validator checks deprecated but only checks required for path parameters.
+        // Both parameter Boolean fields must report invalid scalar types.
         // Text remains the validation label despite Jackson 3's StringNode name.
-        assertEquals(1, model.getValidationItems().stream().filter(item -> item.getSeverity() == Severity.ERROR
+        assertEquals(2, model.getValidationItems().stream().filter(item -> item.getSeverity() == Severity.ERROR
                 && item.getMsg().contains("Text") && item.getMsg().contains("Boolean")).count());
     }
 
@@ -100,4 +100,42 @@ class Jackson3MigrationTest {
             }
         }
     }
+    @Test
+    void rejectsNonCanonicalNumericKeywordsWithoutCrashing() {
+        for (String keyword : List.of("maxLength", "minLength", "minItems", "maxItems",
+                "minProperties", "maxProperties", "minimum", "maximum", "multipleOf")) {
+            for (String scalar : List.of("012", "0x10", "1_0")) {
+                String spec = HEADER + PATHS + "components:\n  schemas:\n    Value:\n      "
+                        + keyword + ": " + scalar + "\n";
+                OpenApi3 model = assertDoesNotThrow(() -> new OpenApi3Parser().parse(spec, resolutionBase()),
+                        keyword + ": " + scalar);
+                assertFalse(model.isValid(), keyword + ": " + scalar);
+                assertTrue(model.getValidationItems().stream().anyMatch(item ->
+                        item.getSeverity() == Severity.ERROR && item.getMsg().contains("Text")),
+                        () -> model.getValidationItems().toString());
+            }
+        }
+    }
+
+    @Test
+    void validatesRequiredTypeForQueryAndHeaderParameters() {
+        for (String location : List.of("query", "header")) {
+            for (String scalar : List.of("True", "yes")) {
+                OpenApi3 model = new OpenApi3Parser().parse(
+                        parameterSpec(scalar, "false").replace("in: query", "in: " + location), resolutionBase());
+                assertFalse(model.isValid(), location + ": " + scalar);
+                assertEquals(1, model.getValidationItems().stream()
+                        .filter(item -> item.getSeverity() == Severity.ERROR).count());
+            }
+        }
+    }
+
+    @Test
+    void readsOnlyTheFirstYamlDocument() {
+        OpenApi3 model = new OpenApi3Parser().parse(HEADER + PATHS
+                + "---\nopenapi: 2.0\ninfo: {title: ignored}\n", resolutionBase());
+        assertEquals("migration", model.getInfo().getTitle());
+        assertTrue(model.isValid());
+    }
+
 }

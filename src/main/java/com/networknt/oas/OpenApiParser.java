@@ -114,7 +114,7 @@ public class OpenApiParser {
 
 	protected boolean isVersion3(JsonNode tree) {
 		JsonNode versionNode = tree.path("openapi");
-		return versionNode.isTextual() && versionNode.asText().startsWith("3.");
+		return versionNode.isString() && versionNode.asString().startsWith("3.");
 	}
 
 	public static class OpenApiParserException extends RuntimeException {

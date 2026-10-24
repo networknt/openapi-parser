@@ -29,6 +29,7 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 		Parameter parameter = (Parameter) value.getOverlay();
 		validateStringField(F_description, false);
 		validateBooleanField(F_deprecated, false);
+		validateBooleanField(F_required, false);
 		validateBooleanField(F_allowEmptyValue, false);
 		validateBooleanField(F_explode, false);
 		Overlay<Object> example = validateField(F_example, false, Object.class, null);

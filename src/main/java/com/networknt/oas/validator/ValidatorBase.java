@@ -180,7 +180,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		checkMissing(field, required);
 		if (field != null && field.isPresent() && test != null) {
 			Number n = field.get();
-			if (!test.apply(n)) {
+			// A rejected scalar has no numeric overlay value; the type error is already recorded.
+			if (n != null && !test.apply(n)) {
 				results.addError(msg(NumberConstraint, desc, n), field);
 			}
 		}
