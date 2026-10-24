@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import com.networknt.jsonoverlay.JsonLoader;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.validator.ValidationResults.ValidationItem;
@@ -43,7 +43,7 @@ public class ExamplesTest {
 		while (!dirs.isEmpty()) {
 			URL url = dirs.remove();
 			JsonNode tree = new JsonLoader().load(url);
-			for (JsonNode result : iterable(tree.elements())) {
+			for (JsonNode result : iterable(tree.values().iterator())) {
 				String type = result.get("type").asText();
 				String path = result.get("path").asText();
 				String resultUrl = result.get("url").asText();

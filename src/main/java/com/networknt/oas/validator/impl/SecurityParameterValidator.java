@@ -13,8 +13,8 @@ package com.networknt.oas.validator.impl;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.ArrayNode;
 import com.networknt.jsonoverlay.Overlay;
 import com.networknt.oas.model.SecurityParameter;
 import com.networknt.oas.validator.ObjectValidatorBase;

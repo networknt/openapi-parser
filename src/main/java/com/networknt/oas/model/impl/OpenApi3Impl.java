@@ -10,8 +10,8 @@
  *******************************************************************************/
 package com.networknt.oas.model.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.ObjectNode;
 import com.networknt.jsonoverlay.*;
 import com.networknt.oas.model.*;
 import com.networknt.oas.validator.ValidationContext;

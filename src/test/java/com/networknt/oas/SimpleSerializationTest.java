@@ -10,9 +10,9 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.networknt.jsonoverlay.JsonLoader;
@@ -57,7 +57,7 @@ public class SimpleSerializationTest {
 			while (!dirs.isEmpty()) {
 				URL url = dirs.remove();
 				JsonNode tree = new JsonLoader().load(url);
-				for (JsonNode result : iterable(tree.elements())) {
+				for (JsonNode result : iterable(tree.values().iterator())) {
 					String type = result.get("type").asText();
 					String path = result.get("path").asText();
 					String resultUrl = result.get("url").asText();
@@ -81,7 +81,10 @@ public class SimpleSerializationTest {
 				if (!exampleUrl.toString().contains("callback-example")) {
 					OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
 					JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
-					JsonNode expected = yamlMapper.readTree(exampleUrl);
+					JsonNode expected;
+					try (var input = exampleUrl.openStream()) {
+						expected = yamlMapper.readTree(input);
+					}
 					JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
 							JSONCompareMode.STRICT);
 				}
