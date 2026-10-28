@@ -10,58 +10,26 @@
  *******************************************************************************/
 package com.networknt.oas;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.networknt.jsonoverlay.JsonLoader;
 import com.networknt.oas.model.OpenApi3;
 import com.networknt.oas.validator.ValidationResults.ValidationItem;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Queues;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Deque;
-import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExamplesTest {
-
-	private static final String SPEC_REPO = "OAI/OpenAPI-specification";
-	private static final String EXAMPLES_BRANCH = "main";
-	private static final String EXAMPLES_ROOT = "_archive_/schemas/v3.0/pass";
-
 	private static Collection<Object[]> findExamples() throws IOException {
-		Collection<Object[]> examples = Lists.newArrayList();
-		Deque<URL> dirs = Queues.newArrayDeque();
-		String auth = System.getenv("GITHUB_AUTH") != null ? System.getenv("GITHUB_AUTH") + "@" : "";
-		String request = String.format("https://%sapi.github.com/repos/%s/contents/%s?ref=%s", auth, SPEC_REPO,
-				EXAMPLES_ROOT, EXAMPLES_BRANCH);
-		dirs.add(new URL(request));
-		while (!dirs.isEmpty()) {
-			URL url = dirs.remove();
-			JsonNode tree = new JsonLoader().load(url);
-			for (JsonNode result : iterable(tree.elements())) {
-				String type = result.get("type").asText();
-				String path = result.get("path").asText();
-				String resultUrl = result.get("url").asText();
-				if (type.equals("dir")) {
-					dirs.add(new URL(resultUrl));
-				} else if (type.equals("file") && (path.endsWith(".yaml") || path.endsWith(".json"))) {
-					String downloadUrl = result.get("download_url").asText();
-					examples.add(new Object[] { new URL(downloadUrl), result.get("name").asText() });
-				}
-			}
-		}
-		return examples;
+		return SpecExamples.load();
 	}
 
 	@Test
 	public void exampleCanBeParsed() throws Exception {
 		Collection<Object[]> examples = findExamples();
-		Assumptions.assumeFalse(examples.isEmpty(), "No examples found (GITHUB_AUTH may not be set)");
+		Assumptions.assumeFalse(examples.isEmpty(), "No bundled examples found");
 		for (Object[] example : examples) {
 			URL exampleUrl = (URL) example[0];
 			if (!exampleUrl.toString().contains("callback-example")) {
@@ -74,12 +42,4 @@ public class ExamplesTest {
 		}
 	}
 
-	private static <T> Iterable<T> iterable(final Iterator<T> iterator) {
-		return new Iterable<T>() {
-			@Override
-			public Iterator<T> iterator() {
-				return iterator;
-			}
-		};
-	}
 }
