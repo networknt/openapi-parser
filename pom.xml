@@ -98,7 +98,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.light-4j>3.0.0-SNAPSHOT</version.light-4j>
-        <version.jackson>3.2.3</version.jackson>
+        <version.jackson>3.2.4</version.jackson>
         <version.caffeine>3.3.0</version.caffeine>
         <version.slf4j>2.0.20</version.slf4j>
         <version.logback>1.6.5</version.logback>
