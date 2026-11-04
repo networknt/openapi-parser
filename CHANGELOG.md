@@ -1,5 +1,17 @@
 # Change Log
 
+## [2.5.0](https://github.com/networknt/openapi-parser/tree/2.5.0) (2026-11-04)
+
+**Commits:**
+
+- upgrade to version 2.5.0 before release in 2.x branch ([ab0f476](https://github.com/networknt/openapi-parser/commit/ab0f4761f6d08489dad2bbaf98e86485db688d3c)) (by Steve Hu)
+- upgrade to version 2.5.0-SNAPSHOT after release in 2.x branch ([36230db](https://github.com/networknt/openapi-parser/commit/36230db2286e19e950857b776d2a72f42775d0b9)) (by Steve Hu)
+- upgrade jackson to 2.22.4 from 2.22.3 ([e99bb61](https://github.com/networknt/openapi-parser/commit/e99bb61d3e5bebc97638859125104659581d1b56)) (by Steve Hu)
+- upgrade logback to 1.6.6 from 1.6.5 ([5cc54cd](https://github.com/networknt/openapi-parser/commit/5cc54cd06f9c1a0c7a8901e83f4fd127c8e86a4e)) (by Steve Hu)
+- Backport offline OpenAPI example tests to 2.x (#82) ([a75c6e5](https://github.com/networknt/openapi-parser/commit/a75c6e553a62b52871cc79a5df2bda12e22ab0b0)) (by Steve Hu)
+- Fix base path rewriting at URL segment boundaries (#78) ([71fd1bd](https://github.com/networknt/openapi-parser/commit/71fd1bd504482284bec4caa36a988a25f349aa97)) (by Steve Hu)
+- upgrade to version 2.4.2-SNAPSHOT after release in master branch ([ef82a35](https://github.com/networknt/openapi-parser/commit/ef82a35ee77dc26be28337b09990c97f75ac4bee)) (by Steve Hu)
+
 ## [2.4.1](https://github.com/networknt/openapi-parser/tree/2.4.1) (2026-10-11)
 
 **Commits:**
