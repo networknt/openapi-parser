@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.5.1](https://github.com/networknt/openapi-parser/tree/2.5.1) (2026-11-21)
+
+**Commits:**
+
+- upgrade to version 2.5.1 before release in 2.x branch ([02bf259](https://github.com/networknt/openapi-parser/commit/02bf2591aca7ab7c11097bfaefa870ae2e208b06)) (by Steve Hu)
+- upgrade logback to 1.6.8 from 1.6.7 ([8dc9baa](https://github.com/networknt/openapi-parser/commit/8dc9baa6871134e450beaa1b16c645ef12eb1477)) (by Steve Hu)
+- upgrade logback to 1.6.7 from 1.6.6 ([970c8c6](https://github.com/networknt/openapi-parser/commit/970c8c68ba9a45ea98db74dca75d2dd4966cb43f)) (by Steve Hu)
+- upgrade maven-surefire to 3.6.1 from 3.6.0 ([09bcc30](https://github.com/networknt/openapi-parser/commit/09bcc300be9ba847cf374c0aa68cb90f9721cb50)) (by Steve Hu)
+- upgrade to version 2.5.1-SNAPSHOT after release in 2.x branch ([20cb936](https://github.com/networknt/openapi-parser/commit/20cb936ae2871469c0fa268fd66fe55af9f28957)) (by Steve Hu)
+
 ## [2.5.0](https://github.com/networknt/openapi-parser/tree/2.5.0) (2026-11-04)
 
 **Commits:**
